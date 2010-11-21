@@ -29,3 +29,8 @@ gem 'rails',  '~>3.0.3'
 # group :development, :test do
 #   gem 'webrat'
 # end
+
+
+group :development do
+  gem 'mongrel',                  '1.2.0.pre2'  # Need this version when running Ruby 1.9.2
+end
