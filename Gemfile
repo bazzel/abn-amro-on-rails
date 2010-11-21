@@ -2,11 +2,12 @@ source 'http://rubygems.org'
 
 gem 'compass',              '~>0.10.6'
 gem 'compass-susy-plugin',  '~>0.8.1' # Responsive web design with grids the quick and reliable way
-                                    # To susy-fy your project, run:
-                                    # compass init rails -r susy -u susy --sass-dir=app/stylesheets --css-dir=public/stylesheets/compiled
-                                    # from the command-line.
+                                      # To susy-fy your project, run:
+                                      # compass init rails -r susy -u susy --sass-dir=app/stylesheets --css-dir=public/stylesheets/compiled
+                                      # from the command-line.
 gem 'haml',                 '~>3.0.24'
 gem 'mysql2',               '~>0.2.6'
+gem 'paperclip',            '~>2.3.5' # Easy upload management for ActiveRecord
 gem 'rails',                '~>3.0.3'
 
 # Bundle edge Rails instead:
@@ -39,7 +40,9 @@ gem 'rails',                '~>3.0.3'
 
 group :development do
   gem 'cucumber-rails',           '~>0.3.2' # Cucumber Generators and Runtime for Rails
-  gem 'mongrel',                  '1.2.0.pre2'  # Need this version when running Ruby 1.9.2
+  gem 'haml-rails',               '0.3.4' # Haml generators for Rails 3
+  gem 'mongrel',                  '1.2.0.pre2' # Need this version when running Ruby 1.9.2
+  gem 'rails3-generators',        '~>0.14.0' # Rails 3 compatible generators for DataMapper, Factory-girl, Authlogic, Mongomapper, Mongoid, Shoulda, Formtastic, SimpleForm and Fabrication
 end
 
 group :development, :test do
