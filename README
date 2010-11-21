@@ -1,3 +1,16 @@
+== Birth of this app
+1. Create skeleton for app:
+   mkdir abn-amro-on-rails
+   cd abn-amro-on-rails
+   Use rvm:
+      <tt>echo "rvm --create 1.9.2@abn-amro-on-rails" > .rvmrc</tt>
+   rails new . -d mysql -T -J
+
+2. Install and setup cucumber as descibed in https://github.com/aslakhellesoy/cucumber-rails
+
+
+
+
 == Welcome to Rails
 
 Rails is a web-application framework that includes everything needed to create
