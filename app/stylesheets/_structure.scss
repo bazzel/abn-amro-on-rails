@@ -1,0 +1,100 @@
+body {
+  background: #E5E5E5;
+}
+
+#container {
+  header {
+    @include trailer(1);
+    background: #002134;
+    position: relative;
+    h1[role='banner'] {
+      // span the full context:
+      @include full; 
+      // When adjusting the font size, Susy will always default to the smallest needed line-height and the default-font-size for the size we are adjusting from:
+      @include adjust-font-size-to(32px);
+      // Add a leader of 0.5 lines:
+      @include leader(0.5,32px);
+      // Add a trailer of 0.5 line:
+      @include trailer(0.5,32px);
+      color: white;
+      a {
+        color: white;
+        text-decoration: none;
+      }
+    }
+  }
+  
+  section#content {
+    @include columns(9);
+    @include alpha;
+    .secondary-navigation {
+      background: #F4F4F4;
+      @include border-top-left-radius(4px);
+      @include border-top-right-radius(4px);
+      border: {
+        bottom: solid 12px none;
+      }
+      ul {
+        @include horizontal-list;
+        li {
+          a {
+            text-decoration: none;
+            display: block;
+            @include leader(0.35);
+            @include trailer(0.2);
+            color: #111;
+            padding: {
+              left: 1em;
+              right: 1em;
+            }
+          }
+          &:first-child {
+            // Ensure we still have a rounded left-corner when hovering:
+            @include border-top-left-radius(4px);
+          }
+          &.active, &.active:hover {
+            background: white;
+          }
+          &:hover {
+            background: #F4F4F4;
+          }
+        }
+      }
+    }
+  }
+
+  aside {
+    @include columns(3);
+    @include omega;
+  }
+  
+}
+
+#main-navigation {
+  @include full; 
+  @include border-top-left-radius(4px);
+  @include border-top-right-radius(4px);
+  background: #F4F4F4;
+  ul {
+    @include horizontal-list;
+    li, li:first-child {
+      margin-left: 1em;
+      @include border-top-left-radius(4px);
+      @include border-top-right-radius(4px);
+      a {
+        text-decoration: none;
+        display: block;
+        @include leader(0.55);
+        @include trailer(0.45);
+        padding: {
+          left: 1em;
+          right: 1em;
+        }
+        color: #111;
+      }
+      &.active {
+        background: #E5E5E5;
+      }
+    }
+  }
+}

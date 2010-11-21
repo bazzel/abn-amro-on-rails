@@ -1,0 +1,9 @@
+= javascript_include_tag :defaults
+/ = google_jqueryui
+
+-#  Append your own using content_for :javascripts
+= yield :javascripts
+
+-# yui profiler and profileviewer
+- if Rails.env == 'development'
+  = javascript_include_tag 'profiling/yahoo-profiling.min', 'profiling/config'

@@ -1,5 +1,6 @@
-%h1 New upload
+- content_for :secondary_navigation do
+  %li.active= link_to 'New Upload', new_upload_path
+
+- title "Add a new Upload"
 
 = render 'form'
-
-= link_to 'Back', uploads_path

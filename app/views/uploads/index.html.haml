@@ -1,4 +1,7 @@
-%h1 Listing uploads
+- content_for :secondary_navigation do
+  %li= link_to 'New Upload', new_upload_path
+
+- title 'Listing Uploads'
 
 %table
   %tr
@@ -15,5 +18,3 @@
       %td= link_to 'Destroy', upload, :confirm => 'Are you sure?', :method => :delete
 
 %br
-
-= link_to 'New Upload', new_upload_path

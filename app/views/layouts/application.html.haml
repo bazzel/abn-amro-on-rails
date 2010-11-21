@@ -1,0 +1,28 @@
+!!!
+%html
+  = render :partial => 'layouts/head'
+
+  %body
+    #container
+      %header
+        &nbsp;
+        %h1{:role => 'banner'}= link_to "ABN AMRO on Rails", root_path
+        %nav#main-navigation
+          %ul
+            %li= link_to "Main page", '#'
+            %li.active= link_to "Uploads", uploads_path
+            %li= link_to "Login", '#'
+
+      %section#content
+        .block
+          .secondary-navigation
+            %ul= yield(:secondary_navigation)
+          .content
+            %h2= yield(:title) if show_title?
+            = render :partial => 'layouts/flashes'
+            = yield
+      
+      %aside= yield(:sidebar)
+        
+    -# Javascript at the bottom for fast page loading
+    = render :partial => 'layouts/javascripts'
