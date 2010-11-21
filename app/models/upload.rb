@@ -13,10 +13,9 @@ class Upload < ActiveRecord::Base
   validates_attachment_content_type :xls, :content_type => XLS_CONTENT_TYPES, :message => 'The file must be an Excel file. Please try again.'
   validates_attachment_size :xls, :less_than => 1.megabyte
   validates_uniqueness_of :xls_file_name
-  validates_format_of :xls_file_name, :with => FILENAME_REGEX, :allow_blank => true, :message => 'The filename match the format XLS[yymmddhhmmss].xls. Please try again.'
+  validates_format_of :xls_file_name, :with => FILENAME_REGEX, :allow_blank => true
 
   # Paperclip
   has_attached_file :xls, APP_CONFIG['upload']['xls']['has_attached_file_options'].symbolize_keys
-
 
 end

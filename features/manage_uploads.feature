@@ -33,4 +33,4 @@ Feature: Manage uploads
     And I attach the upload file "invalid.xls" to "File"
     And I press "Save"
     And I should see "There was a problem with your submission. Errors have been highlighted below."
-    And I should see "The filename match the format XLS[yymmddhhmmss].xls. Please try again." for "File"
+    And I should see "The filename must match the format XLS[yymmddhhmmss].xls. Please try again." for "File"

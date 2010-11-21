@@ -2,4 +2,47 @@
 # See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    errors:
+      messages:
+        greater_than_or_equal_to: must be greater than or equal to %{count}
+        record_invalid: "Validation failed: %{errors}"
+        confirmation: "doesn't match confirmation"
+        less_than_or_equal_to: must be less than or equal to %{count}
+        blank: is required
+        exclusion: is reserved
+        invalid: is invalid
+        odd: must be odd
+        even: must be even
+        too_short: is too short (minimum is %{count} characters)
+        wrong_length: is the wrong length (should be %{count} characters)
+        empty: "can't be empty"
+        less_than: must be less than %{count}
+        greater_than: must be greater than %{count}
+        equal_to: must be equal to %{count}
+        too_long: is too long (maximum is %{count} characters)
+        taken: has already been taken
+        accepted: must be accepted
+        inclusion: is not included in the list
+        not_a_number: is not a number
+        privacy_violation: cannot be changed for privacy reasons
+      models:
+        upload:
+          attributes:
+            xls_file_name:
+              invalid: 'The filename must match the format XLS[yymmddhhmmss].xls. Please try again.'
+      full_messages:
+        format: "%{attribute} %{message}"
+      template:
+        body: "There were problems with the following fields:"
+        header:
+          one: 1 error prohibited this %{model} from being saved
+          other: "%{count} errors prohibited this %{model} from being saved"
+  formtastic:
+    labels:
+      upload:
+        xls: File
+    actions:
+      create: Save
+      update: Save
+      cancel: Cancel

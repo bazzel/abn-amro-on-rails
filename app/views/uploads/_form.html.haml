@@ -2,8 +2,8 @@
   = render "shared/error_messages", :target => @upload
 
   = f.inputs do
-    = f.input :xls, :label => "File"
+    = f.input :xls
 
   = f.buttons do
-    = f.commit_button "Save"
-    %li= link_to "Cancel", uploads_path
+    = f.commit_button
+    %li= link_to t('formtastic.actions.cancel'), uploads_path
