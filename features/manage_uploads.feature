@@ -21,9 +21,16 @@ Feature: Manage uploads
     And I should see "There was a problem with your submission. Errors have been highlighted below."
     And I should see "This field is required. Please select a file." for "File"
 
-  Scenario: Upload invalid file
+  Scenario: Upload invalid file type
     Given I am on the new upload page
     And I attach the upload file "invalid.pdf" to "File"
     And I press "Save"
     And I should see "There was a problem with your submission. Errors have been highlighted below."
     And I should see "The file must be an Excel file. Please try again." for "File"
+
+  Scenario: Upload invalid file name
+    Given I am on the new upload page
+    And I attach the upload file "invalid.xls" to "File"
+    And I press "Save"
+    And I should see "There was a problem with your submission. Errors have been highlighted below."
+    And I should see "The filename match the format XLS[yymmddhhmmss].xls. Please try again." for "File"

@@ -1,5 +1,5 @@
 # Read about factories at http://github.com/thoughtbot/factory_girl
 
 Factory.define :upload do |f|
-  f.downloaded_at "2010-11-21 13:49:51"
+  f.xls File.new(File.join(Rails.root, "spec/fixtures/upload", 'XLS101121100457.xls'))
 end

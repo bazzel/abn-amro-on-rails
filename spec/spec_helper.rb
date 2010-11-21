@@ -29,4 +29,11 @@ RSpec.configure do |config|
 
   # Provides rspec-compatible matchers for testing Paperclip attachments  
   config.include Paperclip::Shoulda::Matchers
+  
+  config.after(:all) do
+    # Cleanup tmp dir.
+    FileUtils.rm_rf "#{Rails.root}/tmp/system"
+    FileUtils.rm Dir.glob("#{Rails.root}/tmp/*.*")
+  end
+  
 end
