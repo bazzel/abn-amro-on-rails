@@ -1,13 +1,9 @@
-= form_for @upload do |f|
-  -if @upload.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@upload.errors.count, "error")} prohibited this upload from being saved:"
-      %ul
-        - @upload.errors.full_messages.each do |msg|
-          %li= msg
+= semantic_form_for @upload, :html => {:multipart => true} do |f|
+  = render "shared/error_messages", :target => @upload
 
-  .field
-    = f.label :downloaded_at
-    = f.datetime_select :downloaded_at
-  .actions
-    = f.submit 'Save'
+  = f.inputs do
+    = f.input :xls, :label => "File"
+
+  = f.buttons do
+    = f.commit_button "Save"
+    %li= link_to "Cancel", uploads_path

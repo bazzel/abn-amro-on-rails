@@ -1,0 +1,26 @@
+== DirectLife My Coach
+
+Up And Running
+==============
+In order to start using the app in development mode, run:
+ - rvm use --create ree-1.8.7@philips_mycoach
+ - gem install bundler
+ - bundle install
+ #- rake db:create
+ #- rake db:migrate
+ - rails s
+ - open your favorite browser and enter: http://localhost:3011
+
+Application dependency
+======================
+My Coach needs the Members Website and Communities to run correctly.
+To access the MyCoach website without having to setup DirectLife Members
+Website, use http://localhost:3010/development/fake_life.
+
+Shared session keys
+===================
+The following keys are shared between DirectLife and My Coach:
+- :g_cn       - Customer number
+- :g_lang     - Language (iso code) of user
+- :g_postback - Location to redirect user to after login
+- :g_tz       - Timezone as configured by user

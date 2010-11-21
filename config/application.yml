@@ -1,0 +1,18 @@
+defaults: &defaults
+  upload:
+    xls:
+      has_attached_file_options:
+        path: ":rails_root/public/system/:attachment/:id/:style/:filename"
+
+development:
+  <<: *defaults
+        
+test:
+  <<: *defaults
+  upload:
+    xls:
+      has_attached_file_options:
+        path: ":rails_root/tmp/system/:attachment/:id/:style/:filename"
+
+production:
+  <<: *defaults

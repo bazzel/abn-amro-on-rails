@@ -31,3 +31,9 @@ Then /^(?:|I )should not see the button "([^"]*)"(?: within "([^"]*)")?$/ do |te
     page.should have_no_button(text)
   end
 end
+
+# Then I should see "This field is required. Please select a file." for "File"
+Then /^I should see "([^"]*)" for "([^"]*)"$/ do |text, field|
+  element = page.find(:xpath, "//li[contains(label, '#{field}')]")
+  element.should have_selector('p.inline-errors', :text => text)
+end

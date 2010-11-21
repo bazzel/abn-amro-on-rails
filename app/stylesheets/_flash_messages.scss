@@ -1,0 +1,25 @@
+/* Flash messages ------------------------------------------------------ */
+@mixin flash_messages {
+  #flash_notice, #flash_error, #flash_alert {
+    @include border-radius(4px);
+    border: solid 1px;
+    padding: 0.7em;
+    @include leader(1);
+    @include trailer(1);
+  }
+
+  #flash_notice {
+    @include flash_message(#CFC);
+  }
+
+  #flash_error, #flash_alert {
+    @include flash_message(#FCC);
+  }
+}
+
+@mixin flash_message($color) {
+  background-color: $color;
+  border: {
+    color: $color - #444;
+  } 
+}
