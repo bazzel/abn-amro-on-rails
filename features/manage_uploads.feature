@@ -34,3 +34,4 @@ Feature: Manage uploads
     And I press "Save"
     And I should see "There was a problem with your submission. Errors have been highlighted below."
     And I should see "The filename must match the format XLS[yymmddhhmmss].xls. Please try again." for "File"
+    But I should not see "The file must be an Excel file. Please try again."

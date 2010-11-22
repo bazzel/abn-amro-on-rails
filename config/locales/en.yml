@@ -31,6 +31,7 @@ en:
           attributes:
             xls_file_name:
               invalid: 'The filename must match the format XLS[yymmddhhmmss].xls. Please try again.'
+              taken: The file has already been uploaded. Please try another one.
       full_messages:
         format: "%{attribute} %{message}"
       template:
