@@ -29,8 +29,8 @@ en:
       models:
         upload:
           attributes:
-            xls_file_name:
-              invalid: 'The filename must match the format XLS[yymmddhhmmss].xls. Please try again.'
+            tab_file_name:
+              invalid: 'The filename must match the format TXT[yymmddhhmmss].tab. Please try again.'
               taken: The file has already been uploaded. Please try another one.
       full_messages:
         format: "%{attribute} %{message}"
@@ -42,7 +42,7 @@ en:
   formtastic:
     labels:
       upload:
-        xls: File
+        tab: File
     actions:
       create: Save
       update: Save

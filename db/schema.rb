@@ -16,10 +16,10 @@ ActiveRecord::Schema.define(:version => 20101121125357) do
     t.datetime "downloaded_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "xls_file_name"
-    t.string   "xls_content_type"
-    t.integer  "xls_file_size"
-    t.datetime "xls_updated_at"
+    t.string   "tab_file_name"
+    t.string   "tab_content_type"
+    t.integer  "tab_file_size"
+    t.datetime "tab_updated_at"
   end
 
 end
