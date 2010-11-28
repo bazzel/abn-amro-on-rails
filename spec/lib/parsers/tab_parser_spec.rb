@@ -96,12 +96,12 @@ describe Parsers::TabParser do
       it 'include keys which can be used as attributes' do
         Parsers::TabParser.foreach(@path) do |row|
           row.to_hash.keys.should eql([:bankaccount, 
-                :valuta, 
-                :date_of_transaction, 
-                :start_balance,
-                :end_balance,
-                :date_of_interest,
-                :amount,
+                :currency, 
+                :transaction_date, 
+                :opening_balance,
+                :ending_balance,
+                :interest_date,
+                :transaction_amount,
                 :description])
         end
       end
@@ -110,16 +110,15 @@ describe Parsers::TabParser do
         Parsers::TabParser.foreach(@path) do |row|
           h = row.to_hash
           h[:bankaccount].should eql(row[0])
-          h[:valuta].should eql(row[1])
-          h[:date_of_transaction].should eql(row[2])
-          h[:start_balance].should eql(row[3])
-          h[:end_balance].should eql(row[4])
-          h[:date_of_interest].should eql(row[5])
-          h[:amount].should eql(row[6])
+          h[:currency].should eql(row[1])
+          h[:transaction_date].should eql(row[2])
+          h[:opening_balance].should eql(row[3])
+          h[:ending_balance].should eql(row[4])
+          h[:interest_date].should eql(row[5])
+          h[:transaction_amount].should eql(row[6])
           h[:description].should eql(row[7])
         end
       end
     end
-
   end
 end

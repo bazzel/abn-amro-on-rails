@@ -16,6 +16,10 @@ describe Upload do
     end
   end
 
+  describe "associations" do
+    it {should have_many(:upload_details, :dependent => :destroy)}
+  end
+  
   describe ".tab" do
     it { should have_attached_file(:tab) }
     # it { should validate_attachment_presence(:tab) }
@@ -30,9 +34,14 @@ describe Upload do
   describe ".downloaded_at" do
     it "parse datetime from filename and stores it as downloaded_at" do
       upload = Factory(:upload)
-      # upload.stub(:tab_file_name).and_return('TXT101121100433.TAB')
-      
       upload.downloaded_at.should eql(DateTime.parse('20101121 10:04:33'))
+    end
+  end
+  
+  describe ".upload_details" do
+    it "creates a upload_detail for every line in the TAB file" do
+      upload = Factory(:upload)
+      upload.should have(110).upload_details
     end
   end
 end

@@ -1,3 +1,5 @@
+require 'csv'
+
 module Parsers
   
   module Hashable
@@ -10,12 +12,12 @@ module Parsers
     #  }
     def to_hash
       keys = [:bankaccount, 
-              :valuta, 
-              :date_of_transaction, 
-              :start_balance,
-              :end_balance,
-              :date_of_interest,
-              :amount,
+              :currency, 
+              :transaction_date, 
+              :opening_balance,
+              :ending_balance,
+              :interest_date,
+              :transaction_amount,
               :description]
       Hash[*keys.zip(self).flatten]
     end

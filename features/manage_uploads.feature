@@ -43,5 +43,5 @@ Feature: Manage uploads
   Then I should be on the upload page for "TXT101231141500.TAB"
   And I should see "'TXT101231141500.TAB' was successfully imported."
   And I should the following upload:
-  | file_name           | downloaded_at           |
-  | TXT101231141500.TAB | December 31, 2010 14:15 |
+  | file_name           | downloaded_at           | upload_details_count | expenses_count |
+  | TXT101231141500.TAB | December 31, 2010 14:15 | 3                    | 3              |

@@ -10,8 +10,16 @@ class Upload < ActiveRecord::Base
   validates_uniqueness_of :tab_file_name
   validates_format_of :tab_file_name, :with => FILENAME_REGEX, :allow_blank => true, :if => :valid_content_type?
 
+  # === Associations
+  has_many :upload_details, :dependent => :destroy
+  
   # Paperclip
   has_attached_file :tab, APP_CONFIG['upload']['tab']['has_attached_file_options'].symbolize_keys
+
+  # === Callbacks
+  # Paperclip saves the file in the after_save callback,
+  # therefore we cannot process the file earlier (otherwise implement a custom Paperclip processor...)
+  after_save :create_upload_details
 
   # Returns datetime part from filename 
   # formatted as DateTime.
@@ -24,4 +32,17 @@ class Upload < ActiveRecord::Base
   def valid_content_type?
     errors[:tab_content_type].empty?
   end
+  
+  def create_upload_details
+    # We only want to process the TAB file once.
+    if upload_details.empty?
+
+      Parsers::TabParser.foreach(tab.path) do |row|
+        upload_details.build row.to_hash
+      end
+    
+      save
+    end
+  end
+  
 end
