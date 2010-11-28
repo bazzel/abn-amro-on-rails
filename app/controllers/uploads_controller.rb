@@ -44,7 +44,7 @@ class UploadsController < ApplicationController
 
     respond_to do |format|
       if @upload.save
-        format.html { redirect_to(@upload, :notice => 'Upload was successfully created.') }
+        format.html { redirect_to(@upload, :notice => t('flash.uploads.created', :file_name => @upload.tab_file_name)) }
         format.xml  { render :xml => @upload, :status => :created, :location => @upload }
       else
         format.html { render :action => "new" }

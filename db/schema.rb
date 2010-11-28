@@ -13,7 +13,6 @@
 ActiveRecord::Schema.define(:version => 20101121125357) do
 
   create_table "uploads", :force => true do |t|
-    t.datetime "downloaded_at"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "tab_file_name"

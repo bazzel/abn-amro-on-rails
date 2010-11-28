@@ -1,7 +1,7 @@
 class Upload < ActiveRecord::Base
   # === Constants
   TAB_CONTENT_TYPES = ['text/plain']
-  FILENAME_REGEX = /^txt(\d{12}).tab$/i
+  FILENAME_REGEX = /^txt(\d{6})(\d{6})\.tab$/i
   
   # === Validations
   validates_attachment_presence :tab, :message => 'This field is required. Please select a file.'
@@ -13,6 +13,13 @@ class Upload < ActiveRecord::Base
   # Paperclip
   has_attached_file :tab, APP_CONFIG['upload']['tab']['has_attached_file_options'].symbolize_keys
 
+  # Returns datetime part from filename 
+  # formatted as DateTime.
+  def downloaded_at
+    md = FILENAME_REGEX.match(tab.original_filename)
+    DateTime.parse("#{md[1]} #{md[2]}")
+  end
+  
   private
   def valid_content_type?
     errors[:tab_content_type].empty?

@@ -35,3 +35,13 @@ Feature: Manage uploads
     And I should see "There was a problem with your submission. Errors have been highlighted below."
     And I should see "The filename must match the format TXT[yymmddhhmmss].tab. Please try again." for "File"
     But I should not see "The file must be a Tab-delimited text file. Please try again."
+    
+  Scenario: Upload a valid file
+  Given I am on the new upload page
+  And I attach the upload file "TXT101231141500.TAB" to "File"
+  And I press "Save"
+  Then I should be on the upload page for "TXT101231141500.TAB"
+  And I should see "'TXT101231141500.TAB' was successfully imported."
+  And I should the following upload:
+  | file_name           | downloaded_at           |
+  | TXT101231141500.TAB | December 31, 2010 14:15 |
