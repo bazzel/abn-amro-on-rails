@@ -1,0 +1,3 @@
+%tr[upload]{ :class => "#{cycle('odd', 'even')}"}
+  %td= link_to(upload.tab.original_filename, upload)
+  %td= l(upload.downloaded_at, :format => :long)

@@ -2,14 +2,26 @@ body {
   background: #E5E5E5;
 }
 
+/* Layout -------------------------------------------------------------- */
+#container {
+  header {
+    h1[role='banner'] {
+      // span the full context:
+      @include full; } }
+  #content {
+    @include columns(9);
+    @include alpha; }
+  aside {
+    @include columns(3);
+    @include omega; } }
+
+/* Structure ----------------------------------------------------------- */
 #container {
   header {
     @include trailer(1);
     background: #002134;
     position: relative;
     h1[role='banner'] {
-      // span the full context:
-      @include full; 
       // When adjusting the font size, Susy will always default to the smallest needed line-height and the default-font-size for the size we are adjusting from:
       @include adjust-font-size-to(32px);
       // Add a leader of 0.5 lines:
@@ -23,51 +35,43 @@ body {
       }
     }
   }
-  
-  section#content {
-    @include columns(9);
-    @include alpha;
-    .secondary-navigation {
-      background: #F4F4F4;
-      @include border-top-left-radius(4px);
-      @include border-top-right-radius(4px);
-      border: {
-        bottom: solid 12px none;
-      }
-      ul {
-        @include horizontal-list;
-        li {
-          a {
-            text-decoration: none;
-            display: block;
-            @include leader(0.35);
-            @include trailer(0.2);
-            color: #111;
-            padding: {
-              left: 1em;
-              right: 1em;
-            }
+}
+
+#content {
+  .secondary-navigation {
+    background: #F4F4F4;
+    @include border-top-left-radius(4px);
+    @include border-top-right-radius(4px);
+    border: {
+      bottom: solid 12px none;
+    }
+    ul {
+      @include horizontal-list;
+      li {
+        a {
+          text-decoration: none;
+          display: block;
+          @include leader(0.35);
+          @include trailer(0.2);
+          color: #111;
+          padding: {
+            left: 1em;
+            right: 1em;
           }
-          &:first-child {
-            // Ensure we still have a rounded left-corner when hovering:
-            @include border-top-left-radius(4px);
-          }
-          &.active, &.active:hover {
-            background: white;
-          }
-          &:hover {
-            background: #F4F4F4;
-          }
+        }
+        &:first-child {
+          // Ensure we still have a rounded left-corner when hovering:
+          @include border-top-left-radius(4px);
+        }
+        &.active, &.active:hover {
+          background: white;
+        }
+        &:hover {
+          background: #F4F4F4;
         }
       }
     }
   }
-
-  aside {
-    @include columns(3);
-    @include omega;
-  }
-  
 }
 
 #main-navigation {
@@ -98,3 +102,37 @@ body {
     }
   }
 }
+
+.block {
+  .content {
+    padding: 1em;
+    h2 {
+      @include adjust-font-size-to(22px);
+      @include trailer(0.5, 22px);
+    }
+  }
+}
+
+.table {
+  border: none;
+  th {
+    text-align: left;
+    @include padding-leader(0.35);
+    @include padding-trailer(0.2);
+    &:first-child {
+      @include border-top-left-radius(4px);
+    }
+    &:last-child {
+      @include border-top-right-radius(4px);
+    }
+  }
+  td {
+    border-bottom: 1px solid;
+    @include padding-leader(0.35);
+    @include padding-trailer(0.2);
+    &:last-child {
+      text-align: right;
+    }
+  }
+}
+
