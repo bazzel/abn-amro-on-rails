@@ -37,11 +37,18 @@ Feature: Manage uploads
     But I should not see "The file must be a Tab-delimited text file. Please try again."
     
   Scenario: Upload a valid file
-  Given I am on the new upload page
-  And I attach the upload file "TXT101231141500.TAB" to "File"
-  And I press "Save"
-  Then I should be on the upload page for "TXT101231141500.TAB"
-  And I should see "'TXT101231141500.TAB' was successfully imported."
-  And I should the following upload:
-  | file_name           | downloaded_at           | upload_details_count | expenses_count |
-  | TXT101231141500.TAB | December 31, 2010 14:15 | 3                    | 3              |
+    Given I am on the new upload page
+    And I attach the upload file "TXT101231141500.TAB" to "File"
+    And I press "Save"
+    Then I should be on the upload page for "TXT101231141500.TAB"
+    And I should see "'TXT101231141500.TAB' was successfully imported."
+    And I should the following upload:
+      | file_name           | downloaded_at           | upload_details_count | expenses_count |
+      | TXT101231141500.TAB | December 31, 2010 14:15 | 3                    | 3              |
+    And I follow "Expenses" in the sidebar
+    Then show me the page
+    Then I should see the following expenses:
+      | Bankaccount | Transaction date | Transaction amount | Balance |
+      | 861887719   | 2010-12-31       | € -17.62             | € 2297.42 |
+      | 861887719   | 2010-12-30       | € -27.55             | € 2315.04 |
+      | 861887719   | 2010-12-29       | € -23.99             | € 2342.59 |

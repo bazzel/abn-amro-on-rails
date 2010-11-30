@@ -18,6 +18,7 @@ describe Upload do
 
   describe "associations" do
     it {should have_many(:upload_details, :dependent => :destroy)}
+    it {should have_many(:expenses, :through => :upload_details)}
   end
   
   describe ".tab" do

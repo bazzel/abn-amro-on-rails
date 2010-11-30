@@ -12,6 +12,7 @@ class Upload < ActiveRecord::Base
 
   # === Associations
   has_many :upload_details, :dependent => :destroy
+  has_many :expenses, :through => :upload_details
   
   # Paperclip
   has_attached_file :tab, APP_CONFIG['upload']['tab']['has_attached_file_options'].symbolize_keys
@@ -36,9 +37,10 @@ class Upload < ActiveRecord::Base
   def create_upload_details
     # We only want to process the TAB file once.
     if upload_details.empty?
-
       Parsers::TabParser.foreach(tab.path) do |row|
-        upload_details.build row.to_hash
+        attributes = row.to_hash
+        logger.debug("[#{self.class}#create_upload_details] Instantiate a new UploadDetail object from the following attributes:\n#{attributes.to_yaml}")
+        upload_details.create attributes
       end
     
       save

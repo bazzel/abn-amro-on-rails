@@ -1,6 +1,15 @@
 - content_for :secondary_navigation do
   %li.active= link_to 'New Upload', new_upload_path
 
+- content_for :sidebar do
+  .block
+    %h3 Header
+    .content
+      %ul
+        %li= link_to "Expenses", upload_expenses_path(@upload)
+        %li Bar
+
+
 %p
   %b File name:
   = @upload.tab.original_filename

@@ -1,0 +1,5 @@
+%tr[expense]{ :class => "#{cycle('odd', 'even')}"}
+  %td= expense.bankaccount
+  %td= l(expense.transaction_date, :format => :default)
+  %td= number_to_currency(expense.transaction_amount)
+  %td= number_to_currency(expense.ending_balance)

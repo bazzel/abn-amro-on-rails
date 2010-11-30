@@ -59,7 +59,9 @@ describe Parsers::TabParser do
 
     it "contains date of transaction in 3rd. element" do
       Parsers::TabParser.foreach(@path) do |row|
-        row[2].should eql(Date.parse('20101231'))
+        [Date.parse('20101229'),
+         Date.parse('20101230'),
+         Date.parse('20101231')].should include(row[2])
       end
     end
 
@@ -75,7 +77,9 @@ describe Parsers::TabParser do
     end
     it "contains date of interest in 6rd. element" do
       Parsers::TabParser.foreach(@path) do |row|
-        row[5].should eql(Date.parse('20101230'))
+        [Date.parse('20101229'),
+         Date.parse('20101230'),
+         Date.parse('20101231')].should include(row[5])
       end
     end
     it "contains amount of transaction in 7rd. element" do
@@ -86,9 +90,9 @@ describe Parsers::TabParser do
 
     it "contains description of transaction in 8th. element" do
       Parsers::TabParser.foreach(@path) do |row|
-        ['BETAALD  21-10-10 14U46 SX2102   ETOS 7249>TILBURG      PASNR 100',
-         'BETAALD  21-10-10 14U43 803706   ALBERT HEIJN 1521>TILBURG                               PASNR 100',
-         'BETAALD  21-10-10 14U25 SX2101   ETOS 7249>TILBURG      PASNR 100'].should include(row[7])
+        ['BETAALD  29-12-10 14U46 SX2102   ETOS 7249>TILBURG      PASNR 100',
+         'BETAALD  30-12-10 14U43 803706   ALBERT HEIJN 1521>TILBURG                               PASNR 100',
+         'BETAALD  31-12-10 14U25 SX2101   ETOS 7249>TILBURG      PASNR 100'].should include(row[7])
       end
     end
 

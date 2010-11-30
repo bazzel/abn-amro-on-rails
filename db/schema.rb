@@ -10,7 +10,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101128094712) do
+ActiveRecord::Schema.define(:version => 20101128130253) do
+
+  create_table "expenses", :force => true do |t|
+    t.string   "bankaccount"
+    t.date     "transaction_date"
+    t.integer  "opening_balance"
+    t.integer  "ending_balance"
+    t.integer  "transaction_amount"
+    t.string   "description"
+    t.integer  "upload_detail_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "upload_details", :force => true do |t|
     t.string   "bankaccount"

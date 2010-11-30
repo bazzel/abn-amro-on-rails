@@ -1,6 +1,14 @@
+# == Given
+
+# == When
 When /^I follow "([^"]*)" in the submenu$/ do |link|
   When %{I follow "#{link}" within ".secondary-navigation"}
 end
+
+Then /^I follow "([^"]*)" in the sidebar$/ do |link|
+  When %{I follow "#{link}" within "aside .content"}
+end
+
 
 Then /^I should see "([^"]*)" highlighted in the menu$/ do |menu|
   within(:css, '#main-navigation li.active') do
@@ -37,3 +45,4 @@ Then /^I should see "([^"]*)" for "([^"]*)"$/ do |text, field|
   element = page.find(:xpath, "//li[contains(label, '#{field}')]")
   element.should have_selector('p.inline-errors', :text => text)
 end
+
