@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101128130253) do
+ActiveRecord::Schema.define(:version => 20101201155941) do
 
   create_table "expenses", :force => true do |t|
     t.string   "bankaccount"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(:version => 20101128130253) do
     t.integer  "upload_detail_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "balance"
   end
 
   create_table "upload_details", :force => true do |t|

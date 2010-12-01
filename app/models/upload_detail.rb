@@ -1,10 +1,11 @@
 class UploadDetail < ActiveRecord::Base
   # === Associations
   has_many :expenses, :dependent => :destroy
+  belongs_to :upload
 
   # === Callbacks
   before_create :build_expense
-  
+
   private
   def build_expense
     expenses.build({

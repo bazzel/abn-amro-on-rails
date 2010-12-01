@@ -37,13 +37,15 @@ class Upload < ActiveRecord::Base
   def create_upload_details
     # We only want to process the TAB file once.
     if upload_details.empty?
+      # We should probably wrap this in a transaction:
+      # Upload.transaction(:requires_new => true) do
+      #   ...
+      # end
       Parsers::TabParser.foreach(tab.path) do |row|
         attributes = row.to_hash
         logger.debug("[#{self.class}#create_upload_details] Instantiate a new UploadDetail object from the following attributes:\n#{attributes.to_yaml}")
         upload_details.create attributes
       end
-    
-      save
     end
   end
   

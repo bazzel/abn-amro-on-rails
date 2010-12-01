@@ -3,6 +3,7 @@ require 'spec_helper'
 describe UploadDetail do
   describe "associations" do
     it {should have_many(:expenses, :dependent => :destroy)}
+    it {should belong_to(:upload) }
   end
   
   describe "expenses" do
