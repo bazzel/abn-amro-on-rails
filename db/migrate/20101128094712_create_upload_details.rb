@@ -4,10 +4,10 @@ class CreateUploadDetails < ActiveRecord::Migration
       t.string :bankaccount
       t.string :currency
       t.date :transaction_date
-      t.float :opening_balance
-      t.float :ending_balance
+      t.decimal :opening_balance, :precision => 8, :scale => 2
+      t.decimal :ending_balance, :precision => 8, :scale => 2
       t.date :interest_date
-      t.float :transaction_amount
+      t.decimal :transaction_amount, :precision => 8, :scale => 2
       t.string :description
       
       t.references :upload

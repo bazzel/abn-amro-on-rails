@@ -3,9 +3,9 @@ class CreateExpenses < ActiveRecord::Migration
     create_table :expenses do |t|
       t.string :bankaccount
       t.date :transaction_date
-      t.integer :opening_balance
-      t.integer :ending_balance
-      t.integer :transaction_amount
+      t.decimal :opening_balance, :precision => 8, :scale => 2
+      t.decimal :ending_balance, :precision => 8, :scale => 2
+      t.decimal :transaction_amount, :precision => 8, :scale => 2
       t.string :description
       
       t.references :upload_detail

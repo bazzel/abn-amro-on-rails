@@ -11,9 +11,9 @@ class UploadDetail < ActiveRecord::Base
     expenses.build({
      :bankaccount        => bankaccount,
      :transaction_date   => transaction_date,
-     :opening_balance    => (opening_balance * 100).to_i, # Store amount as cents
-     :ending_balance     => (ending_balance * 100).to_i,
-     :transaction_amount => (transaction_amount * 100).to_i,
+     :opening_balance    => opening_balance,
+     :ending_balance     => ending_balance,
+     :transaction_amount => transaction_amount,
      :description        => description
     })
   end

@@ -15,24 +15,24 @@ ActiveRecord::Schema.define(:version => 20101201155941) do
   create_table "expenses", :force => true do |t|
     t.string   "bankaccount"
     t.date     "transaction_date"
-    t.integer  "opening_balance"
-    t.integer  "ending_balance"
-    t.integer  "transaction_amount"
+    t.decimal  "opening_balance",    :precision => 8, :scale => 2
+    t.decimal  "ending_balance",     :precision => 8, :scale => 2
+    t.decimal  "transaction_amount", :precision => 8, :scale => 2
     t.string   "description"
     t.integer  "upload_detail_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "balance"
+    t.decimal  "balance",            :precision => 8, :scale => 2
   end
 
   create_table "upload_details", :force => true do |t|
     t.string   "bankaccount"
     t.string   "currency"
     t.date     "transaction_date"
-    t.float    "opening_balance"
-    t.float    "ending_balance"
+    t.decimal  "opening_balance",    :precision => 8, :scale => 2
+    t.decimal  "ending_balance",     :precision => 8, :scale => 2
     t.date     "interest_date"
-    t.float    "transaction_amount"
+    t.decimal  "transaction_amount", :precision => 8, :scale => 2
     t.string   "description"
     t.integer  "upload_id"
     t.datetime "created_at"

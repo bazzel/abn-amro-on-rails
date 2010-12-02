@@ -10,20 +10,15 @@ class Expense < ActiveRecord::Base
   end
   
   def prev
-    if new_record?
-      upload.expenses.last
-    else
-      upload.expenses.where("expenses.id < ?", self).last
-    end
+    expenses = upload.expenses
+    expenses = expenses.where("expenses.id < ?", self) unless new_record?
+    
+    expenses.last
   end
 
   private
   def calculate_balance
-    if prev
-      self.balance = prev.balance + transaction_amount.to_i
-    else
-      self.balance = opening_balance.to_i + transaction_amount.to_i
-    end
+    self.balance = (prev ? prev.balance : opening_balance) + transaction_amount
   end
 
 end

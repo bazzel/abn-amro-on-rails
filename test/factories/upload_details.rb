@@ -7,4 +7,5 @@ Factory.define :upload_detail do |f|
   f.ending_balance 234.56
   f.transaction_amount 345.67
   f.description 'Lorem ipsum'
+  f.association :upload
 end
