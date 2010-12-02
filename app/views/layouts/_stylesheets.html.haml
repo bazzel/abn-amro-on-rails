@@ -2,5 +2,8 @@
 = stylesheet_link_tag 'compiled/print', :media => 'print'
 = stylesheet_link_tag 'compiled/ie', :media => 'screen, projection'
 
+/[if lt IE 7]
+  = stylesheet_link_tag 'compiled/ie6.css', :media => 'screen, projection'
+    
 -# Append your own using content_for :stylesheets
 = yield :stylesheets

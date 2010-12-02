@@ -1,6 +1,7 @@
 # This configuration file works with both the Compass command line tool and within Rails.
 require 'susy'
 # Require any additional compass plugins here.
+require 'fancy-buttons'
 
 project_type = :rails
 project_path = Compass::AppIntegration::Rails.root

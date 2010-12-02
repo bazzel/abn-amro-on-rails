@@ -32,4 +32,10 @@ form.formtastic {
   .required {
     abbr {
       color: red;
-      padding-left:2px; } } }
+      padding-left:2px; } }
+  fieldset {
+    &.buttons {
+      input, a {
+        @include fancy-button-structure;
+        @include fancy-button-colors(#E5E5E5, #DEDEDE);
+        @include serif-family; } } } }
