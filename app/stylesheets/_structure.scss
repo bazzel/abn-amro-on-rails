@@ -43,7 +43,7 @@ body {
     @include border-top-left-radius(4px);
     @include border-top-right-radius(4px);
     border: {
-      bottom: solid 12px none;
+      bottom: solid 12px;
     }
     ul {
       @include horizontal-list;
@@ -100,6 +100,29 @@ body {
         background: #E5E5E5;
       }
     }
+  }
+}
+
+aside {
+  h3 {
+    @include border-top-left-radius(4px);
+    @include border-top-right-radius(4px);
+    @include padding-leader(0.35);
+    @include padding-trailer(0.2);
+    @include trailer(0);
+    background: #F4F4F4;
+    border: {
+      bottom: solid 12px;
+    }
+    font-weight: normal;
+    padding: {
+      left: 1em;
+      right: 1em;
+    }
+  }
+  ul {
+    @include no-bullets;
+    margin-left: 0;
   }
 }
 
