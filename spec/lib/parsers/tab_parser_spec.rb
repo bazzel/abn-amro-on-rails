@@ -7,6 +7,18 @@ describe Parsers::TabParser do
   end
 
   describe "#foreach" do
+    
+    describe "illegal quoting" do
+      before(:each) do
+        @path = txt_file('illegal_quoting.TAB')
+      end
+      
+      it "handles 'Illegal quoting' properly" do
+        lambda {
+          Parsers::TabParser.foreach(@path)
+        }.should_not raise_error(CSV::MalformedCSVError)
+      end
+    end
 
     before(:each) do
       @path = txt_file('TXT101231141500.TAB')

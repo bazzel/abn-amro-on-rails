@@ -12,7 +12,7 @@ class Upload < ActiveRecord::Base
 
   # === Associations
   has_many :upload_details, :dependent => :destroy
-  has_many :expenses, :through => :upload_details
+  has_many :expenses, :through => :upload_details, :order => 'expenses.id DESC'
   
   # Paperclip
   has_attached_file :tab, APP_CONFIG['upload']['tab']['has_attached_file_options'].symbolize_keys

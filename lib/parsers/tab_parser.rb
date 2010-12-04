@@ -28,7 +28,8 @@ module Parsers
       def foreach(path)
         options = {
           :col_sep => "\t",
-          :converters => converters
+          :converters => converters,
+          :quote_char => "\t"
         }
         CSV.foreach(path, options) do |row|
           # row is an Array, but we extend it

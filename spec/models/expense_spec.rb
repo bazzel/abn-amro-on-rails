@@ -30,6 +30,8 @@ describe Expense do
       upload.expenses[2].balance.to_f.should eql(4289.23)
     end
   end
+  
+  it "adds to the balance of the same bankaccount"
 end
 
 

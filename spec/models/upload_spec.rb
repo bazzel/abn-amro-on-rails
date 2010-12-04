@@ -18,7 +18,7 @@ describe Upload do
 
   describe "associations" do
     it {should have_many(:upload_details, :dependent => :destroy)}
-    it {should have_many(:expenses, :through => :upload_details)}
+    it {should have_many(:expenses, :through => :upload_details, :order => 'expenses.id DESC')}
   end
   
   describe ".tab" do
