@@ -9,7 +9,7 @@ class UploadDetail < ActiveRecord::Base
   private
   def build_expense
     expenses.build({
-     :bankaccount        => bankaccount,
+     :account_number     => bankaccount,
      :transaction_date   => transaction_date,
      :opening_balance    => opening_balance,
      :ending_balance     => ending_balance,

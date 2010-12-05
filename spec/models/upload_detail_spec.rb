@@ -25,7 +25,7 @@ describe UploadDetail do
 
       expense = upload_detail.expenses[0]
       
-      expense.bankaccount.should eql(upload_detail.bankaccount)
+      expense.account_number.should eql(upload_detail.bankaccount)
       expense.transaction_date.should eql(upload_detail.transaction_date)
       expense.opening_balance.should eql(upload_detail.opening_balance)
       expense.ending_balance.should eql(upload_detail.ending_balance)

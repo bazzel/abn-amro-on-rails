@@ -3,6 +3,7 @@ require 'spec_helper'
 describe Expense do
   describe 'associations' do
     it { should belong_to(:upload_detail) }
+    it { should belong_to(:bank_account) }
   end
   
   describe '#upload' do
@@ -15,10 +16,6 @@ describe Expense do
 
       expense.upload.should eql(upload)
     end
-  end
-  
-  describe "#prev" do
-    
   end
   
   describe "#balance" do
@@ -37,7 +34,15 @@ describe Expense do
     end
   end
   
-  it "adds to the balance of the same bankaccount"
+  describe "#account_number" do
+    it "creates bank_account if account_number is not recognized" do
+      expense = Factory.build(:expense, :bank_account => nil)
+      expense.account_number = '861887719'
+      
+      expense.bank_account.account_number.should eql('861887719')
+    end
+  end
+  
 end
 
 
