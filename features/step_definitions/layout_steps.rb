@@ -5,6 +5,7 @@ When /^I follow "([^"]*)" in the submenu$/ do |link|
   When %{I follow "#{link}" within ".secondary-navigation"}
 end
 
+# == Then
 Then /^I follow "([^"]*)" in the sidebar$/ do |link|
   When %{I follow "#{link}" within "aside .content"}
 end
@@ -46,3 +47,8 @@ Then /^I should see "([^"]*)" for "([^"]*)"$/ do |text, field|
   element.should have_selector('p.inline-errors', :text => text)
 end
 
+Then /^I should not see a link to "([^"]*)" in the sidebar$/ do |link|
+  within(:css, 'aside .content') do
+    page.should_not have_selector('a', :text => link)
+  end
+end

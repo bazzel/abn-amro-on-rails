@@ -48,7 +48,7 @@ describe Upload do
   
   describe "#bank_accounts" do
     it "returns the bank_accounts which have transactions in the uploaded file" do
-      upload = Factory(:upload, :tab => File.new(File.join(Rails.root, "spec/fixtures/upload", 'TXT101204150043.TAB')))
+      upload = Factory(:upload, :tab => upload_file('TXT101204150043.TAB'))
 
       %w{861887719 808257226 845593013}.each do |account_number|
         upload.bank_accounts.map(&:account_number).should include(account_number)

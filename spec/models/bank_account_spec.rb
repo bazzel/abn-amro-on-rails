@@ -7,7 +7,7 @@ describe BankAccount do
   
   it "creating bank_acocunts" do
     lambda {
-      Factory(:upload, :tab => File.new(File.join(Rails.root, "spec/fixtures/upload", 'TXT101204150043.TAB')))
+      Factory(:upload, :tab => upload_file('TXT101204150043.TAB'))
     }.should change(BankAccount, :count).by(3)
   end
   

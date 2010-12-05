@@ -30,9 +30,12 @@ class Upload < ActiveRecord::Base
   end
   
   def bank_accounts
-    BankAccount.joins({:expenses => :upload_detail})
-      .where('upload_id = ?', id)
-      .group(:bank_account_id)  
+    @bank_accounts ||=
+      begin
+        @bank_accounts = BankAccount.joins({:expenses => :upload_detail})
+          .where('upload_id = ?', id)
+          .group(:bank_account_id)  
+      end
   end
   
   private

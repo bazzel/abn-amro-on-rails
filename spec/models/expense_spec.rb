@@ -20,7 +20,7 @@ describe Expense do
   
   describe "#balance" do
     it "calculates balance" do
-      upload = Factory(:upload, :tab => File.new(File.join(Rails.root, "spec/fixtures/upload", 'TXT101204150043.TAB')))
+      upload = Factory(:upload, :tab => upload_file('TXT101204150043.TAB'))
       
       upload.expenses[0].balance.to_f.should eql(2493.55)
       upload.expenses[1].balance.to_f.should eql(2378.55)

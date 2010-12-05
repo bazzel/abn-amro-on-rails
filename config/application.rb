@@ -47,3 +47,7 @@ module AbnAmroOnRails
     end
   end
 end
+
+# Requires patches to ruby classes which are stored 
+# in lib/patch.
+Dir[Rails.root.join("lib/patch/**/*.rb")].each {|f| require f}
