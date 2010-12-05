@@ -11,6 +11,8 @@ class ExpensesController < ApplicationController
     else
       @bank_accounts = BankAccount.all
     end
+    
+    @expenses = @expenses.paginate :page => params[:page], :per_page => 25
   end
   
   private
@@ -21,6 +23,8 @@ class ExpensesController < ApplicationController
           @bank_account = BankAccount.find(params[:bank_account_id])
         elsif params[:upload_id]
           @bank_account = @upload.bank_accounts.first
+        else
+          @bank_account = BankAccount.first
         end
       end
   end

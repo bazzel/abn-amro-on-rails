@@ -6,7 +6,7 @@ end
 
 Given /^I've uploaded the file "([^"]*)"$/ do |file|
   Given %{I am on the new upload page}
-  And %{I attach the upload file "TXT101204150043.TAB" to "File"}
+  And %{I attach the upload file "#{file}" to "File"}
   And %{I press "Save"}
 end
 

@@ -1,4 +1,6 @@
 AbnAmroOnRails::Application.routes.draw do
+  resources :expenses
+  
   resources :uploads do
     resources :expenses
   end

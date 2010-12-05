@@ -11,13 +11,10 @@ gem 'haml',                 '~>3.0.24'
 gem 'mysql2',               '~>0.2.6'
 gem 'paperclip',            '~>2.3.5' # Easy upload management for ActiveRecord
 gem 'rails',                '~>3.0.3'
-# gem 'google-spreadsheet-ruby', '0.1.2'
-# gem 'roo',                  '1.9.3'
-# gem 'spreadsheet',          '0.6.4.1'
-# gem 'fastercsv',            '~>1.5.3'
+gem 'will_paginate',        '~>2.3.15'
+
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-
 
 # Use unicorn as the web server
 # gem 'unicorn'

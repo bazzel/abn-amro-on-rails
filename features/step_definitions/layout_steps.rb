@@ -1,6 +1,10 @@
 # == Given
 
 # == When
+When /^I follow "([^"]*)" in the menu$/ do |link|
+  When %{I follow "#{link}" within "#main-navigation"}
+end
+
 When /^I follow "([^"]*)" in the submenu$/ do |link|
   When %{I follow "#{link}" within ".secondary-navigation"}
 end

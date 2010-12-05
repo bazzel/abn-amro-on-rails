@@ -9,8 +9,8 @@
         %h1{:role => 'banner'}= link_to "ABN AMRO on Rails", root_path
         %nav#main-navigation
           %ul
-            %li= link_to "Main page", '#'
-            %li.active= link_to "Uploads", uploads_path
+            %li{:class => controller.controller_name == 'expenses' && 'active' }= link_to "Expenses", expenses_path
+            %li{:class => controller.controller_name == 'uploads' && 'active' }= link_to "Uploads", uploads_path
             %li= link_to "Login", '#'
 
       %section#content
