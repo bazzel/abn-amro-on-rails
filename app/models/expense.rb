@@ -10,10 +10,10 @@ class Expense < ActiveRecord::Base
   end
   
   def prev
-    expenses = upload.expenses
+    expenses = upload.expenses.where('expenses.bankaccount = ?', bankaccount)
     expenses = expenses.where("expenses.id < ?", self) unless new_record?
     
-    expenses.last
+    expenses.order("expenses.id ASC").last
   end
 
   private
