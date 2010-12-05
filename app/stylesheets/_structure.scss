@@ -138,6 +138,9 @@ aside {
 
 .table {
   border: none;
+  .debit, .credit, .balance {
+    text-align: right;
+  }
   th {
     text-align: left;
     @include padding-leader(0.35);

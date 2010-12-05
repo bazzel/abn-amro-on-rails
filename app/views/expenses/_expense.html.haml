@@ -1,9 +1,9 @@
 %tr[expense]{ :class => "#{cycle('odd', 'even')}"}
   %td= l(expense.transaction_date, :format => :default)
-  %td
+  %td.debit
     - if expense.transaction_amount.negative?
       = number_to_currency(expense.transaction_amount, :unit => '')
-  %td
+  %td.credit
     - if expense.transaction_amount.positive?
       = number_to_currency(expense.transaction_amount, :unit => '')
-  %td= number_to_currency(expense.balance, :unit => '')
+  %td.balance= number_to_currency(expense.balance, :unit => '')

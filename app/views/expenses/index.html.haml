@@ -3,7 +3,7 @@
 
 - content_for :sidebar do
   .block
-    %h3 Header
+    %h3 Accounts
     .content
       %ul
         - @bank_accounts.each do |bank_account|
@@ -18,8 +18,7 @@
 %table.table
   %tr
     %th Transaction date
-    %th Debit
-    %th Credit
-    %th Balance
-    / %th Description
+    %th.debit Debit
+    %th.credit Credit
+    %th.balance Balance
   = render @expenses

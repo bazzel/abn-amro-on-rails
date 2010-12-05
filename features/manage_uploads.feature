@@ -68,3 +68,19 @@ Feature: Manage uploads
       | 2010-06-09       |       | 65.00  | 351.21  |
       | 2010-06-10       |       | 10.00  | 361.21  |
     And I should not see a link to "845593013" in the sidebar
+
+  Scenario: Show only expenses for current upload
+    Given I've uploaded the file "TXT101231141500.TAB"
+    And I've uploaded the file "TXT101204150043.TAB"
+    And I am on the upload page for "TXT101204150043.TAB"
+    And I follow "Expenses" in the sidebar
+    Then I should see the following expenses:
+      | Transaction date | Debit   | Credit | Balance  |
+      | 2010-05-15       |         | 19.95  | 2,493.55 |
+      | 2010-05-16       | -115.00 |        | 2,378.55 |
+      | 2010-05-16       | -52.39  |        | 2,326.16 |
+    And I should not see the following expenses:
+      | Transaction date | Debit  |
+      | 2010-12-29       | -23.99 |
+      | 2010-12-30       | -27.55 |
+      | 2010-12-31       | -17.62 |
