@@ -2,32 +2,52 @@ require 'spec_helper'
 
 describe ExpensesController do
   before(:each) do
-   @upload = mock_model(Upload)
-   @expenses = [mock_model(Expense)]
-   Upload.stub(:find).and_return(@upload)
-   @upload.stub(:expenses).and_return(@expenses)
+    @upload = mock_model(Upload)
+
+    @bank_account = mock_model(BankAccount)
+    @bank_accounts = [@bank_account]
+   
+    @expense = mock_model(Expense)
+    @expenses = [@expense]
+    @expenses.stub(:includes).and_return(@expenses)
+    BankAccount.stub(:find).and_return(@bank_account)
+    @bank_account.stub(:expenses).and_return(@expenses)
   end
   
-  describe "GET /upload/1/expenses/index" do
-    def do_get
-      get :index, :upload_id => 1
+  describe "GET /bank_accounts/1/expenses/index" do
+    def do_get(params = {:bank_account_id => 1})
+      get :index, params
     end
     
-    it "finds the upload object for the given upload_id and assigns it for the view" do
-      Upload.should_receive(:find).with(1).and_return(@upload)
+    it "finds the bank_account object for the given bank_account_id and assigns it for the view" do
+      BankAccount.should_receive(:find).with(1).and_return(@bank_account)
       do_get
-      assigns[:upload].should eql(@upload)
+      assigns[:bank_account].should eql(@bank_account)
     end
     
-    it "assigns the slides for the view" do
-      @upload.should_receive(:expenses).and_return(@expenses)
+    it "finds first bank_account object for given upload_id and assigns it for the view" do
+      Upload.should_receive(:find).with(1).and_return(@upload)
+      @upload.should_receive(:bank_accounts).and_return(@bank_accounts)
+      @bank_accounts.should_receive(:first).and_return(@bank_account)
+      
+      do_get :upload_id => 1
+    end
+    
+    it "assigns the expenses for the view" do
+      @bank_account.should_receive(:expenses).and_return(@expenses)
       do_get
       assigns[:expenses].should eql(@expenses)
     end
     
+    it "includes bank_account for performance improvement" do
+      @expenses.should_receive(:includes).with(:bank_account).and_return(@expenses)
+      do_get
+    end
+
     it "renders index" do
       do_get
       response.should render_template('index')
     end
+    
   end
 end

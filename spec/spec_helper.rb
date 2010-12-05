@@ -30,6 +30,19 @@ RSpec.configure do |config|
   # Provides rspec-compatible matchers for testing Paperclip attachments  
   config.include Paperclip::Shoulda::Matchers
   
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
+    
   config.after(:all) do
     # Cleanup tmp dir.
     FileUtils.rm_rf "#{Rails.root}/tmp/system"

@@ -29,6 +29,12 @@ class Upload < ActiveRecord::Base
     DateTime.parse("#{md[1]} #{md[2]}")
   end
   
+  def bank_accounts
+    BankAccount.joins({:expenses => :upload_detail})
+      .where('upload_id = ?', id)
+      .group(:bank_account_id)  
+  end
+  
   private
   def valid_content_type?
     errors[:tab_content_type].empty?

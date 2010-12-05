@@ -2,6 +2,10 @@ AbnAmroOnRails::Application.routes.draw do
   resources :uploads do
     resources :expenses
   end
+  
+  resources :bank_accounts do
+    resources :expenses
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
