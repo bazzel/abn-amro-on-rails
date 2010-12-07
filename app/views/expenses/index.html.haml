@@ -9,9 +9,9 @@
         - @bank_accounts.each do |bank_account|
           %li
             - if bank_account == @bank_account
-              = bank_account.account_number
+              = "#{bank_account}"
             - else
-              = link_to(bank_account.account_number, bank_account_expenses_path(bank_account, :upload_id => @upload))
+              = link_to("#{bank_account}", bank_account_expenses_path(bank_account, :upload_id => @upload))
 
 - title 'Listing Expenses'
 
