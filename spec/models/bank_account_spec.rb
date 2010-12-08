@@ -10,6 +10,15 @@ describe BankAccount do
     it { Factory(:bank_account); should validate_uniqueness_of(:account_number, :message => 'This account number already exist. Please enter another one.')}
   end
   
+  describe ".bank_account=" do
+    it "can only be set once" do
+      bank_account = Factory.build(:bank_account, :account_number => '861887719')
+      bank_account.account_number = '972259171'
+      
+      bank_account.account_number.should eql('861887719')
+    end
+  end
+
   describe ".to_s" do
     before(:each) do
       @bank_account = Factory.build(:bank_account, :account_number => '861887719')
