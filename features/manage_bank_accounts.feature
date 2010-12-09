@@ -16,6 +16,12 @@ Feature: Manage bank accounts
       | 86.18.87.719   | my account   |
       | 97.22.59.171   | your account |
 
+  Scenario: Viewing disabled attributes
+    Given a bank_account exists with account_number: "861887719"
+    When I go to the home page
+    And I follow "Edit" for bank account "861887719"
+    Then the "Account number" field should be disabled
+
   Scenario: Editing an existing bank account
     Given a bank_account exists with account_number: "861887719"
     When I go to the home page
