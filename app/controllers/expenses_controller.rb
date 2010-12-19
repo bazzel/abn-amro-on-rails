@@ -2,6 +2,7 @@ class ExpensesController < ApplicationController
   
   before_filter :find_upload, :find_bank_account
   
+  # GET /bank_accounts/1/expenses/index
   def index
     @expenses = @bank_account.expenses.includes(:bank_account)
     
@@ -13,6 +14,18 @@ class ExpensesController < ApplicationController
     end
     
     @expenses = @expenses.paginate :page => params[:page], :per_page => 25
+  end
+  
+  # GET /bank_accounts/1/expenses/100/edit
+  def edit
+    @expense = @bank_account.expenses.find(params[:id])
+  end
+  
+  # PUT /bank_accounts/1/expense/100
+  def update
+    @expense = @bank_account.expenses.find(params[:id])
+    @expense.update_attributes(params[:expense])
+    redirect_to bank_account_expenses_path(@bank_account), :notice => 'Expense was successfully updated'
   end
   
   private

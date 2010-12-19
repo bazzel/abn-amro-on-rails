@@ -2,6 +2,7 @@ class Expense < ActiveRecord::Base
   # == Associations
   belongs_to :upload_detail
   belongs_to :bank_account
+  belongs_to :creditor
 
   # === Callbacks
   before_save :calculate_balance

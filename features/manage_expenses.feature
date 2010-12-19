@@ -17,3 +17,19 @@ Scenario: Pagination
   When I follow the page link to "2"
   Then I should see a page link to "1"
   And I should not see a page link to "2"
+  
+Scenario: Adding creditor to expense
+  Given I've uploaded the file "TXT101121100433.TAB"
+  And the following creditors exist
+    | name |
+    | CZ   |
+  When I go to the expenses page
+  And I follow "Edit" for expense "66.81.86.739 CZ                 SAL. OKTOBER 2010" 
+  And I select "CZ" from "Creditor"
+  And I press "Save"
+  Then I should be on the expenses page for "861887719"
+  And I should see "Expense was successfully updated"
+  And I should see the following expenses:
+    | creditor |
+    | CZ       |
+  

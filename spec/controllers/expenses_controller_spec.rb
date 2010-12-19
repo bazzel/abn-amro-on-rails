@@ -91,4 +91,68 @@ describe ExpensesController do
     end
     
   end
+
+  describe "GET /bank_accounts/1/expenses/100/edit" do
+    def do_get
+      get :edit, :bank_account_id => 1, :id => 100
+    end
+
+    it "finds the bank_account object for the given bank_account_id and assigns it for the view" do
+      BankAccount.should_receive(:find).with(1).and_return(@bank_account)
+      do_get
+      assigns[:bank_account].should eql(@bank_account)
+    end
+
+    it "finds the expense object for the given id and assigns it for the view" do
+      @bank_account.expenses.should_receive(:find).with(100).and_return(@expense)
+      do_get
+      assigns[:expense].should eql(@expense)
+    end
+
+    it "renders edit" do
+      do_get
+      response.should render_template('edit')
+    end
+  end
+
+  describe "PUT /bank_accounts/1/expense/100" do
+    before(:each) do
+      @expenses.stub(:find).and_return(@expense)
+      @expense.stub(:update_attributes).and_return(true)
+    end
+    
+    def do_put
+      put :update, :bank_account_id => 1, :id => 100, :expense => { 'these' => 'params' }
+    end
+
+    it "finds the bank_account object for the given bank_account_id and assigns it for the view" do
+      BankAccount.should_receive(:find).with(1).and_return(@bank_account)
+      do_put
+      assigns[:bank_account].should eql(@bank_account)
+    end
+
+    it "finds the expense object for the given id and assigns it for the view" do
+      @bank_account.expenses.should_receive(:find).with(100).and_return(@expense)
+      do_put
+      assigns[:expense].should eql(@expense)
+    end
+    
+    it "updates the expense" do
+      @expense.should_receive(:update_attributes).with({ 'these' => 'params' })
+      do_put
+    end
+    
+    describe "success" do
+      it "sets the flash notice" do
+        do_put
+        flash[:notice].should eql('Expense was successfully updated')
+      end
+      
+      it "redirects to expenses index" do
+        do_put
+        response.should redirect_to(bank_account_expenses_path(@bank_account))
+      end
+    end
+    
+  end
 end

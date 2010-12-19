@@ -17,6 +17,10 @@ module NavigationHelpers
       upload = Upload.find_by_tab_file_name($1)
       upload_path(upload)
 
+    when /^the expenses page for "(.*)"$/
+      bank_account = BankAccount.find_by_account_number($1)
+      bank_account_expenses_path(bank_account)
+
     # the following are examples using path_to_pickle
 
     when /^#{capture_model}(?:'s)? page$/                           # eg. the forum's page

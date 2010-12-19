@@ -4,6 +4,7 @@ describe Expense do
   describe 'associations' do
     it { should belong_to(:upload_detail) }
     it { should belong_to(:bank_account) }
+    it { should belong_to(:creditor) }
   end
   
   describe '#upload' do

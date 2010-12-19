@@ -1,0 +1,15 @@
+= semantic_form_for @expense do |f|
+  = render "shared/error_messages", :target => @expense
+
+  = f.inputs do
+    = f.input :transaction_date, :input_html => { :disabled => true }
+    = f.input :transaction_amount, :input_html => { :disabled => true }
+    = f.input :description, :input_html => { :disabled => true }
+
+  = f.inputs do
+    = f.input :creditor
+      
+    
+  = f.buttons do
+    = f.commit_button
+    %li= link_to "Cancel", bank_account_expenses_path(@bank_account)
