@@ -34,7 +34,16 @@ describe BankAccount do
       Factory(:upload, :tab => upload_file('TXT101204150043.TAB'))
     }.should change(BankAccount, :count).by(3)
   end
-  
-  
 
+  describe "#balance" do
+    it "return 0 if no expenses" do
+      Factory(:bank_account).balance.should eql(0)
+    end
+    
+    it "returns balance of last expense" do
+      upload = Factory(:upload, :tab => upload_file('TXT101204150043.TAB'))
+      
+      BankAccount.find_by_account_number('861887719').balance.should eql(2326.16)
+    end
+  end
 end

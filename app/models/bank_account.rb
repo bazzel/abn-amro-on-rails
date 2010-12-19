@@ -16,4 +16,40 @@ class BankAccount < ActiveRecord::Base
     write_attribute(:account_number, account_number || new_account_number)
   end
 
+  def balance
+    expenses.empty? ? 0 : expenses.order('expenses.id').last.balance
+  end
+  
+  # [
+  #   {
+  #     "bank_account" : {
+  #       "account_number" : "861887719",
+  #       "created_at"     : "2010-12-05T09:53:24Z",
+  #       "description"    : "a la carte",
+  #       "id"             : 1,
+  #       "updated_at"     : "2010-12-08T13:49:36Z",
+  #       "balance"        : "0.0"
+  #     }
+  #   },
+  #   {
+  #     "bank_account" : {
+  #       "account_number" : "972259171",
+  #       "created_at"     : "2010-12-05T09:53:40Z",
+  #       "description"    : null,
+  #       "id"             : 2,
+  #       "updated_at"     : "2010-12-08T13:49:40Z",
+  #       "balance"        : "152.24"
+  #     }
+  #   },
+  #   ...
+  # ]
+  def as_json(options = nil)
+    super(:methods => [:balance])
+  end
 end
+
+# $.getJSON('http://localhost:3000/bank_accounts.json', function(data) {
+#   $.each(data, function(index, value) {
+#     console.log(value.bank_account.balance);
+#   });
+# });

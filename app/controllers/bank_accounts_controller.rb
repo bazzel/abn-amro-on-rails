@@ -1,7 +1,10 @@
 class BankAccountsController < ApplicationController
+  respond_to :xml, :json, :html
   
   def index
     @bank_accounts = BankAccount.all
+    
+    respond_with @bank_accounts
   end
   
   def edit

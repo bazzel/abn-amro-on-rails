@@ -30,9 +30,19 @@ Feature: Manage bank accounts
     And I press "Save"
     And I should see "Bank Account was successfully updated"
     And I should see the following bank_accounts:
-      | account_number | description  |
-      | 86.18.87.719   | my account   |
+      | account_number | description |
+      | 86.18.87.719   | my account  |
 
+  Scenario: title
+    Given I've uploaded the file "TXT101204150043.TAB"
+    When I go to the home page
+    And I should see the following bank_accounts:
+      | account_number | balance   |
+      | 86.18.87.719   | 2,326.16  |
+      | 80.82.57.226   | 76,007.45 |
+      | 84.55.93.013   | 76,007.45 |
+
+  
   # Scenario: Updating an existing bank account with an empty account number
   #   Given a bank_account exists with account_number: "861887719"
   #   When I go to the home page
@@ -44,9 +54,9 @@ Feature: Manage bank accounts
   #   
   # Scenario: Updating an existing bank account with a duplicate account number
   #   Given the following bank_accounts exist
-  #     | account_number | description  |
-  #     | 861887719      | my account   |
-  #     | 972259171      | your account |
+ # | account_number | description  |
+ # | 861887719      | my account   |
+ # | 972259171      | your account |
   #   When I go to the home page
   #   And I follow "Edit" for bank account "861887719"
   #   And I fill in "Account number" with "972259171"

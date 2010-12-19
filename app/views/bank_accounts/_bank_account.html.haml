@@ -1,5 +1,6 @@
 %tr[bank_account]{ :class => "#{cycle('odd', 'even')}"}
   %td= "#{bank_account}"
   %td= bank_account.description
+  %td.balance= number_to_currency(bank_account.balance, :unit => '')
   %td
     = link_to('Edit', edit_bank_account_path(bank_account))

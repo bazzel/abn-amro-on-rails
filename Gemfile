@@ -8,6 +8,7 @@ gem 'compass-susy-plugin',  '~>0.8.1' # Responsive web design with grids the qui
 gem 'fancy-buttons',        '~>1.0.4' # Easily style buttons with beautiful CSS3 features like gradients, rounded corners, etc.
 gem 'formtastic',           '~>1.2.0'                                    
 gem 'haml',                 '~>3.0.24'
+gem 'jquery-rails',         '~>0.2.6'
 gem 'mysql2',               '~>0.2.6'
 gem 'paperclip',            '~>2.3.5' # Easy upload management for ActiveRecord
 gem 'rails',                '~>3.0.3'
