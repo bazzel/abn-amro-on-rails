@@ -20,6 +20,10 @@ class BankAccount < ActiveRecord::Base
     expenses.empty? ? 0 : expenses.order('expenses.id').last.balance
   end
   
+  def quotient
+    (balance / self.class.max.balance).abs
+  end
+  
   # [
   #   {
   #     "bank_account" : {
@@ -45,6 +49,15 @@ class BankAccount < ActiveRecord::Base
   # ]
   def as_json(options = nil)
     super(:methods => [:balance])
+  end
+  
+  class << self
+    # Returns the BankAccount object with the largest balance.
+    def max
+      BankAccount.all.inject do |max, account|
+        max.balance.abs > account.balance.abs ? max : account
+      end
+    end
   end
 end
 

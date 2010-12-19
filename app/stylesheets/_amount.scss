@@ -1,0 +1,27 @@
+// By applying an inline style to the DIV-element with class 'balance-value'
+// you can vary the width so you get a progress bar.
+// Combine with 'positive' to get a green bar
+// or 'negative' to get a red bar.
+//
+// Example:
+// <div class="balance-container">
+//   <div class="balance-text"> 152.24</div>
+//   <div class="balance-value positive" style="width:26%;"></div>
+// </div>
+.balance-container {
+  border: 1px solid grey;
+  padding:2px;
+  background:white;
+  .balance-text {
+    float:right;
+  }
+  .balance-value {
+    height:18px;
+    &.positive {
+      @include linear-gradient(color-stops(white, #ACE97C 50%, #ACE97C), left);
+    }
+    &.negative {
+      @include linear-gradient(color-stops(white, red 50%, red), left);
+    }
+  }
+}

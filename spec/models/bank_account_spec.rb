@@ -35,7 +35,7 @@ describe BankAccount do
     }.should change(BankAccount, :count).by(3)
   end
 
-  describe "#balance" do
+  describe ".balance" do
     it "return 0 if no expenses" do
       Factory(:bank_account).balance.should eql(0)
     end
@@ -44,6 +44,56 @@ describe BankAccount do
       upload = Factory(:upload, :tab => upload_file('TXT101204150043.TAB'))
       
       BankAccount.find_by_account_number('861887719').balance.should eql(2326.16)
+    end
+  end
+
+  describe ".quotient" do
+    it "should return quotient of balance and BankAccount with largest amount" do
+      bank_account = Factory.build(:bank_account)
+      bank_account.stub(:balance).and_return(BigDecimal.new("100.00"))
+      max = Factory.build(:bank_account)
+      max.stub(:balance).and_return(BigDecimal.new("200.00"))
+      BankAccount.stub(:max).and_return(max)
+      
+      bank_account.quotient.should eql(0.5)
+    end
+
+    it "should return quotient of balance and BankAccount with smallest amount" do
+      bank_account = Factory.build(:bank_account)
+      bank_account.stub(:balance).and_return(BigDecimal.new("-100.00"))
+      max = Factory.build(:bank_account)
+      max.stub(:balance).and_return(BigDecimal.new("-200.00"))
+      BankAccount.stub(:max).and_return(max)
+      
+      bank_account.quotient.should eql(0.5)
+    end
+
+    it "should return positive value for quotient" do
+      bank_account = Factory.build(:bank_account)
+      bank_account.stub(:balance).and_return(BigDecimal.new("-100.00"))
+      max = Factory.build(:bank_account)
+      max.stub(:balance).and_return(BigDecimal.new("200.00"))
+      BankAccount.stub(:max).and_return(max)
+      
+      bank_account.quotient.should eql(0.5)
+    end
+  end
+
+  describe "#max" do
+    before(:each) do
+      @positive = mock_model(BankAccount, :balance => 100)
+      @zero = mock_model(BankAccount, :balance => 0)
+      @negative = mock_model(BankAccount, :balance => -100)
+    end
+
+    it "returns BankAccount with largest amount" do
+      BankAccount.stub(:all).and_return([mock_model(BankAccount, :balance => -50), @positive, @zero])
+      BankAccount.max.should eql(@positive)
+    end
+
+    it "returns BankAccount with largest negative amount" do
+      BankAccount.stub(:all).and_return([@negative, @zero, mock_model(BankAccount, :balance => 50)])
+      BankAccount.max.should eql(@negative)
     end
   end
 end
