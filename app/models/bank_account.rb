@@ -1,4 +1,7 @@
 class BankAccount < ActiveRecord::Base
+  # === Constants
+  ZERO = BigDecimal('0')
+
   # === Associations
   has_many :expenses
 
@@ -11,19 +14,20 @@ class BankAccount < ActiveRecord::Base
   def to_s
     account_number.gsub(/(\d{2})(\d{2})(\d{2})(\d{3})/, '\1.\2.\3.\4')
   end
-  
+
   def account_number=(new_account_number)
     write_attribute(:account_number, account_number || new_account_number)
   end
 
   def balance
-    expenses.empty? ? 0 : expenses.order('expenses.id').last.balance
+    expenses.empty? ? ZERO : expenses.order('expenses.id').last.balance
   end
-  
+
   def quotient
-    (balance / self.class.max.balance).abs
+    max = self.class.max.balance
+    max.zero? ? ZERO : (balance / self.class.max.balance).abs
   end
-  
+
   # [
   #   {
   #     "bank_account" : {
@@ -50,9 +54,10 @@ class BankAccount < ActiveRecord::Base
   def as_json(options = nil)
     super(:methods => [:balance])
   end
-  
+
   class << self
-    # Returns the BankAccount object with the largest balance.
+    # Returns the BankAccount object with the largest balance
+    # (negative values included!).
     def max
       BankAccount.all.inject do |max, account|
         max.balance.abs > account.balance.abs ? max : account

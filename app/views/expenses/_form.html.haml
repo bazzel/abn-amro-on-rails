@@ -7,9 +7,9 @@
     = f.input :description, :input_html => { :disabled => true }
 
   = f.inputs do
-    = f.input :creditor
-      
-    
+    = f.input :creditor, :prompt => "Select a creditor"
+    = f.input :creditor_name, :label => "Or create one"
+
   = f.buttons do
     = f.commit_button
     %li= link_to "Cancel", bank_account_expenses_path(@bank_account)

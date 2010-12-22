@@ -2,7 +2,7 @@ Feature: Manage bank accounts
   In order my bank accounts
   As a user
   I want some views for this
-  
+
   Scenario: Listing bank accounts
     Given the following bank_accounts exist
       | account_number | description  |
@@ -42,7 +42,7 @@ Feature: Manage bank accounts
       | 80.82.57.226   | 76,007.45 |
       | 84.55.93.013   | 76,007.45 |
 
-  
+
   # Scenario: Updating an existing bank account with an empty account number
   #   Given a bank_account exists with account_number: "861887719"
   #   When I go to the home page
@@ -51,7 +51,7 @@ Feature: Manage bank accounts
   #   And I press "Save"
   #   And I should see "There was a problem with your submission."
   #   And I should see "This field is required. Please enter a value."
-  #   
+  #
   # Scenario: Updating an existing bank account with a duplicate account number
   #   Given the following bank_accounts exist
  # | account_number | description  |
