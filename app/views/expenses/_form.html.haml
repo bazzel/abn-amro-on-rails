@@ -1,3 +1,12 @@
+= content_for(:javascripts) do
+  = javascript_include_tag('jquery.ui.autocomplete_from_select')
+  :javascript
+    $(function() {
+      $("#expense_creditor_name").autocompleteFromSelect({
+        source: "#expense_creditor_id"
+      });
+    });
+
 = semantic_form_for @expense do |f|
   = render "shared/error_messages", :target => @expense
 
@@ -7,7 +16,7 @@
     = f.input :description, :input_html => { :disabled => true }
 
   = f.inputs do
-    = f.input :creditor, :prompt => "Select a creditor"
+    = f.input :creditor, :include_blank => true
     = f.input :creditor_name, :label => "Or create one"
 
   = f.buttons do

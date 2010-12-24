@@ -1,9 +1,11 @@
+= stylesheet_link_tag 'jquery-ui-1.8.7.custom'
+
 = stylesheet_link_tag 'compiled/screen', :media => 'screen, projection'
 = stylesheet_link_tag 'compiled/print', :media => 'print'
 = stylesheet_link_tag 'compiled/ie', :media => 'screen, projection'
 
 /[if lt IE 7]
   = stylesheet_link_tag 'compiled/ie6.css', :media => 'screen, projection'
-    
+
 -# Append your own using content_for :stylesheets
 = yield :stylesheets

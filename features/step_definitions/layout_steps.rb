@@ -9,6 +9,12 @@ When /^I follow "([^"]*)" in the submenu$/ do |link|
   When %{I follow "#{link}" within ".secondary-navigation"}
 end
 
+When /^I select "([^"]*)" from the autocomplete list$/ do |link|
+  within(:css, "ul.ui-autocomplete") do
+    page.find('a', :text => link).click
+  end
+end
+
 # == Then
 Then /^I follow "([^"]*)" in the sidebar$/ do |link|
   When %{I follow "#{link}" within "aside .content"}

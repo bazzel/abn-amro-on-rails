@@ -10,6 +10,8 @@ class Expense < ActiveRecord::Base
   attr_accessor :account_number,
                 :creditor_name
 
+  # delegate :name, :to => :creditor, :prefix => true, :allow_nil => true
+
   def creditor_name=(name)
     self.creditor = Creditor.find_or_create_by_name(name) unless name.blank?
   end

@@ -1,8 +1,8 @@
 class Upload < ActiveRecord::Base
   # === Constants
-  TAB_CONTENT_TYPES = ['text/plain']
+  TAB_CONTENT_TYPES = ['text/plain', 'application/octet-stream']
   FILENAME_REGEX = /^txt(\d{6})(\d{6})\.tab$/i
-  
+
   # === Validations
   validates_attachment_presence :tab, :message => 'This field is required. Please select a file.'
   validates_attachment_content_type :tab, :content_type => TAB_CONTENT_TYPES, :message => 'The file must be a Tab-delimited text file. Please try again.'
@@ -13,7 +13,7 @@ class Upload < ActiveRecord::Base
   # === Associations
   has_many :upload_details, :dependent => :destroy
   has_many :expenses, :through => :upload_details
-  
+
   # Paperclip
   has_attached_file :tab, APP_CONFIG['upload']['tab']['has_attached_file_options'].symbolize_keys
 
@@ -22,27 +22,27 @@ class Upload < ActiveRecord::Base
   # therefore we cannot process the file earlier (otherwise implement a custom Paperclip processor...)
   after_save :create_upload_details
 
-  # Returns datetime part from filename 
+  # Returns datetime part from filename
   # formatted as DateTime.
   def downloaded_at
     md = FILENAME_REGEX.match(tab.original_filename)
     DateTime.parse("#{md[1]} #{md[2]}")
   end
-  
+
   def bank_accounts
     @bank_accounts ||=
       begin
         @bank_accounts = BankAccount.joins({:expenses => :upload_detail})
           .where('upload_id = ?', id)
-          .group(:bank_account_id)  
+          .group(:bank_account_id)
       end
   end
-  
+
   private
   def valid_content_type?
     errors[:tab_content_type].empty?
   end
-  
+
   def create_upload_details
     # We only want to process the TAB file once.
     if upload_details.empty?
@@ -57,5 +57,5 @@ class Upload < ActiveRecord::Base
       end
     end
   end
-  
+
 end
