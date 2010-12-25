@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101225101256) do
+ActiveRecord::Schema.define(:version => 20101225111549) do
 
   create_table "bank_accounts", :force => true do |t|
     t.string   "account_number"
@@ -25,6 +25,8 @@ ActiveRecord::Schema.define(:version => 20101225101256) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "categories", ["parent_id"], :name => "index_categories_on_parent_id"
 
   create_table "creditors", :force => true do |t|
     t.string   "name"
@@ -47,6 +49,11 @@ ActiveRecord::Schema.define(:version => 20101225101256) do
     t.integer  "category_id"
   end
 
+  add_index "expenses", ["bank_account_id"], :name => "index_expenses_on_bank_account_id"
+  add_index "expenses", ["category_id"], :name => "index_expenses_on_category_id"
+  add_index "expenses", ["creditor_id"], :name => "index_expenses_on_creditor_id"
+  add_index "expenses", ["upload_detail_id"], :name => "index_expenses_on_upload_detail_id"
+
   create_table "upload_details", :force => true do |t|
     t.string   "bankaccount"
     t.string   "currency"
@@ -60,6 +67,8 @@ ActiveRecord::Schema.define(:version => 20101225101256) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "upload_details", ["upload_id"], :name => "index_upload_details_on_upload_id"
 
   create_table "uploads", :force => true do |t|
     t.datetime "created_at"

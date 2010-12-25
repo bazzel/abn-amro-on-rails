@@ -1,11 +1,11 @@
-= semantic_form_for @bank_account do |f|
-  = render "shared/error_messages", :target => @bank_account
+= semantic_form_for bank_account do |f|
+  = render "shared/error_messages", :target => bank_account
 
   = f.inputs do
     = f.input :account_number, :input_html => { :disabled => true }
     = f.input :description
-      
-    
+
+
   = f.buttons do
     = f.commit_button
     %li= link_to "Cancel", bank_accounts_path

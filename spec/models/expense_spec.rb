@@ -1,6 +1,13 @@
 require 'spec_helper'
 
 describe Expense do
+  describe "indices" do
+    it { should have_index(:upload_detail_id) }
+    it { should have_index(:bank_account_id) }
+    it { should have_index(:creditor_id) }
+    it { should have_index(:category_id) }
+  end
+
   describe 'associations' do
     it { should belong_to(:upload_detail) }
     it { should belong_to(:bank_account) }

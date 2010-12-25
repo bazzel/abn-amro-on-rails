@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe Category do
+  describe "indices" do
+    it { should have_index(:parent_id) }
+  end
+
   describe "acts_as_tree" do
     before(:each) do
       @parent = Factory(:category)

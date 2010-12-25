@@ -1,5 +1,5 @@
-= semantic_form_for @upload, :html => {:multipart => true} do |f|
-  = render "shared/error_messages", :target => @upload
+= semantic_form_for upload, :html => {:multipart => true} do |f|
+  = render "shared/error_messages", :target => upload
 
   = f.inputs do
     = f.input :tab
