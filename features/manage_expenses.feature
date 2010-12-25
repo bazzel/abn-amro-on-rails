@@ -74,3 +74,18 @@ Feature: Managing expenses
     And I should see the following expenses:
       | creditor |
       | CZ       |
+
+  Scenario: Selecting category for expense
+    Given I've uploaded the file "TXT101121100433.TAB"
+    And the following categories
+      | name    | parent  |
+      | Salaris | Inkomen |
+    When I go to the expenses page
+    And I follow "Edit" for expense "66.81.86.739 CZ                 SAL. OKTOBER 2010"
+    And I select "Salaris" from "Category"
+    And I press "Save"
+    Then I should be on the expenses page for "861887719"
+    And I should see "Expense was successfully updated"
+    And I should see the following expenses:
+      | category |
+      | Salaris  |

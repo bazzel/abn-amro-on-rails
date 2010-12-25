@@ -3,6 +3,7 @@ class Expense < ActiveRecord::Base
   belongs_to :upload_detail
   belongs_to :bank_account
   belongs_to :creditor
+  belongs_to :category
 
   # === Callbacks
   before_save :calculate_balance

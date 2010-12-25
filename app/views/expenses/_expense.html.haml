@@ -1,6 +1,7 @@
 %tr[expense]{ :class => "#{cycle('odd', 'even')}"}
   %td= l(expense.transaction_date, :format => :default)
   %td= expense.creditor.try(:name)
+  %td= expense.category.try(:name)
   %td.debit
     - if expense.transaction_amount.negative?
       = number_to_currency(expense.transaction_amount, :unit => '')

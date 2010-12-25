@@ -10,11 +10,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101219121621) do
+ActiveRecord::Schema.define(:version => 20101225101256) do
 
   create_table "bank_accounts", :force => true do |t|
     t.string   "account_number"
     t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "categories", :force => true do |t|
+    t.string   "name"
+    t.integer  "parent_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -37,6 +44,7 @@ ActiveRecord::Schema.define(:version => 20101219121621) do
     t.decimal  "balance",            :precision => 8, :scale => 2
     t.integer  "bank_account_id"
     t.integer  "creditor_id"
+    t.integer  "category_id"
   end
 
   create_table "upload_details", :force => true do |t|

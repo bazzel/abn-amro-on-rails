@@ -5,6 +5,7 @@ describe Expense do
     it { should belong_to(:upload_detail) }
     it { should belong_to(:bank_account) }
     it { should belong_to(:creditor) }
+    it { should belong_to(:category) }
   end
 
   describe '#upload' do

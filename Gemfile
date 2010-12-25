@@ -1,12 +1,13 @@
 source 'http://rubygems.org'
 
+gem 'acts_as_tree',         '~>0.1.1'
 gem 'compass',              '~>0.10.6'
 gem 'compass-susy-plugin',  '~>0.8.1' # Responsive web design with grids the quick and reliable way
                                       # To susy-fy your project, run:
                                       # compass init rails -r susy -u susy --sass-dir=app/stylesheets --css-dir=public/stylesheets/compiled
                                       # from the command-line.
 gem 'fancy-buttons',        '~>1.0.4' # Easily style buttons with beautiful CSS3 features like gradients, rounded corners, etc.
-gem 'formtastic',           '~>1.2.0'                                    
+gem 'formtastic',           '~>1.2.2'
 gem 'haml',                 '~>3.0.24'
 gem 'jquery-rails',         '~>0.2.6'
 gem 'mysql2',               '~>0.2.6'

@@ -18,6 +18,7 @@
   = f.inputs do
     = f.input :creditor, :include_blank => true
     = f.input :creditor_name, :label => "Or create one"
+    = f.input :category, :collection => Category.children, :include_blank => true, :group_by => :parent, :group_association => :children
 
   = f.buttons do
     = f.commit_button
