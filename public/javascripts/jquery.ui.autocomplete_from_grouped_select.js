@@ -1,4 +1,4 @@
-$.widget("ui.catComplete", {
+$.widget("ui.autocompleteFromGroupedSelect", {
   _create: function() {
     var self = this,
       select = this.element.hide(),
@@ -28,7 +28,7 @@ $.widget("ui.catComplete", {
                     ")(?![^<>]*>)(?![^&;]+;)", "gi"),
                     "<strong>$1</strong>"),
                     value: text,
-                    category: $(this).parents('optgroup').attr('label'),
+                    parent: $(this).parents('optgroup').attr('label'),
                     option: this
                   }
             }
@@ -63,11 +63,11 @@ $.widget("ui.catComplete", {
       
     input.data("autocomplete")._renderMenu = function(ul, items) {
       var self = this,
-        currentCategory = "";
+        currentParent = "";
         $.each(items, function(index, item) {
-          if (item.category != currentCategory) {
-            ul.append("<li class='ui-autocomplete-category'>" + item.category + "</li>");
-            currentCategory = item.category;
+          if (item.parent != currentParent) {
+            ul.append("<li class='ui-autocomplete-category'>" + item.parent + "</li>");
+            currentParent = item.parent;
           }
           self._renderItem(ul, item);
         });
