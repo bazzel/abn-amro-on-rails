@@ -8,9 +8,11 @@
 
       $("#expense_category_id").autocompleteFromGroupedSelect();
     });
-
-= semantic_form_for expense do |f|
+= semantic_form_for(expense) do |f|
   = render "shared/error_messages", :target => expense
+
+  - @pass_through.each do |k,v|
+    = hidden_field_tag k, v
 
   = f.inputs do
     = f.input :transaction_date, :input_html => { :disabled => true }
@@ -24,4 +26,4 @@
 
   = f.buttons do
     = f.commit_button
-    %li= link_to "Cancel", bank_account_expenses_path(bank_account)
+    %li= link_to "Cancel", bank_account_expenses_path(bank_account, @pass_through)

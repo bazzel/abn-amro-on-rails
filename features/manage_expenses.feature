@@ -106,3 +106,12 @@ Feature: Managing expenses
     And I should see the following expenses:
       | category |
       | Salaris  |
+
+  Scenario: Remember current page
+    Given I've uploaded the file "TXT101121100433.TAB"
+    When I go to the expenses page
+    When I follow the page link to "2"
+    And I follow "Edit" for expense "BETAALD  26-10-10 09U05 2B1X02   NS-TILBURG 102>TILBURG PASNR 100"
+    And I press "Save"
+    And I should see a page link to "1"
+    Then I should not see a page link to "2"

@@ -10,4 +10,4 @@
       = number_to_currency(expense.transaction_amount, :unit => '')
   %td.balance= number_to_currency(expense.balance, :unit => '')
   %td
-    = link_to('Edit', edit_bank_account_expense_path(bank_account, expense))
+    = link_to('Edit', edit_bank_account_expense_path(bank_account, expense, @pass_through))

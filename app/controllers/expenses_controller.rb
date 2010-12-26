@@ -2,6 +2,7 @@ class ExpensesController < ApplicationController
 
   before_filter :find_upload, :find_bank_account
   before_filter :find_expense, :only => [:edit, :update]
+  before_filter :pass_through_params, :only => [:index, :edit, :update]
 
   # GET /bank_accounts/1/expenses/index
   def index
@@ -24,7 +25,7 @@ class ExpensesController < ApplicationController
   # PUT /bank_accounts/1/expense/100
   def update
     @expense.update_attributes(params[:expense])
-    redirect_to bank_account_expenses_path(@bank_account), :notice => 'Expense was successfully updated'
+    redirect_to bank_account_expenses_path(@bank_account, @pass_through), :notice => 'Expense was successfully updated'
   end
 
   private
@@ -52,5 +53,9 @@ class ExpensesController < ApplicationController
 
   def find_expense
     @expense = @bank_account.expenses.find(params[:id])
+  end
+
+  def pass_through_params
+    @pass_through = params.slice(:page)
   end
 end

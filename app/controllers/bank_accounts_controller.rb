@@ -25,3 +25,10 @@ class BankAccountsController < ApplicationController
     @bank_account = BankAccount.find(params[:id])
   end
 end
+
+
+# module ActionView::Helpers::UrlHelper
+#   def url_for
+#
+#   end
+# end
