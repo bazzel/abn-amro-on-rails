@@ -17,7 +17,7 @@
 // or @extend it to apply multiple containers on your site.
 #container {
   @include container;
-  @include show-grid("grid.png"); 
+  @include show-grid("grid.png");
 }
 
 // show-grid loads a 64+16x24 grid image by default
@@ -26,3 +26,16 @@
 // and 20 is the (optional) line-height.
 
 /* Styles -------------------------------------------------------------- */
+
+/* jQuery UI ----------------------------------------------------------- */
+.ui-autocomplete-category {
+  font-weight: bold;
+  padding: .2em .4em;
+  line-height: 1.5;
+}
+.ui-autocomplete {
+  max-height: 180px;
+  overflow-y: auto;
+  /* prevent horizontal scrollbar */
+  overflow-x: hidden;
+}

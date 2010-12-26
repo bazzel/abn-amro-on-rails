@@ -10,7 +10,7 @@ When /^I follow "([^"]*)" in the submenu$/ do |link|
 end
 
 When /^I select "([^"]*)" from the autocomplete list$/ do |link|
-  within(:css, "ul.ui-autocomplete") do
+  within(:xpath, "//ul[contains(@class, 'ui-autocomplete') and contains(@style,'display: block;')]") do
     page.find('a', :text => link).click
   end
 end

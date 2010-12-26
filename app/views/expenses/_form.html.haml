@@ -1,10 +1,12 @@
 = content_for(:javascripts) do
-  = javascript_include_tag('jquery.ui.autocomplete_from_select')
+  = javascript_include_tag('jquery.ui.autocomplete_from_select', 'jquery.ui.catcomplete')
   :javascript
     $(function() {
       $("#expense_creditor_name").autocompleteFromSelect({
         source: "#expense_creditor_id"
       });
+
+      $("#expense_category_id").catComplete();
     });
 
 = semantic_form_for expense do |f|

@@ -34,6 +34,16 @@ form.formtastic {
       color: red;
       padding-left:2px; } }
   fieldset {
+    > ol > li {
+      &.string.select {
+        button {
+          padding: {
+            top: 2px;
+            bottom: 3px;
+          }
+        }
+      }
+    }
     &.buttons {
       input, a {
         @include fancy-button-structure;
