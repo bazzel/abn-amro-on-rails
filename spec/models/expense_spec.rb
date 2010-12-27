@@ -15,7 +15,7 @@ describe Expense do
     it { should belong_to(:category) }
   end
 
-  describe '#upload' do
+  describe '.upload' do
     it 'returns the upload attribute from upload_detail' do
       upload = mock_model(Upload)
       upload_detail = mock_model(UploadDetail, :upload => upload)
@@ -27,7 +27,7 @@ describe Expense do
     end
   end
 
-  describe "#balance" do
+  describe ".balance" do
     it "calculates balance" do
       upload = Factory(:upload, :tab => upload_file('TXT101204150043.TAB'))
 
@@ -43,7 +43,7 @@ describe Expense do
     end
   end
 
-  describe "#account_number" do
+  describe ".account_number" do
     it "creates bank_account if account_number is not recognized" do
       expense = Factory.build(:expense, :bank_account => nil)
       expense.account_number = '861887719'
@@ -71,6 +71,38 @@ describe Expense do
       }.should change(Creditor, :count).by(1)
     end
   end
+
+  describe "#credit" do
+    before(:each) do
+      upload = Factory(:upload, :tab => upload_file('TXT101204150043.TAB'))
+      @credit = Expense.credit
+    end
+
+    it "contains only positive expenses" do
+      @credit.should have(5).items
+    end
+
+    it "returns positive expenses" do
+      [19.95, 5000, 3000, 65, 10].each do |amount|
+        @credit.map(&:transaction_amount).should include(amount)
+      end
+    end
+  end
+
+  describe "#debit" do
+    before(:each) do
+      upload = Factory(:upload, :tab => upload_file('TXT101204150043.TAB'))
+      @debit = Expense.debit
+    end
+
+    it "contains only negative expenses" do
+      @debit.should have(2).items
+    end
+
+    it "returns negative expenses" do
+      [-115, -52.39].each do |amount|
+        @debit.map(&:transaction_amount).should include(amount)
+      end
+    end
+  end
 end
-
-
