@@ -28,7 +28,7 @@ GEM
       activemodel (= 3.0.3)
       activesupport (= 3.0.3)
     activesupport (3.0.3)
-    acts_as_tree (0.1.1)
+    acts_as_tree_rails3 (0.1.0)
     arel (2.0.4)
     builder (2.1.2)
     capybara (0.4.0)
@@ -185,7 +185,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  acts_as_tree (~> 0.1.1)
+  acts_as_tree_rails3 (~> 0.1.0)
   capybara (~> 0.4.0)
   compass (~> 0.10.6)
   compass-susy-plugin (~> 0.8.1)

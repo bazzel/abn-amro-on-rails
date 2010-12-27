@@ -2,9 +2,9 @@
 # See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  number: 
-    currency: 
-      format: 
+  number:
+    currency:
+      format:
         format: "%u %n"
         unit: EUR
         separator: .
@@ -54,6 +54,11 @@ en:
     labels:
       upload:
         tab: File
+      category:
+        name: Name
+        parent: Main Category
+      expense:
+        category: Category
     actions:
       create: Save
       update: Save

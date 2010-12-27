@@ -1,0 +1,18 @@
+- content_for :secondary_navigation do
+  %li= link_to 'New Category', new_category_path(@pass_through)
+  %li{:class => params[:roots] && 'active' }= link_to 'Main Categories', categories_path(:roots => true)
+  %li{:class => !params[:roots] && 'active' }= link_to 'Subcategories', categories_path
+
+- title params[:roots] ? 'Listing Main Categories' : 'Listing Subcategories'
+
+%table.table
+  %tr
+    %th Name
+    - unless params[:roots]
+      %th Main Category
+    %th
+  = render @categories
+.action-bars
+  -# A button will be placed in the near future?
+  &nbsp;
+  = will_paginate @categories

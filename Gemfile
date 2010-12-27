@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'acts_as_tree',         '~>0.1.1'
+gem 'acts_as_tree_rails3',  '~>0.1.0'
 gem 'compass',              '~>0.10.6'
 gem 'compass-susy-plugin',  '~>0.8.1' # Responsive web design with grids the quick and reliable way
                                       # To susy-fy your project, run:

@@ -5,6 +5,11 @@ describe Category do
     it { should have_index(:parent_id) }
   end
 
+  describe "validation" do
+    it { should validate_presence_of(:name, :message => 'This field is required. Please enter a value.') }
+    it { Factory(:category); should validate_uniqueness_of(:name, :scope => :parent_id, :message => 'This name already exist. Please enter another one.')}
+  end
+
   describe "acts_as_tree" do
     before(:each) do
       @parent = Factory(:category)

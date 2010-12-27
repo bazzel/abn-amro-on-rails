@@ -7,10 +7,7 @@ describe CreditorsController do
    Creditor.stub(:all).and_return(@creditors)
    @creditors.stub(:all).and_return(@creditors)
    @creditors.stub(:paginate).and_return(@creditors)
-   # @current_user.stub(:slideshows).and_return(@slideshows)
    Creditor.stub(:find).and_return(@creditor)
-   # @slideshows.stub(:all).and_return(@slideshows)
-   # @slideshows.stub(:paginate).and_return(@slideshows)
   end
 
   describe "GET /creditors/index" do
@@ -24,7 +21,7 @@ describe CreditorsController do
       do_get
     end
 
-    it "assigns the slideshows for the view" do
+    it "assigns the creditors for the view" do
       do_get
       assigns[:creditors].should eql(@creditors)
     end

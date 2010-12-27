@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   private
   def pass_through_params
-    @pass_through = params.slice(:page)
+    @pass_through = params.slice(:page, :roots)
   end
 
 end
