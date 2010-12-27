@@ -1,0 +1,14 @@
+- content_for :secondary_navigation do
+  %li= link_to 'New Creditor', new_creditor_path
+
+- title 'Listing Creditors'
+
+%table.table
+  %tr
+    %th Name
+    %th
+  = render @creditors
+.action-bars
+  -# A button will be placed in the near future?
+  &nbsp;
+  = will_paginate @creditors

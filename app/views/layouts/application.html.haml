@@ -11,6 +11,7 @@
           %ul
             %li{:class => controller.controller_name == 'bank_accounts' && 'active' }= link_to "Bank Accounts", bank_accounts_path
             %li{:class => controller.controller_name == 'expenses' && 'active' }= link_to "Expenses", expenses_path
+            %li{:class => controller.controller_name == 'creditors' && 'active' }= link_to "Creditors", creditors_path
             %li{:class => controller.controller_name == 'uploads' && 'active' }= link_to "Uploads", uploads_path
             %li= link_to "Login", '#'
 
@@ -22,8 +23,8 @@
             %h2= yield(:title) if show_title?
             = render :partial => 'layouts/flashes'
             = yield
-      
+
       %aside= yield(:sidebar)
-        
+
     -# Javascript at the bottom for fast page loading
     = render :partial => 'layouts/javascripts'

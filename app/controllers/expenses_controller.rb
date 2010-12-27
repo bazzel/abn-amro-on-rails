@@ -2,7 +2,6 @@ class ExpensesController < ApplicationController
 
   before_filter :find_upload, :find_bank_account
   before_filter :find_expense, :only => [:edit, :update]
-  before_filter :pass_through_params, :only => [:index, :edit, :update]
 
   # GET /bank_accounts/1/expenses/index
   def index
@@ -53,9 +52,5 @@ class ExpensesController < ApplicationController
 
   def find_expense
     @expense = @bank_account.expenses.find(params[:id])
-  end
-
-  def pass_through_params
-    @pass_through = params.slice(:page)
   end
 end

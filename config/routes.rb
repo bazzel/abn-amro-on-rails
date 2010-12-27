@@ -1,10 +1,11 @@
 AbnAmroOnRails::Application.routes.draw do
   resources :expenses
-  
+  resources :creditors
+
   resources :uploads do
     resources :expenses
   end
-  
+
   resources :bank_accounts do
     resources :expenses
   end

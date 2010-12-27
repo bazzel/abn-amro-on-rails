@@ -1,0 +1,7 @@
+- content_for :secondary_navigation do
+  %li= link_to "« Back", creditors_path(@pass_through)
+  %li.active= link_to "New Creditor", new_creditor_path
+
+- title "Add a new Creditor"
+
+= render 'form', :creditor => @creditor
