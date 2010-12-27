@@ -21,6 +21,9 @@ module NavigationHelpers
       bank_account = BankAccount.find_by_account_number($1)
       bank_account_expenses_path(bank_account)
 
+    when /^the main categories page$/
+      categories_path(:roots => true)
+
     # the following are examples using path_to_pickle
 
     when /^#{capture_model}(?:'s)? page$/                           # eg. the forum's page

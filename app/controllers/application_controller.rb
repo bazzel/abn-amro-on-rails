@@ -4,8 +4,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   private
-  def pass_through_params
-    @pass_through = params.slice(:page, :roots)
-  end
+    def pass_through_params
+      @pass_through = params.slice(:page, :roots)
+    end
 
 end

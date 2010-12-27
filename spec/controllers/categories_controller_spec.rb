@@ -113,4 +113,129 @@ describe CategoriesController do
     end
   end
 
+  describe "GET /categories/1/edit" do
+    def do_get
+      get :edit, :id => 1
+    end
+
+    it "finds the category for the given id" do
+      Category.should_receive(:find).with(1)
+      do_get
+    end
+
+    it "assigns category for the view" do
+      do_get
+      assigns[:category].should eql(@category)
+    end
+
+    it "renders edit" do
+      do_get
+      response.should render_template('edit')
+    end
+  end
+
+  describe "PUT categories/1" do
+
+    before(:each) do
+      @category.stub(:update_attributes).and_return(true)
+    end
+
+    def do_put
+      put :update, :id => 1, :category => { 'these' => 'params' }
+    end
+
+    it "finds the category for the given id" do
+      Category.should_receive(:find).with(1)
+      do_put
+    end
+
+    it "updates the category" do
+      @category.should_receive(:update_attributes).with({ 'these' => 'params' })
+      do_put
+    end
+
+    it "should assign the category for the view" do
+      do_put
+      assigns[:category].should eql(@category)
+    end
+
+    describe "success" do
+      it "sets the flash notice" do
+        do_put
+        flash[:notice].should eql('Category was successfully updated')
+      end
+
+      it "redirects to categories index" do
+        do_put
+        response.should redirect_to(categories_path)
+      end
+    end
+
+    describe "failure" do
+      it "should render edit" do
+        @category.stub(:update_attributes).and_return(false)
+        do_put
+        response.should render_template('edit')
+      end
+    end
+  end
+
+  describe "DELETE /categories/1" do
+    before(:each) do
+      @category.stub(:parent)
+    end
+
+    def do_delete
+      delete :destroy, :id => 1
+    end
+
+    describe "for javascript enabled" do
+      it "finds the category for the given id" do
+        Category.should_receive(:find).with(1)
+        do_delete
+      end
+
+      it "destroys the object" do
+        @category.should_receive(:destroy)
+        do_delete
+      end
+
+      it "redirects to main categories index" do
+        do_delete
+        response.should redirect_to(categories_path(:roots => true))
+      end
+
+      it "redirects to subcategories index" do
+        @category.stub(:parent).and_return(true)
+        do_delete
+        response.should redirect_to(categories_path)
+      end
+    end
+  end
+
+  describe "GET /categories/1" do
+    def do_get(params = {})
+      get :show, params.merge(:id => 1)
+    end
+
+    it "finds the category for the given id" do
+      Category.should_receive(:find).with(1)
+      do_get
+    end
+
+    describe "destroy with javascript disabled" do
+      it "renders confirm_destroy" do
+        do_get :destroy => true
+        response.should render_template('confirm_destroy')
+      end
+    end
+
+    describe "show" do
+      it "renders show" do
+        do_get
+        response.should render_template('show')
+      end
+    end
+  end
+
 end

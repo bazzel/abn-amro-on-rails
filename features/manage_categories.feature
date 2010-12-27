@@ -118,60 +118,68 @@ Feature: Manage categories
     And I fill in "Name" with "Overige"
     And I select "Vrije tijd" from "Main Category"
     And I press "Save"
+    Then I should be on the categories page
     And I should see "Category was successfully created"
     And I should see the following categories:
       | name    | parent     |
       | Overige | Inkomen    |
       | Overige | Vrije tijd |
 
-  # Scenario: Editing an existing creditor
-  #   Given the following creditors exist
-# | name |
-# | Foo  |
-  #   When I go to the creditors page
-  #   And I follow "Edit" for creditor "Foo"
-  #   And I fill in "Name" with "Bar"
-  #   And I press "Save"
-  #   And I should see "Creditor was successfully updated"
-  #   And I should see the following creditors:
-# | name |
-# | Bar  |
-  #
-  # Scenario: Editing an existing creditor with invalid data
-  #   Given the following creditors exist
-# | name |
-# | Foo  |
-  #   When I go to the creditors page
-  #   When I follow "Edit" for creditor "Foo"
-  #   And I fill in "Name" with ""
-  #   And I press "Save"
-  #   And I should see "There was a problem with your submission."
-  #   And I should see "This field is required. Please enter a value."
-  #
-  # Scenario: Destroying a creditor
-  # Given the following creditors exist
-# | name |
-# | Foo  |
-  #   When I go to the creditors page
-  #   When I follow "Destroy" for creditor "Foo"
-  #   Then I should be on the creditors page
-  #   And I should see "Creditor was successfully destroyed"
-  #   And I should not see "Foo"
-  #
-  # Scenario: Pagination
-  #   Given 26 creditors exist
-  #   When I go to the creditors page
-  #   Then I should not see a page link to "1"
-  #   And I should see a page link to "2"
-  #   When I follow the page link to "2"
-  #   Then I should see a page link to "1"
-  #   And I should not see a page link to "2"
-  #
-  # Scenario: Remember current page
-  #   Given 26 creditors exist
-  #   When I go to the creditors page
-  #   And I follow the page link to "2"
-  #   And I follow "Edit" for creditor "Creditor 52"
-  #   And I press "Save"
-  #   And I should see a page link to "1"
-  #   Then I should not see a page link to "2"
+    Scenario: Editing an existing category
+    Given the following categories
+      | name    |
+      | Inkomen |
+      When I go to the main categories page
+      And I follow "Edit" for category "Inkomen"
+      And I fill in "Name" with "Income"
+      And I press "Save"
+      Then I should see "Listing Main Categories"
+      And I should see "Category was successfully updated"
+      And I should see the following categories:
+        | name   |
+        | Income |
+
+  Scenario: Editing an existing category with invalid data
+    Given the following categories
+      | name    |
+      | Inkomen |
+    When I go to the main categories page
+    And I follow "Edit" for category "Inkomen"
+    And I fill in "Name" with ""
+    And I press "Save"
+    And I should see "There was a problem with your submission."
+    And I should see "This field is required. Please enter a value."
+
+  Scenario: Destroying a creditor
+    Given the following categories
+      | name    | parent  |
+      | Salaris | Inkomen |
+    When I go to the main categories page
+    And I follow "Destroy" for category "Inkomen"
+    Then I should see "Listing Main Categories"
+    And I should see "Category was successfully destroyed"
+    But I should not see the following categories:
+      | name    |
+      | Inkomen |
+    When I go to the categories page
+    Then I should not see the following categories:
+      | name    |
+      | Salaris |
+
+  Scenario: Pagination
+    Given 26 categories exist
+    When I go to the main categories page
+    Then I should not see a page link to "1"
+    And I should see a page link to "2"
+    When I follow the page link to "2"
+    Then I should see a page link to "1"
+    And I should not see a page link to "2"
+
+  Scenario: Remember current page
+    Given 26 categories exist
+    When I go to the main categories page
+    And I follow the page link to "2"
+    And I follow "Edit" for category "Category 52"
+    And I press "Save"
+    And I should see a page link to "1"
+    Then I should not see a page link to "2"

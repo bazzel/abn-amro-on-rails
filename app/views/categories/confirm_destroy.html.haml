@@ -1,0 +1,6 @@
+- title "Are you sure you want to destroy this category?"
+
+= semantic_form_for @category, :html => { :method => :delete } do |f|
+  = f.buttons do
+    = f.commit_button "Destroy"
+    %li= link_to "Cancel", categories_path

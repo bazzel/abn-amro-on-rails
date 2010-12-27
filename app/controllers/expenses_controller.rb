@@ -1,5 +1,4 @@
 class ExpensesController < ApplicationController
-
   before_filter :find_upload, :find_bank_account
   before_filter :find_expense, :only => [:edit, :update]
 

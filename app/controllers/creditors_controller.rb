@@ -1,4 +1,5 @@
 class CreditorsController < ApplicationController
+  before_filter :find_creditor, :only => [:edit, :update, :show, :destroy]
 
   # GET creditors/index
   def index
@@ -23,17 +24,14 @@ class CreditorsController < ApplicationController
 
   # GET creditors/1/edit
   def edit
-    @creditor = Creditor.find(params[:id])
   end
 
   # PUT creditors/1
   def update
-    @creditor = Creditor.find(params[:id])
-
     if @creditor.update_attributes(params[:creditor])
       redirect_to creditors_path(@pass_through), :notice => 'Creditor was successfully updated'
     else
-      render :new
+      render :edit
     end
   end
 
@@ -41,8 +39,6 @@ class CreditorsController < ApplicationController
   #
   # This will show a confirmation view for users who have javascript disabled.
   def show
-    @creditor = Creditor.find(params[:id])
-
     if params[:destroy]
       render :confirm_destroy and return
     end
@@ -50,9 +46,12 @@ class CreditorsController < ApplicationController
 
   # DELETE creditors/1
   def destroy
-    @creditor = Creditor.find(params[:id])
-
     @creditor.destroy
     redirect_to creditors_path(@pass_through), :notice => 'Creditor was successfully destroyed'
   end
+
+  private
+    def find_creditor
+      @creditor = Creditor.find(params[:id])
+    end
 end

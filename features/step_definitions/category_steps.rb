@@ -1,3 +1,8 @@
+# === Transforms
+Transform /^category "([^"]*)"$/ do |name|
+  Category.find_by_name(name)
+end
+
 # == Given
 Given /^the following categories$/ do |table|
   table.hashes.each do |hash|
@@ -8,6 +13,11 @@ Given /^the following categories$/ do |table|
 
     Factory(:category, hash)
   end
+end
+
+# == When
+When /^I follow "([^"]*)" for (category "[^"]*")$/ do |link, category|
+  When %{I follow "#{link}" within "#category_#{category.id}"}
 end
 
 # == Then

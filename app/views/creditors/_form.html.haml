@@ -1,7 +1,7 @@
 = semantic_form_for(creditor) do |f|
   = render "shared/error_messages", :target => creditor
 
-  - @pass_through.each do |k,v|
+  - pass_through.each do |k,v|
     = hidden_field_tag k, v
 
   = f.inputs do
@@ -9,4 +9,4 @@
 
   = f.buttons do
     = f.commit_button
-    %li= link_to "Cancel", creditors_path(@pass_through)
+    %li= link_to "Cancel", creditors_path(pass_through)

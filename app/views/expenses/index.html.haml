@@ -24,7 +24,7 @@
     %th.credit Credit
     %th.balance Balance
     %th
-  = render @expenses, :bank_account => @bank_account
+  = render @expenses, :bank_account => @bank_account, :pass_through => @pass_through
 
 .action-bars
   -# A button will be placed in the near future?
