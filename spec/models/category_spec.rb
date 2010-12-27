@@ -10,6 +10,10 @@ describe Category do
     it { Factory(:category); should validate_uniqueness_of(:name, :scope => :parent_id, :message => 'This name already exist. Please enter another one.')}
   end
 
+  describe 'associations' do
+    it { should have_many(:expenses, :dependent => :nullify) }
+  end
+
   describe "acts_as_tree" do
     before(:each) do
       @parent = Factory(:category)
