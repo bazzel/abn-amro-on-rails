@@ -125,19 +125,19 @@ Feature: Manage categories
       | Overige | Inkomen    |
       | Overige | Vrije tijd |
 
-    Scenario: Editing an existing category
-    Given the following categories
-      | name    |
-      | Inkomen |
-      When I go to the main categories page
-      And I follow "Edit" for category "Inkomen"
-      And I fill in "Name" with "Income"
-      And I press "Save"
-      Then I should see "Listing Main Categories"
-      And I should see "Category was successfully updated"
-      And I should see the following categories:
-        | name   |
-        | Income |
+  Scenario: Editing an existing category
+  Given the following categories
+    | name    |
+    | Inkomen |
+    When I go to the main categories page
+    And I follow "Edit" for category "Inkomen"
+    And I fill in "Name" with "Income"
+    And I press "Save"
+    Then I should see "Listing Main Categories"
+    And I should see "Category was successfully updated"
+    And I should see the following categories:
+      | name   |
+      | Income |
 
   Scenario: Editing an existing category with invalid data
     Given the following categories
@@ -149,6 +149,23 @@ Feature: Manage categories
     And I press "Save"
     And I should see "There was a problem with your submission."
     And I should see "This field is required. Please enter a value."
+
+  @wip
+  Scenario: Once a subcategory, always a subcategory
+    Given the following categories
+      | name    | parent  |
+      | Salaris | Inkomen |
+    When I go to the categories page
+    And I follow "Edit" for category "Salaris"
+    Then I can not select "" from "Main Category"
+
+  Scenario: Once a main category, always a main category
+    Given the following categories
+      | name    |
+      | Inkomen |
+    When I go to the main categories page
+    And I follow "Edit" for category "Inkomen"
+    Then the "Main Category" field should be disabled
 
   Scenario: Destroying a creditor
     Given the following categories

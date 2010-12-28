@@ -6,7 +6,7 @@
 
   = f.inputs do
     = f.input :name
-    = f.input :parent, :collection => Category.roots
+    = category_parent_input f, category
 
   = f.buttons do
     = f.commit_button
