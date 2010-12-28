@@ -2,6 +2,10 @@
   %td= category.name
   - unless params[:roots]
     %td= category.parent.name
+  %td.debit= category.credit
+  %td.credit= category.debit
+  %td.total= category.total
+
   %td
     = link_to('Edit', edit_category_path(category, pass_through)) + " | "
     = link_to 'Destroy', category_path(category, pass_through.merge(:destroy => true)), :confirm => 'Are you sure?', :method => :delete

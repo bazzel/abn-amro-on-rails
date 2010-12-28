@@ -75,7 +75,7 @@ body {
 }
 
 #main-navigation {
-  @include full; 
+  @include full;
   @include border-top-left-radius(4px);
   @include border-top-right-radius(4px);
   background: #F4F4F4;
@@ -138,7 +138,7 @@ aside {
 
 .table {
   border: none;
-  .debit, .credit, .balance {
+  .debit, .credit, .balance, .total {
     text-align: right;
   }
   th {
