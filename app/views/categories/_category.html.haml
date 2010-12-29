@@ -2,9 +2,15 @@
   %td= category.name
   - unless params[:roots]
     %td= category.parent.name
-  %td.debit= category.credit
-  %td.credit= category.debit
-  %td.total= category.total
+  %td.debit
+    - if category.credit > 0
+      = visual_amount(category.credit, Category.max)
+  %td.credit
+    - if category.debit < 0
+      = visual_amount(category.debit, Category.max)
+  %td.total
+    - unless category.total == 0
+      = visual_amount(category.total, Category.max)
 
   %td
     = link_to('Edit', edit_category_path(category, pass_through)) + " | "

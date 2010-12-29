@@ -34,7 +34,19 @@ class Category < ActiveRecord::Base
   end
 
   def total
-    credit + debit
+    @total ||= credit + debit
   end
 
+  class << self
+    # Returns the value of the Category with the largest credit or debit
+    # (negative values included!).
+    def max(roots = nil)
+      @max ||= begin
+        collection = roots ? self.roots : self.children
+        @max = collection.inject(0) do |max, category|
+          [category.credit, category.debit.abs, max].max
+        end
+      end
+    end
+  end
 end

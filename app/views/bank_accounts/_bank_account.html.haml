@@ -2,6 +2,6 @@
   %td= "#{bank_account}"
   %td= bank_account.description
   %td.balance
-    = balance_for(bank_account)
+    = visual_amount(bank_account.balance, BankAccount.max.balance)
   %td
     = link_to('Edit', edit_bank_account_path(bank_account))
