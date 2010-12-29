@@ -11,7 +11,6 @@ Feature: Manage bank accounts
     When I go to the home page
     Then I should see "Bank Accounts" highlighted in the menu
     And I should see "Listing Bank Accounts"
-    And show me the page
     And I should see the following bank_accounts:
       | account_number | description  |
       | 86.18.87.719   | my account   |

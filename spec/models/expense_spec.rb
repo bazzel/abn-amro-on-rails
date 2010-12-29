@@ -105,4 +105,18 @@ describe Expense do
       end
     end
   end
+
+  describe "#max_balance" do
+    it "returns largest positive balance" do
+      Expense.stub(:maximum).and_return(100.00)
+      Expense.stub(:minimum).and_return(-99.00)
+      Expense.max_balance.should eql(100.00)
+    end
+
+    it "returns largest negative balance (as a positive value)" do
+      Expense.stub(:maximum).and_return(99.00)
+      Expense.stub(:minimum).and_return(-100.00)
+      Expense.max_balance.should eql(100.00)
+    end
+  end
 end

@@ -50,4 +50,12 @@ class Expense < ActiveRecord::Base
     self.balance = (prev ? prev.balance : opening_balance) + transaction_amount
   end
 
+  class << self
+    # Returns the balance of the Expense with the largest balance
+    # (negative values included!).
+    def max_balance
+      [maximum(:balance), minimum(:balance).abs].max
+    end
+  end
+
 end
