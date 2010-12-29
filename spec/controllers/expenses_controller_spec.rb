@@ -83,7 +83,7 @@ describe ExpensesController do
     end
 
     it "orders on created_at descending" do
-      @expenses.should_receive(:order).with('expenses.created_at DESC').and_return(@expenses)
+      @expenses.should_receive(:order).with('expenses.transaction_date DESC').and_return(@expenses)
       do_get :bank_account_id => 1
     end
 

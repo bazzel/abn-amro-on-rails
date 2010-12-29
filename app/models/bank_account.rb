@@ -59,8 +59,10 @@ class BankAccount < ActiveRecord::Base
     # Returns the BankAccount object with the largest balance
     # (negative values included!).
     def max
-      self.all.inject do |max, account|
-        max.balance.abs > account.balance.abs ? max : account
+      @max ||= begin
+        @max = self.all.inject do |max, account|
+          max.balance.abs > account.balance.abs ? max : account
+        end
       end
     end
   end

@@ -15,6 +15,77 @@
 
 - title 'Listing Expenses'
 
+- content_for(:javascripts) do
+  :javascript
+    $(function () {
+      new Highcharts.Chart({
+        chart: {
+          renderTo: 'expenses_chart',
+          zoomType: 'x',
+          spacingRight: 20
+        },
+        series: [{
+          type: 'area',
+          name: 'Balance',
+          pointInterval: #{1.day * 1000},
+          pointStart: #{@bank_account.expenses.first.transaction_date.to_time.to_i * 1000},
+          data: #{expenses_chart_series_data(@bank_account.expenses)}
+        }],
+        credits: {
+          enabled: false
+        },
+        title: {
+          text: "Balance of '#{@bank_account}' by Day"
+        },
+        subtitle: {
+          text: 'Click and drag in the plot area to zoom in'
+        },
+        xAxis: {
+          type: 'datetime',
+          title: {
+            text: null
+          }
+        },
+        yAxis: {
+          title: {
+            text: 'EUR'
+          }
+        },
+        tooltip: {
+          shared: true
+        },
+        legend: {
+          enabled: false
+        },
+        plotOptions: {
+          area: {
+            _fillColor: {
+              linearGradient: [0, 0, 0, 300],
+              stops: [[0, 'rgb(255,255,255)'],[1, '#ACE97C']]
+            },
+            lineWidth: 1,
+            marker: {
+              enabled: false,
+              states: {
+                hover: {
+                  enabled: true,
+                  radius: 5
+                }
+              }
+            },
+            shadow: false,
+            states: {
+              hover: {
+                lineWidth: 1
+              }
+            }
+          }
+        }
+      });
+    });
+
+#expenses_chart
+
 %table.table
   %tr
     %th Transaction date
