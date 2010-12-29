@@ -49,3 +49,22 @@ form.formtastic {
         @include fancy-button-structure;
         @include fancy-button-colors(#E5E5E5, #DEDEDE);
         @include serif-family; } } } }
+
+
+aside {
+  form.formtastic {
+    fieldset {
+      > ol > li {
+        label {
+          display: block;
+          width: 100%;
+          float: none; }
+        &.string input {
+          width: 100%; }
+      }
+      &.buttons {
+        padding-left: 0;
+      }
+    }
+  }
+}
