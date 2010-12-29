@@ -2,8 +2,8 @@ class CategoriesController < ApplicationController
 
   before_filter :find_category, :only => [:edit, :update, :show, :destroy]
 
-  # GET categories/index
-  # GET categories/index?roots=true
+  # GET "/categories/index"
+  # GET "/categories/index?roots=true"
   def index
     if params[:roots]
       @categories = Category.roots
@@ -14,29 +14,31 @@ class CategoriesController < ApplicationController
     @categories = @categories.paginate(:page => params[:page], :per_page => 25)
   end
 
-  # GET categories/new
+  # GET "/categories/new"
   def new
     @category = Category.new
   end
 
-  # POST categories
+  # POST "/categories"
   def create
     @category = Category.new(params[:category])
 
     if @category.save
       options = @category.parent ? {} : { :roots => true }
-      redirect_to categories_path(options), :notice => 'Category was successfully created'
+      # If the category form in the sidebar is used,
+      # we redirect to the postback_url instead of the index view.
+      redirect_to (params[:postback_url] || categories_path(options)), :notice => 'Category was successfully created'
     else
       render :new
     end
 
   end
 
-  # GET categories/1/edit
+  # GET "/categories/1/edit"
   def edit
   end
 
-  # PUT categories/1
+  # PUT "/categories/1"
   def update
     if @category.update_attributes(params[:category])
       redirect_to categories_path(@pass_through), :notice => 'Category was successfully updated'
@@ -45,7 +47,7 @@ class CategoriesController < ApplicationController
     end
   end
 
-  # GET categories/1
+  # GET "/categories/1"
   #
   # This will show a confirmation view for users who have javascript disabled.
   def show
@@ -54,7 +56,7 @@ class CategoriesController < ApplicationController
     end
   end
 
-  # DELETE categories/1
+  # DELETE "/categories/1"
   def destroy
     @category.destroy
     options = @category.parent ? {} : { :roots => true }

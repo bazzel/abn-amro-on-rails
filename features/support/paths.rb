@@ -24,6 +24,10 @@ module NavigationHelpers
     when /^the main categories page$/
       categories_path(:roots => true)
 
+    when /^the expense edit page for "(.*)"$/
+      expense = Expense.find_by_description($1)
+      edit_bank_account_expense_path(expense.bank_account, expense)
+
     # the following are examples using path_to_pickle
 
     when /^#{capture_model}(?:'s)? page$/                           # eg. the forum's page

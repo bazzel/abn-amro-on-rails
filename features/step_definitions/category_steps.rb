@@ -36,3 +36,7 @@ Then /^I should not see the following categories:$/ do |table|
     end
   end
 end
+
+Then /^I should see a form to add a category in the sidebar$/ do
+  page.should have_selector(:css, "aside form#new_category")
+end

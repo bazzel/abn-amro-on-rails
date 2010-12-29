@@ -1,6 +1,12 @@
 - content_for :secondary_navigation do
   %li= link_to "« Back", :back
 
+- content_for :sidebar do
+  .block
+    %h3 Category
+    .content
+      = render :partial => 'categories/form', :locals => { :category => Category.new, :pass_through => @pass_through }
+
 - title "Edit Expense"
 
-= render 'form', :expense => @expense, :bank_account => @bank_account, :pass_through => @pass_through
+= render 'expenses/form', :expense => @expense, :bank_account => @bank_account, :pass_through => @pass_through

@@ -102,6 +102,11 @@ describe CategoriesController do
         do_post
         response.should redirect_to(categories_path(:roots => true))
       end
+
+      it "redirects to postback_url if given" do
+        do_post :postback_url => 'http://example.com'
+        response.should redirect_to('http://example.com')
+      end
     end
 
     describe "failure" do

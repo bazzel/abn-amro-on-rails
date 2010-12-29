@@ -10,4 +10,6 @@
 
   = f.buttons do
     = f.commit_button
-    %li= link_to "Cancel", categories_path(pass_through)
+    - if controller_name == 'categories'
+      -# No Cancel link if displayed in the sidebar.
+      %li= link_to "Cancel", categories_path(pass_through)
