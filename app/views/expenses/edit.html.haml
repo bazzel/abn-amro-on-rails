@@ -5,7 +5,7 @@
   .block
     %h3 Category
     .content
-      = render :partial => 'categories/form', :locals => { :category => Category.new, :pass_through => @pass_through }
+      = render :partial => 'categories/form', :locals => { :category => @category, :pass_through => @pass_through }
 
 - title "Edit Expense"
 

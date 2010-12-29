@@ -29,15 +29,6 @@ Feature: Add category through sidebar
     And I should see the following expenses:
       | category |
       | Salaris  |
-  
-  # Scenario: Redirect to the expense edit view
-  #   Given the following categories
-  #     | name    |
-  #     | Inkomen |
-  #   And I've uploaded the file "TXT101121100433.TAB"
-  #   When I go to the expenses page
-  #   And I am on the expense edit page for "66.81.86.739 CZ                 SAL. OKTOBER 2010"
-  #   And I fill in "Name" with "Salaris" within "#new_category"
-  #   And I select "Inkomen" from "Main Category" within "#new_category"
-  #   And I press "Save" within "#new_category"
-  #   Then I should be on the expense edit page for "66.81.86.739 CZ                 SAL. OKTOBER 2010"
+
+  # TODO:
+  # Write scenario and implement invalid category

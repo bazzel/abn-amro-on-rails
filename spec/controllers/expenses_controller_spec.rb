@@ -119,6 +119,13 @@ describe ExpensesController do
       do_get
       assigns[:pass_through][:postback_url].should eql(edit_bank_account_expense_path(@bank_account, @expense))
     end
+
+    it "assigns new category to the view" do
+      category = mock_model(Category)
+      Category.stub(:new).and_return(category)
+      do_get
+      assigns[:category].should eql(category)
+    end
   end
 
   describe "PUT /bank_accounts/1/expense/100" do
