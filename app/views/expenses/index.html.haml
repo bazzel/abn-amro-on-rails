@@ -1,5 +1,5 @@
 - content_for :secondary_navigation do
-  %li= link_to 'New Upload', new_upload_path
+  %li.active= link_to 'Expenses', bank_account_expenses_path(@bank_account)
 
 - content_for :sidebar do
   .block

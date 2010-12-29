@@ -4,7 +4,7 @@ class ExpensesController < ApplicationController
 
   # GET /bank_accounts/1/expenses/index
   def index
-    @expenses = @bank_account.expenses.includes(:bank_account)
+    @expenses = @bank_account.expenses.order('expenses.created_at DESC').includes(:bank_account)
 
     if params[:upload_id]
       @bank_accounts = @upload.bank_accounts

@@ -10,6 +10,7 @@ describe ExpensesController do
     @expense = mock_model(Expense, :id => 100)
     @expenses = [@expense]
     @expenses.stub(:includes).and_return(@expenses)
+    @expenses.stub(:order).and_return(@expenses)
     @expenses.stub(:find).and_return(@expense)
     BankAccount.stub(:find).and_return(@bank_account)
     @bank_account.stub(:expenses).and_return(@expenses)
@@ -78,6 +79,11 @@ describe ExpensesController do
 
     it "includes bank_account for performance improvement" do
       @expenses.should_receive(:includes).with(:bank_account).and_return(@expenses)
+      do_get :bank_account_id => 1
+    end
+
+    it "orders on created_at descending" do
+      @expenses.should_receive(:order).with('expenses.created_at DESC').and_return(@expenses)
       do_get :bank_account_id => 1
     end
 
