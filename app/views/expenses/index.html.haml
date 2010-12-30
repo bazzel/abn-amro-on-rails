@@ -7,7 +7,7 @@
     .content
       %ul
         - @bank_accounts.each do |bank_account|
-          %li
+          %li{:title => bank_account.description}
             - if bank_account == @bank_account
               = "#{bank_account}"
             - else
@@ -28,8 +28,8 @@
           type: 'area',
           name: 'Balance',
           pointInterval: #{1.day * 1000},
-          pointStart: #{@bank_account.expenses.first.transaction_date.to_time.to_i * 1000},
-          data: #{expenses_chart_series_data(@bank_account.expenses)}
+          pointStart: #{@bank_account.expenses.minimum(:transaction_date).to_time.to_i * 1000},
+          data: #{expenses_chart_series(@bank_account.expenses)}
         }],
         credits: {
           enabled: false

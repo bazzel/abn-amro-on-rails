@@ -6,8 +6,8 @@ Feature: Add category through sidebar
   Scenario: Viewing the category form
     Given I've uploaded the file "TXT101121100433.TAB"
     When I go to the expenses page
-    And I follow "Edit" for expense "66.81.86.739 CZ                 SAL. OKTOBER 2010"
-    Then I should be on the expense edit page for "66.81.86.739 CZ                 SAL. OKTOBER 2010"
+    And I follow "Edit" for expense "UW REKENING MET SALDO IS         ADMINISTRATIEF OVERGEHEVELD VAN  FORTIS BANK NEDERLAND NAAR       ABN AMRO BANK"
+    Then I should be on the expense edit page for "UW REKENING MET SALDO IS         ADMINISTRATIEF OVERGEHEVELD VAN  FORTIS BANK NEDERLAND NAAR       ABN AMRO BANK"
     Then I should see a form to add a category in the sidebar
     And I should not see "Cancel" within "#new_category"
 
@@ -17,11 +17,11 @@ Feature: Add category through sidebar
       | Inkomen |
     And I've uploaded the file "TXT101121100433.TAB"
     When I go to the expenses page
-    And I am on the expense edit page for "66.81.86.739 CZ                 SAL. OKTOBER 2010"
+    And I am on the expense edit page for "UW REKENING MET SALDO IS         ADMINISTRATIEF OVERGEHEVELD VAN  FORTIS BANK NEDERLAND NAAR       ABN AMRO BANK"
     And I fill in "Name" with "Salaris" within "#new_category"
     And I select "Inkomen" from "Main Category" within "#new_category"
     And I press "Save" within "#new_category"
-    Then I should be on the expense edit page for "66.81.86.739 CZ                 SAL. OKTOBER 2010"
+    Then I should be on the expense edit page for "UW REKENING MET SALDO IS         ADMINISTRATIEF OVERGEHEVELD VAN  FORTIS BANK NEDERLAND NAAR       ABN AMRO BANK"
     And I select "Salaris" from "Category"
     And I press "Save"
     Then I should be on the expenses page for "861887719"

@@ -24,7 +24,7 @@ Feature: Managing expenses
       | name |
       | CZ   |
     When I go to the expenses page
-    And I follow "Edit" for expense "66.81.86.739 CZ                 SAL. OKTOBER 2010"
+    And I follow "Edit" for expense "UW REKENING MET SALDO IS         ADMINISTRATIEF OVERGEHEVELD VAN  FORTIS BANK NEDERLAND NAAR       ABN AMRO BANK"
     And I select "CZ" from "Creditor"
     And I press "Save"
     Then I should be on the expenses page for "861887719"
@@ -36,7 +36,7 @@ Feature: Managing expenses
   Scenario: Add creditor to expense
     Given I've uploaded the file "TXT101121100433.TAB"
     When I go to the expenses page
-    And I follow "Edit" for expense "66.81.86.739 CZ                 SAL. OKTOBER 2010"
+    And I follow "Edit" for expense "UW REKENING MET SALDO IS         ADMINISTRATIEF OVERGEHEVELD VAN  FORTIS BANK NEDERLAND NAAR       ABN AMRO BANK"
     And I fill in "Or create one" with "CZ"
     And I press "Save"
     Then I should be on the expenses page for "861887719"
@@ -52,7 +52,7 @@ Feature: Managing expenses
       | name |
       | CZ   |
     When I go to the expenses page
-    And I follow "Edit" for expense "66.81.86.739 CZ                 SAL. OKTOBER 2010"
+    And I follow "Edit" for expense "UW REKENING MET SALDO IS         ADMINISTRATIEF OVERGEHEVELD VAN  FORTIS BANK NEDERLAND NAAR       ABN AMRO BANK"
     And I fill in "Creditor" with "C"
     And I select "CZ" from the autocomplete list
     And I press "Save"
@@ -66,7 +66,7 @@ Feature: Managing expenses
   Scenario: Add creditor to expense
     Given I've uploaded the file "TXT101121100433.TAB"
     When I go to the expenses page
-    And I follow "Edit" for expense "66.81.86.739 CZ                 SAL. OKTOBER 2010"
+    And I follow "Edit" for expense "UW REKENING MET SALDO IS         ADMINISTRATIEF OVERGEHEVELD VAN  FORTIS BANK NEDERLAND NAAR       ABN AMRO BANK"
     And I fill in "Creditor" with "CZ"
     And I press "Save"
     Then I should be on the expenses page for "861887719"
@@ -81,7 +81,7 @@ Feature: Managing expenses
       | name    | parent  |
       | Salaris | Inkomen |
     When I go to the expenses page
-    And I follow "Edit" for expense "66.81.86.739 CZ                 SAL. OKTOBER 2010"
+    And I follow "Edit" for expense "UW REKENING MET SALDO IS         ADMINISTRATIEF OVERGEHEVELD VAN  FORTIS BANK NEDERLAND NAAR       ABN AMRO BANK"
     And I select "Salaris" from "Category"
     And I press "Save"
     Then I should be on the expenses page for "861887719"
@@ -97,7 +97,7 @@ Feature: Managing expenses
       | name    | parent  |
       | Salaris | Inkomen |
     When I go to the expenses page
-    And I follow "Edit" for expense "66.81.86.739 CZ                 SAL. OKTOBER 2010"
+    And I follow "Edit" for expense "UW REKENING MET SALDO IS         ADMINISTRATIEF OVERGEHEVELD VAN  FORTIS BANK NEDERLAND NAAR       ABN AMRO BANK"
     And I fill in "Category" with "S"
     And I select "Salaris" from the autocomplete list
     And I press "Save"
@@ -111,7 +111,7 @@ Feature: Managing expenses
     Given I've uploaded the file "TXT101121100433.TAB"
     When I go to the expenses page
     When I follow the page link to "2"
-    And I follow "Edit" for expense "BETAALD  26-10-10 09U05 2B1X02   NS-TILBURG 102>TILBURG PASNR 100"
+    And I follow "Edit" for expense "BETAALD  11-11-10 14U39 803713   ALBERT HEIJN 1521>TILBURG                               PASNR 100"
     And I press "Save"
     And I should see a page link to "1"
     Then I should not see a page link to "2"
