@@ -41,7 +41,6 @@ Feature: Manage uploads
     And I attach the upload file "TXT101204150043.TAB" to "File"
     And I press "Save"
     Then I should be on the upload page for "TXT101204150043.TAB"
-    And show me the page
     And I should see "'TXT101204150043.TAB' was successfully imported."
     And I should the following upload:
       | file_name           | downloaded_at           | upload_details_count | expenses_count |

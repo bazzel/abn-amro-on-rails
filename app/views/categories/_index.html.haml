@@ -1,0 +1,16 @@
+- title params[:roots] ? 'Listing Main Categories' : 'Listing Subcategories'
+
+%table.table
+  %tr
+    %th Name
+    - unless params[:roots]
+      %th Main Category
+    %th.debit Debit
+    %th.credit Credit
+    %th.total Total
+    %th
+  = render @categories, :pass_through => @pass_through
+.action-bars
+  -# A button will be placed in the near future?
+  &nbsp;
+  = will_paginate @categories

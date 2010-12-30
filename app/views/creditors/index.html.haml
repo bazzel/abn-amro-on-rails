@@ -1,14 +1,3 @@
 = tabs_for(:class => 'secondary-navigation') do |tab|
   - tab.create(new_creditor_path, 'New Creditor') do
-    .content
-      %h2 Listing Creditors
-      = render :partial => 'layouts/flashes'
-      %table.table
-        %tr
-          %th Name
-          %th
-        = render @creditors, :pass_through => @pass_through
-      .action-bars
-        -# A button will be placed in the near future?
-        &nbsp;
-        = will_paginate @creditors
+    = render :partial => 'index', :locals => { :creditors => @creditors, :pass_through => @pass_through }, :layout => 'shared/block_content'
