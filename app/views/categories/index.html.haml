@@ -1,21 +1,21 @@
-- content_for :secondary_navigation do
-  %li= link_to 'New Category', new_category_path(@pass_through)
-  %li{:class => params[:roots] && 'active' }= link_to 'Main Categories', categories_path(:roots => true)
-  %li{:class => !params[:roots] && 'active' }= link_to 'Subcategories', categories_path
-
-- title params[:roots] ? 'Listing Main Categories' : 'Listing Subcategories'
-
-%table.table
-  %tr
-    %th Name
-    - unless params[:roots]
-      %th Main Category
-    %th.debit Debit
-    %th.credit Credit
-    %th.total Total
-    %th
-  = render @categories, :pass_through => @pass_through
-.action-bars
-  -# A button will be placed in the near future?
-  &nbsp;
-  = will_paginate @categories
+= tabs_for(:class => 'secondary-navigation') do |tab|
+  - tab.create(new_category_path(@pass_through), 'New Category')
+  - tab.create(categories_path(:roots => true), 'Main Categories', :item_html => { :class => params[:roots] && 'active'}) do
+    .content
+      %h2= params[:roots] ? 'Listing Main Categories' : 'Listing Subcategories'
+      = render :partial => 'layouts/flashes'
+      %table.table
+        %tr
+          %th Name
+          - unless params[:roots]
+            %th Main Category
+          %th.debit Debit
+          %th.credit Credit
+          %th.total Total
+          %th
+        = render @categories, :pass_through => @pass_through
+      .action-bars
+        -# A button will be placed in the near future?
+        &nbsp;
+        = will_paginate @categories
+  - tab.create(categories_path, 'Subcategories', :item_html => { :class => !params[:roots] && 'active'})

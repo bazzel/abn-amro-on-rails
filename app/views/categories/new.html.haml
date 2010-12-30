@@ -1,7 +1,6 @@
-- content_for :secondary_navigation do
-  %li= link_to "« Back", categories_path(@pass_through)
-  %li.active= link_to "New Category", new_category_path(@pass_through)
-
-- title "Add a new Category"
-
-= render 'form', :category => @category, :pass_through => @pass_through
+= tabs_for(:class => 'secondary-navigation') do |tab|
+  - tab.create(categories_path(@pass_through), '« Back')
+  - tab.create(new_category_path, 'New Category', :item_html => { :class => 'active' }) do
+    .content
+      %h2 Add a new Category
+      = render 'form', :category => @category, :pass_through => @pass_through

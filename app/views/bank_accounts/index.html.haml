@@ -1,9 +1,12 @@
-- title 'Listing Bank Accounts'
-
-%table.table
-  %tr
-    %th Account number
-    %th Description
-    %th.balance Balance
-    %th
-  = render @bank_accounts
+= tabs_for(:class => 'secondary-navigation') do |tab|
+  - tab.create('table_container', 'Bank Accounts', :item_html => { :class => 'active'}) do
+    .content
+      %h2 Listing Bank Accounts
+      = render :partial => 'layouts/flashes'
+      %table.table
+        %tr
+          %th Account number
+          %th Description
+          %th.balance Balance
+          %th
+        = render @bank_accounts

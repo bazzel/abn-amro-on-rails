@@ -1,10 +1,10 @@
-- content_for :secondary_navigation do
-  %li= link_to 'New Upload', new_upload_path
-
-- title 'Listing Uploads'
-
-%table.table
-  %tr
-    %th Filename
-    %th Downloaded at
-  = render @uploads
+= tabs_for(:class => 'secondary-navigation') do |tab|
+  - tab.create(new_upload_path, 'New Upload') do
+    .content
+      %h2 Listing Uploads
+      = render :partial => 'layouts/flashes'
+      %table.table
+        %tr
+          %th Filename
+          %th Downloaded at
+        = render @uploads

@@ -1,12 +1,12 @@
-- content_for :secondary_navigation do
-  %li= link_to "« Back", :back
+= tabs_for(:class => 'secondary-navigation') do |tab|
+  - tab.create(bank_account_expenses_path(@bank_account, @pass_through), '« Back') do
+    .content
+      %h2 Edit Expense
+      = render :partial => 'layouts/flashes'
+      = render 'expenses/form', :expense => @expense, :bank_account => @bank_account, :pass_through => @pass_through
 
 - content_for :sidebar do
   .block
     %h3 Category
     .content
       = render :partial => 'categories/form', :locals => { :category => @category, :pass_through => @pass_through }
-
-- title "Edit Expense"
-
-= render 'expenses/form', :expense => @expense, :bank_account => @bank_account, :pass_through => @pass_through

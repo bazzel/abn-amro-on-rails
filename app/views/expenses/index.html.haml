@@ -1,5 +1,27 @@
-- content_for :secondary_navigation do
-  %li.active= link_to 'Expenses', bank_account_expenses_path(@bank_account)
+= tabs_for(:class => 'secondary-navigation') do |tab|
+  - tab.create('table_container', 'Expenses') do
+    .content
+      %h2 Listing Expenses
+      = render :partial => 'layouts/flashes'
+      %table.table
+        %tr
+          %th Transaction date
+          %th
+            Creditor/Category
+          %th.debit Debit
+          %th.credit Credit
+          %th.balance Balance
+          %th
+        = render @expenses, :bank_account => @bank_account, :pass_through => @pass_through
+
+      .action-bars
+        -# A button will be placed in the near future?
+        &nbsp;
+        = will_paginate @expenses
+  - tab.create('chart_container', 'Chart') do
+    .content
+      %h2 Chart
+      #expenses_chart
 
 - content_for :sidebar do
   .block
@@ -13,11 +35,12 @@
             - else
               = link_to("#{bank_account}", bank_account_expenses_path(bank_account, :upload_id => @upload))
 
-- title 'Listing Expenses'
-
 - content_for(:javascripts) do
   :javascript
     $(function () {
+      $("#tabs").tabs();
+      $("#tabs").removeClass('secondary-navigation');
+
       new Highcharts.Chart({
         chart: {
           renderTo: 'expenses_chart',
@@ -83,21 +106,3 @@
         }
       });
     });
-
-#expenses_chart
-
-%table.table
-  %tr
-    %th Transaction date
-    %th
-      Creditor/Category
-    %th.debit Debit
-    %th.credit Credit
-    %th.balance Balance
-    %th
-  = render @expenses, :bank_account => @bank_account, :pass_through => @pass_through
-
-.action-bars
-  -# A button will be placed in the near future?
-  &nbsp;
-  = will_paginate @expenses

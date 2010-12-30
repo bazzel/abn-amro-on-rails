@@ -1,7 +1,7 @@
-- content_for :secondary_navigation do
-  %li= link_to "« Back", creditors_path(@pass_through)
-  %li.active= link_to "New Creditor", new_creditor_path
-
-- title "Edit Creditor"
-
-= render 'form', :creditor => @creditor, :pass_through => @pass_through
+= tabs_for(:class => 'secondary-navigation') do |tab|
+  - tab.create(creditors_path(@pass_through), '« Back')
+  - tab.create(new_creditor_path, 'New Creditor') do
+    .content
+      %h2 Edit Creditor
+      = render :partial => 'layouts/flashes'
+      = render 'form', :creditor => @creditor, :pass_through => @pass_through

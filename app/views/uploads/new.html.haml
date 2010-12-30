@@ -1,6 +1,6 @@
-- content_for :secondary_navigation do
-  %li.active= link_to 'New Upload', new_upload_path
-
-- title "Add a new Upload"
-
-= render 'form', :upload => @upload
+= tabs_for(:class => 'secondary-navigation') do |tab|
+  - tab.create(new_upload_path, 'New Upload', :item_html => { :class => 'active' }) do
+    .content
+      %h2 Add a new Upload
+      = render :partial => 'layouts/flashes'
+      = render 'form', :upload => @upload

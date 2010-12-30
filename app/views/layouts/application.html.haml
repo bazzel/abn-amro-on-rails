@@ -16,13 +16,7 @@
             %li{:class => controller.controller_name == 'uploads' && 'active' }= link_to "Uploads", uploads_path
 
       %section#content
-        .block
-          .secondary-navigation
-            %ul= yield(:secondary_navigation)
-          .content
-            %h2= yield(:title) if show_title?
-            = render :partial => 'layouts/flashes'
-            = yield
+        .block= yield
 
       %aside= yield(:sidebar)
 

@@ -1,7 +1,6 @@
-%h1 Editing upload
-
-= render 'form', :upload => @upload
-
-= link_to 'Show', @upload
-\|
-= link_to 'Back', uploads_path
+= tabs_for(:class => 'secondary-navigation') do |tab|
+  - tab.create(new_upload_path, 'New Upload') do
+    .content
+      %h2 Editing upload
+      = render :partial => 'layouts/flashes'
+      = render 'form', :upload => @upload

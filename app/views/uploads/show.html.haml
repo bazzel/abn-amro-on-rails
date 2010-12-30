@@ -1,5 +1,18 @@
-- content_for :secondary_navigation do
-  %li.active= link_to 'New Upload', new_upload_path
+= tabs_for(:class => 'secondary-navigation') do |tab|
+  - tab.create(new_upload_path, 'New Upload') do
+    .content
+      %h2 Add a new Upload
+      = render :partial => 'layouts/flashes'
+      %p
+        %b File name:
+        = @upload.tab.original_filename
+      %p
+        %b Downloaded at:
+        = l(@upload.downloaded_at, :format => :long)
+
+      %p
+        %b Upload details count:
+        = @upload.upload_details.count
 
 - content_for :sidebar do
   .block
@@ -8,19 +21,3 @@
       %ul
         %li= link_to "Expenses", upload_expenses_path(@upload)
         %li Bar
-
-
-%p
-  %b File name:
-  = @upload.tab.original_filename
-%p
-  %b Downloaded at:
-  = l(@upload.downloaded_at, :format => :long)
-
-%p
-  %b Upload details count:
-  = @upload.upload_details.count
-
-= link_to 'Edit', edit_upload_path(@upload)
-\|
-= link_to 'Back', uploads_path

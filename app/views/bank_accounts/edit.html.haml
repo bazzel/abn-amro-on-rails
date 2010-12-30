@@ -1,3 +1,6 @@
-- title "Edit Bank Account"
-
-= render 'form', :bank_account => @bank_account
+= tabs_for(:class => 'secondary-navigation') do |tab|
+  - tab.create(bank_accounts_path, '« Back') do
+    .content
+      %h2 Edit Bank Account
+      = render :partial => 'layouts/flashes'
+      = render 'form', :bank_account => @bank_account
