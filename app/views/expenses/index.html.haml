@@ -18,10 +18,8 @@
         -# A button will be placed in the near future?
         &nbsp;
         = will_paginate @expenses
-  - tab.create('chart_container', 'Chart') do
-    .content
-      %h2 Chart
-      #expenses_chart
+  = render :partial => 'expenses_tab', :locals => { :tab => tab }
+  = render :partial => 'debits_and_credits_tabs', :locals => { :tab => tab }
 
 - content_for :sidebar do
   .block
@@ -40,69 +38,4 @@
     $(function () {
       $("#tabs").tabs();
       $("#tabs").removeClass('secondary-navigation');
-
-      new Highcharts.Chart({
-        chart: {
-          renderTo: 'expenses_chart',
-          zoomType: 'x',
-          spacingRight: 20
-        },
-        series: [{
-          type: 'area',
-          name: 'Balance',
-          pointInterval: #{1.day * 1000},
-          pointStart: #{@bank_account.expenses.minimum(:transaction_date).to_time.to_i * 1000},
-          data: #{expenses_chart_series(@bank_account.expenses)}
-        }],
-        credits: {
-          enabled: false
-        },
-        title: {
-          text: "Balance of '#{@bank_account}' by Day"
-        },
-        subtitle: {
-          text: 'Click and drag in the plot area to zoom in'
-        },
-        xAxis: {
-          type: 'datetime',
-          title: {
-            text: null
-          }
-        },
-        yAxis: {
-          title: {
-            text: 'EUR'
-          }
-        },
-        tooltip: {
-          shared: true
-        },
-        legend: {
-          enabled: false
-        },
-        plotOptions: {
-          area: {
-            _fillColor: {
-              linearGradient: [0, 0, 0, 300],
-              stops: [[0, 'rgb(255,255,255)'],[1, '#ACE97C']]
-            },
-            lineWidth: 1,
-            marker: {
-              enabled: false,
-              states: {
-                hover: {
-                  enabled: true,
-                  radius: 5
-                }
-              }
-            },
-            shadow: false,
-            states: {
-              hover: {
-                lineWidth: 1
-              }
-            }
-          }
-        }
-      });
     });

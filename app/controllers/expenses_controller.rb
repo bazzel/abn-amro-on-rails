@@ -14,6 +14,9 @@ class ExpensesController < ApplicationController
     end
 
     @expenses = @expenses.paginate :page => params[:page], :per_page => 25
+
+
+    @category_chart = CategoriesChart.new(@bank_account)
   end
 
   # GET /bank_accounts/1/expenses/100/edit

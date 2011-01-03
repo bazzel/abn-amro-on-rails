@@ -1,0 +1,65 @@
+- tab.create('credits_chart_container', 'Credit') do
+  .content
+    %h2 Chart
+    #subcategories_credits_chart
+    #main_categories_credits_chart
+- tab.create('debits_chart_container', 'Debit') do
+  .content
+    %h2 Chart
+    #subcategories_debits_chart
+    #main_categories_debits_chart
+
+- content_for(:javascripts) do
+  :javascript
+    $(function () {
+      Highcharts.setOptions({
+        chart: {
+          zoomType: 'xy',
+          defaultSeriesType: 'column'
+        },
+        credits: {
+          enabled: false
+        },
+        xAxis: {
+          categories: #{@category_chart.x_axis_categories}
+        },
+        yAxis: {
+          title: {
+            text: 'Total fruit consumption'
+          },
+          max: #{@category_chart.y_axis_max}
+        },
+        plotOptions: {
+          column: {
+            stacking: 'normal'
+          }
+        }
+      });
+      new Highcharts.Chart({
+        chart: {
+          renderTo: 'subcategories_credits_chart'
+        },
+        series: #{@category_chart.credits.to_json}
+      });
+
+      new Highcharts.Chart({
+        chart: {
+          renderTo: 'main_categories_credits_chart'
+        },
+        series: #{@category_chart.credits(true).to_json}
+      });
+
+      new Highcharts.Chart({
+        chart: {
+          renderTo: 'subcategories_debits_chart'
+        },
+        series: #{@category_chart.debits.to_json}
+      });
+
+      new Highcharts.Chart({
+        chart: {
+          renderTo: 'main_categories_debits_chart'
+        },
+        series: #{@category_chart.debits(true).to_json}
+      });
+    });
