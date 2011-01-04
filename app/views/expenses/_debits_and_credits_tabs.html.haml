@@ -21,13 +21,13 @@
           enabled: false
         },
         xAxis: {
-          categories: #{@category_chart.x_axis_categories}
+          categories: #{category_chart.x_axis_categories}
         },
         yAxis: {
           title: {
             text: 'Total fruit consumption'
           },
-          max: #{@category_chart.y_axis_max}
+          max: #{category_chart.y_axis_max}
         },
         plotOptions: {
           column: {
@@ -39,27 +39,27 @@
         chart: {
           renderTo: 'subcategories_credits_chart'
         },
-        series: #{@category_chart.credits.to_json}
+        series: #{category_chart.credits.to_json}
       });
 
       new Highcharts.Chart({
         chart: {
           renderTo: 'main_categories_credits_chart'
         },
-        series: #{@category_chart.credits(true).to_json}
+        series: #{category_chart.credits(true).to_json}
       });
 
       new Highcharts.Chart({
         chart: {
           renderTo: 'subcategories_debits_chart'
         },
-        series: #{@category_chart.debits.to_json}
+        series: #{category_chart.debits.to_json}
       });
 
       new Highcharts.Chart({
         chart: {
           renderTo: 'main_categories_debits_chart'
         },
-        series: #{@category_chart.debits(true).to_json}
+        series: #{category_chart.debits(true).to_json}
       });
     });

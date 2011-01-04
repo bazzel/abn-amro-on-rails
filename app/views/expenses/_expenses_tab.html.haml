@@ -19,14 +19,14 @@
           type: 'area',
           name: 'Balance',
           pointInterval: #{1.day * 1000},
-          pointStart: #{@bank_account.expenses.minimum(:transaction_date).to_time.to_i * 1000},
-          data: #{expenses_chart_series(@bank_account.expenses)}
+          pointStart: #{bank_account.expenses.minimum(:transaction_date).to_time.to_i * 1000},
+          data: #{expenses_chart_series(bank_account.expenses)}
         }],
         credits: {
           enabled: false
         },
         title: {
-          text: "Balance of '#{@bank_account}' by Day"
+          text: "Balance of '#{bank_account}' by Day"
         },
         subtitle: {
           text: 'Click and drag in the plot area to zoom in'

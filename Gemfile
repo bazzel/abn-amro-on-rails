@@ -47,7 +47,7 @@ group :development do
   gem 'haml-rails',               '0.3.4' # Haml generators for Rails 3
   gem 'mongrel',                  '1.2.0.pre2' # Need this version when running Ruby 1.9.2
   gem 'rails3-generators',        '~>0.14.0' # Rails 3 compatible generators for DataMapper, Factory-girl, Authlogic, Mongomapper, Mongoid, Shoulda, Formtastic, SimpleForm and Fabrication
-  gem 'rails_best_practices',     '~>0.6.1'
+  gem 'rails_best_practices',     '~>0.6.5'
 end
 
 group :development, :test do
