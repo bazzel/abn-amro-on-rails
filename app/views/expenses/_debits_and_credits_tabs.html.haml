@@ -1,17 +1,41 @@
 - tab.create('credits_chart_container', 'Credit') do
   .content
     %h2 Chart
-    #subcategories_credits_chart
-    #main_categories_credits_chart
+    .switch_categories
+      = link_to "x"
+    .categories_container{:'data-label' => 'Main Categories'}
+      #main_categories_credits_chart
+    .categories_container{:'data-label' => 'Subcategories'}
+      #subcategories_credits_chart
+
 - tab.create('debits_chart_container', 'Debit') do
   .content
     %h2 Chart
-    #subcategories_debits_chart
-    #main_categories_debits_chart
+    .switch_categories
+      = link_to "x"
+
+    .categories_container{:'data-label' => 'Main Categories'}
+      #subcategories_debits_chart
+    .categories_container{:'data-label' => 'Subcategories'}
+      #main_categories_debits_chart
 
 - content_for(:javascripts) do
   :javascript
     $(function () {
+      $('.switch_categories').each(function(index) {
+        var self = this;
+        var $containers = $(self).parents('.content').find('.categories_container');
+        $(self).find('a')
+          .text($containers.not(':first')
+            .hide()
+            .data('label'))
+          .click(function() {
+            $containers.toggle();
+            $(this).text($containers.filter(':hidden').data('label'));
+            return false;
+          });
+      });
+
       Highcharts.setOptions({
         chart: {
           zoomType: 'xy',
@@ -21,13 +45,13 @@
           enabled: false
         },
         xAxis: {
-          categories: #{category_chart.x_axis_categories}
+          categories: #{categories_chart.x_axis_categories}
         },
         yAxis: {
           title: {
-            text: 'Total fruit consumption'
+            text: 'EUR'
           },
-          max: #{category_chart.y_axis_max}
+          max: #{categories_chart.y_axis_max}
         },
         plotOptions: {
           column: {
@@ -39,27 +63,27 @@
         chart: {
           renderTo: 'subcategories_credits_chart'
         },
-        series: #{category_chart.credits.to_json}
+        series: #{categories_chart.credits.to_json}
       });
 
       new Highcharts.Chart({
         chart: {
           renderTo: 'main_categories_credits_chart'
         },
-        series: #{category_chart.credits(true).to_json}
+        series: #{categories_chart.credits(true).to_json}
       });
 
       new Highcharts.Chart({
         chart: {
           renderTo: 'subcategories_debits_chart'
         },
-        series: #{category_chart.debits.to_json}
+        series: #{categories_chart.debits.to_json}
       });
 
       new Highcharts.Chart({
         chart: {
           renderTo: 'main_categories_debits_chart'
         },
-        series: #{category_chart.debits(true).to_json}
+        series: #{categories_chart.debits(true).to_json}
       });
     });

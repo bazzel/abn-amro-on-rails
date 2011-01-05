@@ -14,9 +14,15 @@ describe ExpensesController do
     @expenses.stub(:find).and_return(@expense)
     BankAccount.stub(:find).and_return(@bank_account)
     @bank_account.stub(:expenses).and_return(@expenses)
+
   end
 
   describe "GET /bank_accounts/1/expenses/index" do
+    before(:each) do
+      @categories_chart = mock('CategoriesChart')
+      CategoriesChart.stub(:new).and_return(@categories_chart)
+    end
+
     def do_get(params = {})
       get :index, params
     end
@@ -95,6 +101,12 @@ describe ExpensesController do
     it "paginates the expenses" do
       @expenses.should_receive(:paginate).with(hash_including(:page, :per_page))
       do_get :bank_account_id => 1
+    end
+
+    it "instantiates a new CategoriesChart object and assigns it to the view" do
+      CategoriesChart.should_receive(:new).and_return(@categories_chart)
+      do_get :bank_account_id => 1
+      assigns[:categories_chart].should eql(@categories_chart)
     end
 
   end

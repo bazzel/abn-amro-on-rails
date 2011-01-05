@@ -20,7 +20,7 @@
         = will_paginate @expenses
 
   = render :partial => 'expenses_tab', :locals => { :tab => tab, :bank_account => @bank_account }
-  = render :partial => 'debits_and_credits_tabs', :locals => { :tab => tab, :category_chart => @category_chart }
+  = render :partial => 'debits_and_credits_tabs', :locals => { :tab => tab, :categories_chart => @categories_chart }
 
 - content_for :sidebar do
   .block

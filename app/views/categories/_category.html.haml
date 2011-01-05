@@ -3,11 +3,11 @@
   - unless params[:roots]
     %td= category.parent.name
   %td.debit
-    - if category.credit > 0
-      = visual_amount(category.credit, Category.max)
-  %td.credit
     - if category.debit < 0
       = visual_amount(category.debit, Category.max)
+  %td.credit
+    - if category.credit > 0
+      = visual_amount(category.credit, Category.max)
   %td.total
     - unless category.total == 0
       = visual_amount(category.total, Category.max)
