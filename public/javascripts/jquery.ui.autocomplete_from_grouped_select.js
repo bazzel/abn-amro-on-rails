@@ -28,7 +28,7 @@ $.widget("ui.autocompleteFromGroupedSelect", {
                     ")(?![^<>]*>)(?![^&;]+;)", "gi"),
                     "<strong>$1</strong>"),
                     value: text,
-                    parent: $(this).parents('optgroup').attr('label'),
+                    parent: $(this).closest('optgroup').attr('label'),
                     option: this
                   }
             }

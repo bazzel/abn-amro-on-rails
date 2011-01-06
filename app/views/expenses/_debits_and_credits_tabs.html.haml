@@ -24,7 +24,7 @@
     $(function () {
       $('.switch_categories').each(function(index) {
         var self = this;
-        var $containers = $(self).parents('.content').find('.categories_container');
+        var $containers = $(self).closest('.content').find('.categories_container');
         $(self).find('a')
           .text($containers.not(':first')
             .hide()
