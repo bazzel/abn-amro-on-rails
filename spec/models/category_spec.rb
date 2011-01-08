@@ -26,7 +26,7 @@ describe Category do
 
   describe "validation" do
     it { should validate_presence_of(:name, :message => 'This field is required. Please enter a value.') }
-    it { Factory(:category); should validate_uniqueness_of(:name, :scope => :parent_id, :message => 'This name already exist. Please enter another one.')}
+    it { Factory(:category); should validate_uniqueness_of(:name, :scope => :parent_id, :message => 'This name already exists. Please enter another one.')}
   end
 
   describe 'associations' do

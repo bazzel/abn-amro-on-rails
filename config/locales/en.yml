@@ -59,6 +59,8 @@ en:
         parent: Main Category
       expense:
         category: Category
+      preset:
+        category: Category
     actions:
       create: Save
       update: Save

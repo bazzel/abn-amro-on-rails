@@ -8,7 +8,8 @@ $.widget("ui.autocompleteFromSelect", {
     select   = $(o.source).hide(),
     selected = select.children(":selected"),
     value    = selected.val() ? selected.text() : "",
-    label    = select.parent("li").hide().find("label").text();
+    sourceLi = select.parent("li").hide(),
+    label    = sourceLi.find("label").html();
 
     var input = this.element
     .val(value)
@@ -53,7 +54,19 @@ $.widget("ui.autocompleteFromSelect", {
         }
       }
     });
-    input.parent("li").find("label").text(label);
+    
+    var targetLi = input.parent("li");
+    targetLi.find("label").html(label);
+    
+    // Formtastic related.
+    if (sourceLi.hasClass('required')) {
+      targetLi.addClass('required')
+        .removeClass('optional');
+    }
+    
+    sourceLi.find('p.inline-errors').appendTo(targetLi);
+    // End formtastic related.
+    
     input.data("autocomplete")._renderItem = function( ul, item ) {
       return $( "<li></li>" )
       .data( "item.autocomplete", item )

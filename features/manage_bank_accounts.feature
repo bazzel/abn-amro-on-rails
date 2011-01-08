@@ -62,4 +62,4 @@ Feature: Manage bank accounts
   #   And I fill in "Account number" with "972259171"
   #   And I press "Save"
   #   And I should see "There was a problem with your submission."
-  #   And I should see "This account number already exist. Please enter another one."
+  #   And I should see "This account number already exists. Please enter another one."

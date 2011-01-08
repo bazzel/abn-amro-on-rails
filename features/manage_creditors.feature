@@ -54,7 +54,7 @@ Feature: Manage creditors
     And I fill in "Name" with "Foo"
     And I press "Save"
     And I should see "There was a problem with your submission."
-    And I should see "This name already exist. Please enter another one."
+    And I should see "This name already exists. Please enter another one."
 
   Scenario: Editing an existing creditor
     Given the following creditors exist

@@ -107,7 +107,7 @@ Feature: Manage categories
     And I fill in "Name" with "Inkomen"
     And I press "Save"
     And I should see "There was a problem with your submission."
-    And I should see "This name already exist. Please enter another one."
+    And I should see "This name already exists. Please enter another one."
 
   Scenario: Adding a subcategory with the same name as another subcategory but a different parent
     Given the following categories

@@ -3,7 +3,7 @@ class Category < ActiveRecord::Base
 
   # === Validations
   validates_presence_of :name, :message => 'This field is required. Please enter a value.'
-  validates_uniqueness_of :name, :scope => :parent_id, :message => 'This name already exist. Please enter another one.'
+  validates_uniqueness_of :name, :scope => :parent_id, :message => 'This name already exists. Please enter another one.'
 
   # === Associations
   has_many :expenses, :dependent => :nullify

@@ -2,6 +2,7 @@ AbnAmroOnRails::Application.routes.draw do
   resources :expenses
   resources :creditors
   resources :categories
+  resources :presets
 
   resources :uploads do
     resources :expenses

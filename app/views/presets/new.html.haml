@@ -1,0 +1,4 @@
+= tabs_for(:class => 'secondary-navigation') do |tab|
+  - tab.create(presets_path(@pass_through), '« Back')
+  - tab.create(new_preset_path, 'New Preset', :item_html => { :class => 'active' }) do
+    = render :partial => 'new', :locals => { :preset => @preset, :pass_through => @pass_through }, :layout => 'shared/block_content'

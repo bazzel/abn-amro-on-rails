@@ -1,0 +1,9 @@
+%tr[preset]{ :class => "#{cycle('odd', 'even')}"}
+  %td= preset.keyphrase
+  %td
+    = preset.creditor.try(:name) || '-'
+    %br/
+    = preset.category.try(:name)
+  %td
+    = link_to('Edit', edit_preset_path(preset, pass_through)) + " | "
+    = link_to 'Destroy', preset_path(preset, pass_through.merge(:destroy => true)), :confirm => 'Are you sure?', :method => :delete

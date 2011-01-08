@@ -1,0 +1,26 @@
+= content_for(:javascripts) do
+  = javascript_include_tag('jquery.ui.autocomplete_from_select', 'jquery.ui.autocomplete_from_grouped_select')
+  :javascript
+    $(function() {
+      $("#preset_creditor_name").autocompleteFromSelect({
+        source: "#preset_creditor_id"
+      });
+
+      $("#preset_category_id").autocompleteFromGroupedSelect();
+    });
+
+= semantic_form_for(preset) do |f|
+  = render "shared/error_messages", :target => preset
+
+  - pass_through.each do |k,v|
+    = hidden_field_tag k, v
+
+  = f.inputs do
+    = f.input :keyphrase
+    = f.input :creditor, :include_blank => true
+    = f.input :creditor_name, :label => "Or create one"
+    = f.input :category, :collection => Category.children, :include_blank => true, :group_by => :parent, :group_association => :children
+
+  = f.buttons do
+    = f.commit_button
+    %li= link_to "Cancel", presets_path(pass_through)
