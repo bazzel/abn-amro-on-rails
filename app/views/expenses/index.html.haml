@@ -1,23 +1,6 @@
 = tabs_for(:class => 'secondary-navigation') do |tab|
   - tab.create('table_container', 'Expenses') do
-    .content
-      %h2 Listing Expenses
-      = render :partial => 'layouts/flashes'
-      %table.table
-        %tr
-          %th Transaction date
-          %th
-            Creditor/Category
-          %th.debit Debit
-          %th.credit Credit
-          %th.balance Balance
-          %th
-        = render @expenses, :bank_account => @bank_account, :pass_through => @pass_through
-
-      .action-bars
-        -# A button will be placed in the near future?
-        &nbsp;
-        = will_paginate @expenses
+    = render :partial => 'index', :locals => { :expenses => @expenses, :bank_account => @bank_account, :pass_through => @pass_through }, :layout => 'shared/block_content'
 
   = render :partial => 'expenses_tab', :locals => { :tab => tab, :bank_account => @bank_account }
   = render :partial => 'debits_and_credits_tabs', :locals => { :tab => tab, :categories_chart => @categories_chart }
