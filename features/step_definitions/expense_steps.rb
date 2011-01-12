@@ -14,9 +14,10 @@ When /^I check (expense "[^"]*")$/ do |expense|
   When %{I check "expense_ids_#{expense.id}"}
 end
 
-When /^I check all expenses$/ do
-  When %{I check "toggle_all"}
-end
+# Moved to additional_web_steps.rb
+# When /^I check all expenses$/ do
+#   When %{I check "toggle_all"}
+# end
 
 # == Then
 Then /^I should see the following expenses:$/ do |table|

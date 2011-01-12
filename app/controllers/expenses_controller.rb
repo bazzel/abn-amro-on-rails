@@ -2,7 +2,7 @@ class ExpensesController < ApplicationController
   before_filter :find_upload, :find_bank_account
   before_filter :find_expense, :only => [:edit, :update]
 
-  # GET /bank_accounts/1/expenses/index
+  # GET "/bank_accounts/1/expenses/index"s
   def index
     @expenses = @bank_account.expenses.order('expenses.transaction_date DESC').includes(:bank_account)
     @categories_chart = CategoriesChart.new(@bank_account)
@@ -17,7 +17,7 @@ class ExpensesController < ApplicationController
     @expenses = @expenses.paginate :page => params[:page], :per_page => 25
   end
 
-  # GET /bank_accounts/1/expenses/100/edit
+  # GET "/bank_accounts/1/expenses/100/edit"
   def edit
     # Edit view contains several forms for different resources (.e.g. category).
     # Submitting these forms must redirect/render to this edit action.
@@ -26,7 +26,7 @@ class ExpensesController < ApplicationController
     @category = Category.new
   end
 
-  # PUT /bank_accounts/1/expense/100
+  # PUT "/bank_accounts/1/expense/100"
   def update
     @expense.update_attributes(params[:expense])
     redirect_to bank_account_expenses_path(@bank_account, @pass_through), :notice => 'Expense was successfully updated'

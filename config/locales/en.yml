@@ -17,6 +17,10 @@ en:
       presets:
         one: Presets have been applied to 1 expense
         other: Presets have been applied to %{count} expenses
+    presets:
+      apply_multiple:
+        one: Presets have been applied to 1 expense
+        other: Presets have been applied to %{count} expenses
   activerecord:
     errors:
       messages:

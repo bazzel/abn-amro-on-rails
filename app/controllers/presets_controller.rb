@@ -55,4 +55,20 @@ class PresetsController < ApplicationController
     redirect_to presets_path(@pass_through), :notice => 'Preset was successfully destroyed'
   end
 
+  # PUT "/presets/apply_multiple"
+  def apply_multiple
+    response_status_and_flash = {}
+
+    if (ids = params[:preset_ids])
+      presets = Preset.find(params[:preset_ids])
+      applied = Preset.apply_for(presets)
+      response_status_and_flash[:notice] = t(:'flash.presets.apply_multiple', :count => applied)
+    else
+      response_status_and_flash[:alert] = 'Please select one or more presets and try again.'
+    end
+
+    redirect_to presets_path, response_status_and_flash
+  end
+
+
 end

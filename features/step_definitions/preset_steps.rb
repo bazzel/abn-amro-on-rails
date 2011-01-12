@@ -25,6 +25,16 @@ When /^I follow "([^"]*)" for (preset "[^"]*")$/ do |link, preset|
   When %{I follow "#{link}" within "#preset_#{preset.id}"}
 end
 
+When /^I check (preset "[^"]*")$/ do |preset|
+  When %{I check "preset_ids_#{preset.id}"}
+end
+
+# Moved to additional_web_steps.rb
+# Given /^I check all presets$/ do
+#   When %{I check "toggle_all"}
+# end
+
+
 # == Then
 Then /^I should see the following presets:$/ do |table|
   table.hashes.each do |hash|

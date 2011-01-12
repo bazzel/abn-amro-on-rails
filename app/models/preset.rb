@@ -37,10 +37,10 @@ class Preset < ActiveRecord::Base
     end
 
     # Apply given presets to all expenses
-    # def apply_for(presets)
-    #   apply(presets, Expense.all)
-    # end
-    #
+    def apply_for(presets)
+      apply(presets, Expense.all)
+    end
+
     # Apply given presets to given expenses
     def apply(presets, expenses)
       num_applied = 0
@@ -53,27 +53,5 @@ class Preset < ActiveRecord::Base
 
       num_applied
     end
-
-    # def apply_to(expenses)
-    #   num_applied = 0
-    #   all.each do |preset|
-    #     matches = expenses.select { |e| e.description.match(/#{preset.keyphrase}/)}
-    #
-    #     num_applied = num_applied + matches.size
-    #
-    #     Expense.update_all({
-    #       :category_id => preset.category_id,
-    #       :creditor_id => preset.creditor_id
-    #     }, {
-    #       :id => matches.map(&:id)
-    #     }) unless matches.empty?
-    #
-    #     expenses = expenses - matches
-    #   end
-    #
-    #   num_applied
-    # end
   end
-
-
 end

@@ -191,7 +191,7 @@ describe ExpensesController do
 
     before(:each) do
       @expenses.stub(:find).and_return(@expenses)
-      Preset.stub(:apply).and_return(99)
+      Preset.stub(:apply_to).and_return(99)
     end
 
     def do_put(options = {})
@@ -208,13 +208,13 @@ describe ExpensesController do
     end
 
     it "sets the flash notice for one expense" do
-      Preset.stub(:apply).and_return(1)
+      Preset.stub(:apply_to).and_return(1)
       do_put(:expense_ids => [100])
       flash[:notice].should eql('Presets have been applied to 1 expense')
     end
 
     it "sets the flash notice for two expenses" do
-      Preset.stub(:apply).and_return(2)
+      Preset.stub(:apply_to).and_return(2)
       do_put(:expense_ids => [100, 101])
       flash[:notice].should eql('Presets have been applied to 2 expenses')
     end

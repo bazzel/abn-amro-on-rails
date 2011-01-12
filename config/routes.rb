@@ -2,7 +2,9 @@ AbnAmroOnRails::Application.routes.draw do
   resources :expenses
   resources :creditors
   resources :categories
-  resources :presets
+  resources :presets do
+    put :apply_multiple, :on => :collection
+  end
 
   resources :uploads do
     resources :expenses

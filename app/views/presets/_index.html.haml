@@ -1,11 +1,13 @@
 - title "Listing Presets"
-%table.table
-  %tr
-    %th Keyphrase
-    %th Creditor/Category
-    %th
-  = render presets, :pass_through => pass_through
-.action-bars
-  -# A button will be placed in the near future?
-  &nbsp;
-  = will_paginate presets
+= form_tag apply_multiple_presets_path, :method => :put do
+  = action_bar_section presets do
+    - pass_through.each do |k,v|
+      = hidden_field_tag k, v
+
+    %table.table
+      %tr
+        %th= check_box_tag "toggle_all"
+        %th Keyphrase
+        %th Creditor/Category
+        %th
+      = render presets, :pass_through => pass_through

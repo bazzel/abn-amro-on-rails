@@ -220,4 +220,48 @@ describe PresetsController do
     end
   end
 
+  describe "PUT /presets/apply_multiple" do
+
+    before(:each) do
+      Preset.stub(:find).and_return(@presets)
+      Preset.stub(:apply_for).and_return(99)
+    end
+
+    def do_put(options = {})
+      put :apply_multiple, options
+    end
+
+    it "redirects to expenses index" do
+      do_put(:preset_ids => [100, 101])
+      response.should redirect_to(presets_path)
+    end
+
+    it "sets the flash notice for one preset" do
+      Preset.stub(:apply_for).and_return(1)
+      do_put(:preset_ids => [100])
+      flash[:notice].should eql('Presets have been applied to 1 expense')
+    end
+
+    it "sets the flash notice for two presets" do
+      Preset.stub(:apply_for).and_return(2)
+      do_put(:preset_ids => [100, 101])
+      flash[:notice].should eql('Presets have been applied to 2 expenses')
+    end
+
+    it "finds all expenses for given ids" do
+      Preset.should_receive(:find).with([100, 101])
+      do_put(:preset_ids => [100, 101])
+    end
+
+    it "calls apply on Preset and returns number of applied presets" do
+      Preset.should_receive(:apply_for).with(@presets)
+      do_put(:preset_ids => [100, 101])
+    end
+
+    it "sets the flash error if no ids are given" do
+      do_put
+      flash[:alert].should eql('Please select one or more presets and try again.')
+    end
+  end
+
 end
