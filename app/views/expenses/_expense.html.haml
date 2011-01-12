@@ -1,4 +1,5 @@
 %tr[expense]{ :class => "#{cycle('odd', 'even')}"}
+  %td= check_box_tag "expense_ids[]", expense.id, false, :id => "expense_ids_#{expense.id}"
   %td= l(expense.transaction_date, :format => :default)
   %td
     -# TODO: Create a helper for this:

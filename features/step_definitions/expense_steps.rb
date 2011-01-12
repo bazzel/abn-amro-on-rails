@@ -10,6 +10,14 @@ When /^I follow "([^"]*)" for (expense "[^"]*")$/ do |link, expense|
   When %{I follow "#{link}" within "#expense_#{expense.id}"}
 end
 
+When /^I check (expense "[^"]*")$/ do |expense|
+  When %{I check "expense_ids_#{expense.id}"}
+end
+
+When /^I check all expenses$/ do
+  When %{I check "toggle_all"}
+end
+
 # == Then
 Then /^I should see the following expenses:$/ do |table|
   table.hashes.each do |hash|

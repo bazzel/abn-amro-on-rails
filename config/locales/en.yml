@@ -13,6 +13,10 @@ en:
   flash:
     uploads:
       created: "'%{file_name}' was successfully imported."
+    expenses:
+      presets:
+        one: Presets have been applied to 1 expense
+        other: Presets have been applied to %{count} expenses
   activerecord:
     errors:
       messages:

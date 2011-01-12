@@ -16,4 +16,64 @@ class Preset < ActiveRecord::Base
     self.creditor = Creditor.find_or_create_by_name(name) unless name.blank?
   end
 
+  # Apply preset to given expenses
+  def apply_to(expenses)
+    matches = expenses.select { |e| e.description.match(/#{keyphrase}/)}
+
+    Expense.update_all({
+      :category_id => category_id,
+      :creditor_id => creditor_id
+    }, {
+      :id => matches.map(&:id)
+    }) unless matches.empty?
+
+    return matches
+  end
+
+  class << self
+    # Apply all presets to given expenses
+    def apply_to(expenses)
+      apply(all, expenses)
+    end
+
+    # Apply given presets to all expenses
+    # def apply_for(presets)
+    #   apply(presets, Expense.all)
+    # end
+    #
+    # Apply given presets to given expenses
+    def apply(presets, expenses)
+      num_applied = 0
+
+      presets.each do |preset|
+        matches = preset.apply_to(expenses)
+        num_applied = num_applied + matches.size
+        expenses = expenses - matches
+      end
+
+      num_applied
+    end
+
+    # def apply_to(expenses)
+    #   num_applied = 0
+    #   all.each do |preset|
+    #     matches = expenses.select { |e| e.description.match(/#{preset.keyphrase}/)}
+    #
+    #     num_applied = num_applied + matches.size
+    #
+    #     Expense.update_all({
+    #       :category_id => preset.category_id,
+    #       :creditor_id => preset.creditor_id
+    #     }, {
+    #       :id => matches.map(&:id)
+    #     }) unless matches.empty?
+    #
+    #     expenses = expenses - matches
+    #   end
+    #
+    #   num_applied
+    # end
+  end
+
+
 end

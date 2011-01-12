@@ -1,16 +1,25 @@
 - title "Listing Expenses"
-%table.table
-  %tr
-    %th Transaction date
-    %th
-      Creditor/Category
-    %th.debit Debit
-    %th.credit Credit
-    %th.balance Balance
-    %th
-  = render expenses, :bank_account => bank_account, :pass_through => pass_through
+= form_tag presets_bank_account_expenses_path(bank_account), :method => :put do
+  .action-bars
+    .actions
+      = submit_tag "Apply Presets"
+    = will_paginate expenses
 
-.action-bars
-  -# A button will be placed in the near future?
-  &nbsp;
-  = will_paginate expenses
+  - pass_through.each do |k,v|
+    = hidden_field_tag k, v
+  %table.table
+    %tr
+      %th= check_box_tag "toggle_all"
+      %th Transaction date
+      %th
+        Creditor/Category
+      %th.debit Debit
+      %th.credit Credit
+      %th.balance Balance
+      %th
+    = render expenses, :bank_account => bank_account, :pass_through => pass_through
+
+  .action-bars
+    .actions
+      = submit_tag "Apply Presets"
+    = will_paginate expenses

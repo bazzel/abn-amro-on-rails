@@ -3,18 +3,14 @@ require 'spec_helper'
 describe ExpensesController do
   before(:each) do
     @upload = mock_model(Upload)
-
     @bank_account = mock_model(BankAccount, :id => 1)
     @bank_accounts = [@bank_account]
-
     @expense = mock_model(Expense, :id => 100)
     @expenses = [@expense]
     @expenses.stub(:includes).and_return(@expenses)
     @expenses.stub(:order).and_return(@expenses)
-    @expenses.stub(:find).and_return(@expense)
     BankAccount.stub(:find).and_return(@bank_account)
     @bank_account.stub(:expenses).and_return(@expenses)
-
   end
 
   describe "GET /bank_accounts/1/expenses/index" do
@@ -112,6 +108,10 @@ describe ExpensesController do
   end
 
   describe "GET /bank_accounts/1/expenses/100/edit" do
+    before(:each) do
+      @expenses.stub(:find).and_return(@expense)
+    end
+
     def do_get
       get :edit, :bank_account_id => 1, :id => 100
     end
@@ -185,5 +185,53 @@ describe ExpensesController do
       end
     end
 
+  end
+
+  describe "PUT /bank_accounts/1/expense/presets" do
+
+    before(:each) do
+      @expenses.stub(:find).and_return(@expenses)
+      Preset.stub(:apply).and_return(99)
+    end
+
+    def do_put(options = {})
+      options = {
+        :bank_account_id => 1
+      }.merge(options)
+
+      put :presets, options
+    end
+
+    it "redirects to expenses index" do
+      do_put(:expense_ids => [100, 101])
+      response.should redirect_to(bank_account_expenses_path(@bank_account))
+    end
+
+    it "sets the flash notice for one expense" do
+      Preset.stub(:apply).and_return(1)
+      do_put(:expense_ids => [100])
+      flash[:notice].should eql('Presets have been applied to 1 expense')
+    end
+
+    it "sets the flash notice for two expenses" do
+      Preset.stub(:apply).and_return(2)
+      do_put(:expense_ids => [100, 101])
+      flash[:notice].should eql('Presets have been applied to 2 expenses')
+    end
+
+    it "finds all expenses for given ids" do
+      @expenses.should_receive(:find).with([100, 101])
+      do_put(:expense_ids => [100, 101])
+    end
+
+    it "calls apply on Preset and returns number of applied presets" do
+      Preset.should_receive(:apply_to).with(@expenses)
+      do_put(:expense_ids => [100, 101])
+    end
+
+    it "sets the flash error if no ids are given" do
+      do_put
+      flash[:alert].should eql('Please select one or more expenses and try again.')
+    end
   end
 end

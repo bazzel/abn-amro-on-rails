@@ -32,6 +32,21 @@ class ExpensesController < ApplicationController
     redirect_to bank_account_expenses_path(@bank_account, @pass_through), :notice => 'Expense was successfully updated'
   end
 
+  # PUT "/bank_accounts/1/expense/presets"
+  def presets
+    response_status_and_flash = {}
+
+    if (ids = params[:expense_ids])
+      expenses = @bank_account.expenses.find(params[:expense_ids])
+      applied = Preset.apply_to(expenses)
+      response_status_and_flash[:notice] = t(:'flash.expenses.presets', :count => applied)
+    else
+      response_status_and_flash[:alert] = 'Please select one or more expenses and try again.'
+    end
+
+    redirect_to bank_account_expenses_path(@bank_account, @pass_through), response_status_and_flash
+  end
+
   private
   def find_bank_account
     @bank_account ||=

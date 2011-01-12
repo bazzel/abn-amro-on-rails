@@ -9,7 +9,9 @@ AbnAmroOnRails::Application.routes.draw do
   end
 
   resources :bank_accounts do
-    resources :expenses
+    resources :expenses do
+      put :presets, :on => :collection
+    end
   end
 
   # The priority is based upon order of creation:

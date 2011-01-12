@@ -32,4 +32,27 @@ describe Preset do
       }.should change(Creditor, :count).by(1)
     end
   end
+
+  describe "#apply_to" do
+    before(:each) do
+      upload = Factory(:upload, :tab => upload_file('TXT101121100433.TAB'))
+      Factory(:preset, :keyphrase => 'ALBERT HEIJN 1521>TILBURG') # 11
+      Factory(:preset, :keyphrase => 'KABISA B.V.') # 3
+      Factory(:preset, :keyphrase => 'CZ') # 4
+      Factory(:preset, :keyphrase => 'Not existing') # 0
+    end
+
+    it "returns number of applied presets" do
+      Preset.apply_to(Expense.all).should eql(18)
+    end
+
+    it "calls Expense.update_all every time a set of expenses are found" do
+      Expense.should_receive(:update_all).exactly(3).times
+      Preset.apply_to(Expense.all)
+    end
+
+    it "case sensitive (or not?)"
+    it "does what with whitespaces?"
+    it "has a preferred order and start with the longest keyphrase?"
+  end
 end
