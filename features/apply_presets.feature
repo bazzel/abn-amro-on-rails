@@ -61,7 +61,6 @@ Feature: Apply presets
     And I check all expenses
     And I press "Apply Presets"
     Then I should be on the expenses page for "861887719"
-    Then show me the page
     And I should see a page link to "1"
     Then I should not see a page link to "2"
     And I should see "Presets have been applied to 7 expenses"
