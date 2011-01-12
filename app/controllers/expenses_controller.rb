@@ -24,6 +24,7 @@ class ExpensesController < ApplicationController
     # See POST categories for usage of this postback_url.
     @pass_through[:postback_url] = edit_bank_account_expense_path(@bank_account, @expense)
     @category = Category.new
+    @preset = Preset.new
   end
 
   # PUT "/bank_accounts/1/expense/100"

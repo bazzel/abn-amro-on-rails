@@ -20,7 +20,9 @@ class PresetsController < ApplicationController
     @preset = Preset.new(params[:preset])
 
     if @preset.save
-      redirect_to presets_path, :notice => 'Preset was successfully created'
+      # If the category form in the sidebar is used,
+      # we redirect to the postback_url instead of the index view.
+      redirect_to (params[:postback_url] || presets_path), :notice => 'Preset was successfully created'
     else
       @pass_through[:postback_url] = new_preset_path
       @category = Category.new

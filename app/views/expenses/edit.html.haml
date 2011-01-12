@@ -7,3 +7,8 @@
     %h3 Category
     .content
       = render :partial => 'categories/form', :locals => { :category => @category, :pass_through => @pass_through }
+
+  .block
+    %h3 Preset
+    .content
+      = render :partial => 'presets/form', :locals => { :preset => @preset, :pass_through => @pass_through }

@@ -144,6 +144,13 @@ describe ExpensesController do
       do_get
       assigns[:category].should eql(category)
     end
+
+    it "assigns new preset to the view" do
+      preset = mock_model(Preset)
+      Preset.stub(:new).and_return(preset)
+      do_get
+      assigns[:preset].should eql(preset)
+    end
   end
 
   describe "PUT /bank_accounts/1/expense/100" do

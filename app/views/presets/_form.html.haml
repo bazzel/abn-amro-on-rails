@@ -23,4 +23,6 @@
 
   = f.buttons do
     = f.commit_button
-    %li= link_to "Cancel", presets_path(pass_through)
+    - if controller_name == 'presets'
+      -# No Cancel link if displayed in the sidebar.
+      %li= link_to "Cancel", presets_path(pass_through)

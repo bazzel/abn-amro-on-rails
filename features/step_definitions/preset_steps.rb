@@ -34,6 +34,10 @@ end
 #   When %{I check "toggle_all"}
 # end
 
+Then /^I should see a form to add a preset in the sidebar$/ do
+  page.should have_selector(:css, "aside form#new_preset")
+end
+
 
 # == Then
 Then /^I should see the following presets:$/ do |table|

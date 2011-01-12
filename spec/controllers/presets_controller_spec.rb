@@ -106,6 +106,11 @@ describe PresetsController do
         do_post
         response.should redirect_to(presets_path)
       end
+
+      it "redirects to postback_url if given" do
+        do_post :postback_url => 'http://example.com'
+        response.should redirect_to('http://example.com')
+      end
     end
 
     describe "failure" do
