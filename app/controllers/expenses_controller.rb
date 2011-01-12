@@ -22,7 +22,7 @@ class ExpensesController < ApplicationController
     # Edit view contains several forms for different resources (.e.g. category).
     # Submitting these forms must redirect/render to this edit action.
     # See POST categories for usage of this postback_url.
-    @pass_through[:postback_url] = edit_bank_account_expense_path(@bank_account, @expense)
+    @postback_url = edit_bank_account_expense_path(@bank_account, @expense)
     @category = Category.new
     @preset = Preset.new
   end

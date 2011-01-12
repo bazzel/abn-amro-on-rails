@@ -61,4 +61,5 @@ group :development, :test do
   # gem 'remarkable_rails',         '3.1.13', :require => nil
   gem 'rspec-rails',              '~>2.1.0'
   gem 'spork',                    '~>0.8.4' # A forking Drb spec server
+  gem 'webrat',                   '~>0.7.3'
 end

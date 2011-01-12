@@ -94,7 +94,6 @@ Feature: Manage presets
     When I go to the new preset page
     And I select "Foo" from "Creditor"
     And I select "Salaris" from "Category"
-    Then show me the page
     And I press "Save"
     And I should see "There was a problem with your submission."
     And I should see "This field is required. Please enter a value."

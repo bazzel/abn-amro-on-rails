@@ -1,6 +1,8 @@
 = semantic_form_for(category) do |f|
   = render "shared/error_messages", :target => category
 
+  = postback_url_unless(:controller => 'categories')
+
   - pass_through.each do |k,v|
     = hidden_field_tag k, v
 

@@ -1,6 +1,6 @@
 Feature: Add preset through sidebar
   In order to edit expense efficiently
-  As a use
+  As a user
   I want to add missing preset without leaving the expense page
 
   Scenario: Viewing the category form
@@ -20,11 +20,9 @@ Feature: Add preset through sidebar
       | Foo  |
       | Bar  |
     And I've uploaded the file "TXT101121100433.TAB"
-    # When I go to the expenses page
     And I am on the expense edit page for "UW REKENING MET SALDO IS         ADMINISTRATIEF OVERGEHEVELD VAN  FORTIS BANK NEDERLAND NAAR       ABN AMRO BANK"
     And I fill in "Keyphrase" with "My Employer" within "#new_preset"
     And I select "Foo" from "Creditor" within "#new_preset"
-    Then show me the page
     And I select "Salaris" from "Category" within "#new_preset"
     And I press "Save" within "#new_preset"
     Then I should be on the expense edit page for "UW REKENING MET SALDO IS         ADMINISTRATIEF OVERGEHEVELD VAN  FORTIS BANK NEDERLAND NAAR       ABN AMRO BANK"

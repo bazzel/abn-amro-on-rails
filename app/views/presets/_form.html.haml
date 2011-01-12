@@ -12,6 +12,8 @@
 = semantic_form_for(preset) do |f|
   = render "shared/error_messages", :target => preset
 
+  = postback_url_unless(:controller => 'presets')
+
   - pass_through.each do |k,v|
     = hidden_field_tag k, v
 

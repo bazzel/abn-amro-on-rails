@@ -60,7 +60,7 @@ describe PresetsController do
 
     it "assigns path to preset new to postback_url" do
       do_get
-      assigns[:pass_through][:postback_url].should eql(new_preset_path)
+      assigns[:postback_url].should eql(new_preset_path)
     end
 
     it "assigns new category to the view" do
@@ -125,7 +125,7 @@ describe PresetsController do
 
       it "assigns path to preset new to postback_url" do
         do_post
-        assigns[:pass_through][:postback_url].should eql(new_preset_path)
+        assigns[:postback_url].should eql(new_preset_path)
       end
 
       it "assigns new category to the view" do
@@ -159,7 +159,7 @@ describe PresetsController do
 
     it "assigns path to preset edit to postback_url" do
       do_get
-      assigns[:pass_through][:postback_url].should eql(edit_preset_path(@preset))
+      assigns[:postback_url].should eql(edit_preset_path(@preset))
     end
 
     it "assigns new category to the view" do
@@ -219,7 +219,7 @@ describe PresetsController do
 
       it "assigns path to preset edit to postback_url" do
         do_put
-        assigns[:pass_through][:postback_url].should eql(edit_preset_path(@preset))
+        assigns[:postback_url].should eql(edit_preset_path(@preset))
       end
 
       it "assigns new category to the view" do

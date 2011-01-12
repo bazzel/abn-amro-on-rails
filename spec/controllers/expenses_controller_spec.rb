@@ -135,7 +135,7 @@ describe ExpensesController do
 
     it "assigns path to expense edit to postback_url" do
       do_get
-      assigns[:pass_through][:postback_url].should eql(edit_bank_account_expense_path(@bank_account, @expense))
+      assigns[:postback_url].should eql(edit_bank_account_expense_path(@bank_account, @expense))
     end
 
     it "assigns new category to the view" do

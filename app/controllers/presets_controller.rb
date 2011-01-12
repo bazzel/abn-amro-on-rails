@@ -11,7 +11,7 @@ class PresetsController < ApplicationController
     # Edit view contains several forms for different resources (.e.g. category).
     # Submitting these forms must redirect/render to this edit action.
     # See POST categories for usage of this postback_url.
-    @pass_through[:postback_url] = new_preset_path
+    @postback_url = new_preset_path
     @category = Category.new
   end
 
@@ -24,7 +24,7 @@ class PresetsController < ApplicationController
       # we redirect to the postback_url instead of the index view.
       redirect_to (params[:postback_url] || presets_path), :notice => 'Preset was successfully created'
     else
-      @pass_through[:postback_url] = new_preset_path
+      @postback_url = new_preset_path
       @category = Category.new
       render :new
     end
@@ -33,7 +33,7 @@ class PresetsController < ApplicationController
   # GET "presets/1"
   def edit
     @preset = Preset.find(params[:id])
-    @pass_through[:postback_url] = edit_preset_path(@preset)
+    @postback_url = edit_preset_path(@preset)
     @category = Category.new
   end
 
@@ -44,7 +44,7 @@ class PresetsController < ApplicationController
     if @preset.update_attributes(params[:preset])
       redirect_to presets_path(@pass_through), :notice => 'Preset was successfully updated'
     else
-      @pass_through[:postback_url] = edit_preset_path(@preset)
+      @postback_url = edit_preset_path(@preset)
       @category = Category.new
       render :edit
     end
