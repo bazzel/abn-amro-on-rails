@@ -28,6 +28,10 @@ module NavigationHelpers
       expense = Expense.find_by_description($1)
       edit_bank_account_expense_path(expense.bank_account, expense)
 
+    when /^the preset edit page for "(.*)"$/
+      preset = Preset.find_by_keyphrase($1)
+      edit_preset_path(preset)
+
     # the following are examples using path_to_pickle
 
     when /^#{capture_model}(?:'s)? page$/                           # eg. the forum's page

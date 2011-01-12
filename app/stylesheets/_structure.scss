@@ -163,6 +163,8 @@ aside {
 }
 
 .action-bars {
+  border-top: 1px solid white;
+  margin-top: -1px;
   .actions {
     float: left;
   }

@@ -8,6 +8,7 @@ describe PresetsController do
    # @creditors.stub(:all).and_return(@creditors)
    @presets.stub(:paginate).and_return(@presets)
    Preset.stub(:find).and_return(@preset)
+   @category = mock_model(Category)
   end
 
   describe "GET /presets/index" do
@@ -56,6 +57,17 @@ describe PresetsController do
       do_get
       response.should render_template('new')
     end
+
+    it "assigns path to preset new to postback_url" do
+      do_get
+      assigns[:pass_through][:postback_url].should eql(new_preset_path)
+    end
+
+    it "assigns new category to the view" do
+      Category.stub(:new).and_return(@category)
+      do_get
+      assigns[:category].should eql(@category)
+    end
   end
 
   describe "POST /presets" do
@@ -97,11 +109,26 @@ describe PresetsController do
     end
 
     describe "failure" do
-      it "should render new" do
+      before(:each) do
         @preset.stub(:save).and_return(false)
+      end
+
+      it "should render new" do
         do_post
         response.should render_template('new')
       end
+
+      it "assigns path to preset new to postback_url" do
+        do_post
+        assigns[:pass_through][:postback_url].should eql(new_preset_path)
+      end
+
+      it "assigns new category to the view" do
+        Category.stub(:new).and_return(@category)
+        do_post
+        assigns[:category].should eql(@category)
+      end
+
     end
   end
 
@@ -124,6 +151,18 @@ describe PresetsController do
       do_get
       response.should render_template('edit')
     end
+
+    it "assigns path to preset edit to postback_url" do
+      do_get
+      assigns[:pass_through][:postback_url].should eql(edit_preset_path(@preset))
+    end
+
+    it "assigns new category to the view" do
+      Category.stub(:new).and_return(@category)
+      do_get
+      assigns[:category].should eql(@category)
+    end
+
   end
 
   describe "PUT presets/1" do
@@ -164,11 +203,26 @@ describe PresetsController do
     end
 
     describe "failure" do
-      it "should render edit" do
+      before(:each) do
         @preset.stub(:update_attributes).and_return(false)
+      end
+
+      it "should render edit" do
         do_put
         response.should render_template('edit')
       end
+
+      it "assigns path to preset edit to postback_url" do
+        do_put
+        assigns[:pass_through][:postback_url].should eql(edit_preset_path(@preset))
+      end
+
+      it "assigns new category to the view" do
+        Category.stub(:new).and_return(@category)
+        do_put
+        assigns[:category].should eql(@category)
+      end
+
     end
   end
 
