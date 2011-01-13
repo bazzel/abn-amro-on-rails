@@ -43,7 +43,7 @@ class CategoriesChart
 
   # returns the highest debit or credit value multiplied by 1.05
   def y_axis_max
-    @y_axis_max ||= (grouped_expenses.map(&:credit) + grouped_expenses.map(&:debit)).max * 1.05
+    @y_axis_max ||= (grouped_expenses.map(&:credit) + grouped_expenses.map(&:debit)).max * 1.2
   end
 
   private

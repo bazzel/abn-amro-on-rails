@@ -13,11 +13,10 @@
     %h2 Chart
     .switch_categories
       = link_to "x"
-
     .categories_container{:'data-label' => 'Main Categories'}
-      #subcategories_debits_chart
-    .categories_container{:'data-label' => 'Subcategories'}
       #main_categories_debits_chart
+    .categories_container{:'data-label' => 'Subcategories'}
+      #subcategories_debits_chart
 
 - content_for(:javascripts) do
   :javascript

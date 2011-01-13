@@ -12,10 +12,13 @@
 Roadmap
 =======
 In random order:
-* Add preset form to expenses form
+* ignore multiple spaces in presets
+* use regex in presets?
 * Browse to next or previous expense
 * Apply preset during import
+* Apply presets from presets index page only to 'empty' expenses
 * Apply preset from edit preset page
-* Apply preset from index preset page
 * Display at, pos, etc. icons for expense
-*
+* Create filter for expenses:
+  * 'empty' expenses
+  * expenses from last week/month/...
