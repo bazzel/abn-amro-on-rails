@@ -53,17 +53,28 @@ form.formtastic {
 
 aside {
   form.formtastic {
+    @include adjust-font-size-to(12px);
     fieldset {
       > ol > li {
+        margin-bottom: 0;
         label {
           display: block;
           width: 100%;
           float: none; }
         &.string input {
           width: 100%; }
+        p {
+          &.inline-errors {
+            margin: 0;
+          }
+        }
       }
       &.buttons {
         padding-left: 0;
+        input, a {
+          @include fancy-button-structure(12px);
+          @include fancy-button-colors(#E5E5E5, #DEDEDE);
+        }
       }
     }
   }
