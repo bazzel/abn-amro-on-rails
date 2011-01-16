@@ -14,6 +14,7 @@ class Expense < ActiveRecord::Base
   # === Scopes
   scope :credit, where('transaction_amount > 0')
   scope :debit, where('transaction_amount < 0')
+  scope :blank, where(:creditor_id => nil, :category_id => nil)
 
   def creditor_name=(name)
     self.creditor = Creditor.find_or_create_by_name(name) unless name.blank?

@@ -106,6 +106,41 @@ describe Expense do
     end
   end
 
+  describe "#blank" do
+    before(:each) do
+      upload = Factory(:upload, :tab => upload_file('TXT101204150043.TAB'))
+      category = Factory(:subcategory)
+      creditor = Factory(:creditor)
+      expenses = Expense.all
+      @with_category = expenses.first
+      @with_category.update_attribute(:category, category)
+
+      @with_creditor = expenses.second
+      @with_creditor.update_attribute(:creditor, creditor)
+
+      @with_both = expenses.third
+      @with_both.update_attributes(:category => category, :creditor => creditor)
+
+      @without_both = expenses.fourth
+    end
+
+    it "only returns expenses which neither have a category nor a creditor set" do
+      Expense.blank.should include(@without_both)
+    end
+
+    it "does not return expenses which have a creditor set" do
+      Expense.blank.should_not include(@with_creditor)
+    end
+
+    it "does not return expenses which have a category set" do
+      Expense.blank.should_not include(@with_category)
+    end
+
+    it "does not return expenses which have set both" do
+      Expense.blank.should_not include(@with_both)
+    end
+  end
+
   describe "#max_balance" do
     it "returns largest positive balance" do
       Expense.stub(:maximum).and_return(100.00)

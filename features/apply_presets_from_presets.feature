@@ -30,6 +30,11 @@ Feature: Apply presets
     Then I should be on the presets page
     And I should see "Please select one or more presets and try again."
 
+  Scenario: Skip expenses which already have a category or creditor
+    Given I apply preset "ALBERT HEIJN" twice
+    Then I should be on the presets page
+    And I should see "Presets have been applied to 0 expenses"
+
   @javascript
   Scenario: Check all presets
     Given I check all presets

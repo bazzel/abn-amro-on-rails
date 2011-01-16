@@ -29,6 +29,14 @@ When /^I check (preset "[^"]*")$/ do |preset|
   When %{I check "preset_ids_#{preset.id}"}
 end
 
+Given /^I apply preset "([^"]*)" twice$/ do |preset|
+  2.times do
+    Given %{I check preset "#{preset}"}
+    And %{I press "Apply Presets"}
+  end
+end
+
+
 # Moved to additional_web_steps.rb
 # Given /^I check all presets$/ do
 #   When %{I check "toggle_all"}

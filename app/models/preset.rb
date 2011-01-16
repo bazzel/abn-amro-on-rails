@@ -38,7 +38,7 @@ class Preset < ActiveRecord::Base
 
     # Apply given presets to all expenses
     def apply_for(presets)
-      apply(presets, Expense.all)
+      apply(presets, Expense.blank)
     end
 
     # Apply given presets to given expenses

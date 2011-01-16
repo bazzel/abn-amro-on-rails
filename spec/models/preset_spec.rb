@@ -63,6 +63,7 @@ describe Preset do
       Factory(:preset, :keyphrase => 'KABISA B.V.') # 3
       Factory(:preset, :keyphrase => 'CZ') # 4
       Factory(:preset, :keyphrase => 'Not existing') # 0
+
     end
 
     it "returns number of applied presets" do
@@ -71,6 +72,11 @@ describe Preset do
 
     it "calls Expense.update_all every time a set of expenses are found" do
       Expense.should_receive(:update_all).exactly(3).times
+      Preset.apply_for(Preset.all)
+    end
+
+    it "applies presets only on expenses which do not have a category of creditor set" do
+      Expense.should_receive(:blank).and_return([])
       Preset.apply_for(Preset.all)
     end
 
