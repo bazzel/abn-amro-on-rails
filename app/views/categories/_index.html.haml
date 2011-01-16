@@ -9,8 +9,8 @@
     %th.credit Credit
     %th.total Total
     %th
-  = render @categories, :pass_through => @pass_through
+  = render categories, :pass_through => pass_through
 .action-bars
   -# A button will be placed in the near future?
   &nbsp;
-  = will_paginate @categories
+  = will_paginate categories
