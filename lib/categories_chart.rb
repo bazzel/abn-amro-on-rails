@@ -18,14 +18,14 @@ class CategoriesChart
   # Returns an array with an element for every month between
   # the beginning and end date formatted as '%b. %Y'
   # [
-  #   "Jan. 2010", "Feb. 2010", "Mar. 2010",
-  #   "Apr. 2010", "May. 2010", "Jun. 2010",
-  #   "Jul. 2010", "Aug. 2010", "Sep. 2010",
-  #   "Oct. 2010", "Nov. 2010", "Dec. 2010"
+  #   "01-10", "02-10", "03-10",
+  #   "04-10", "05-10", "06-10",
+  #   "07-10", "08-10", "09-10",
+  #   "10-10", "11-10", "12-10"
   # ]
   def x_axis_categories
     @x_axis_categories ||= begin
-      @x_axis_categories = x_values.map { |x| Date.parse(x).strftime("%b. %Y") }
+      @x_axis_categories = x_values.map { |x| Date.parse(x).strftime("%m-%y") }
     end
   end
 
@@ -63,11 +63,19 @@ class CategoriesChart
     def x_values
       @x_values ||= begin
         x_values = []
-        from.year.upto(to.year) do |year|
-          from.month.upto(to.month) do |month|
-            x_values << "#{year}-#{month}-1"
-          end
+
+        beginning_of_month = Date.new(from.year, from.month)
+
+        while beginning_of_month <= to
+          x_values << beginning_of_month.strftime("%Y-%m-%d")
+          beginning_of_month >>= 1
         end
+
+        # from.year.upto(to.year) do |year|
+        #   from.month.upto(to.month) do |month|
+        #     x_values << "#{year}-#{month}-1"
+        #   end
+        # end
 
         @x_values = x_values
       end
@@ -87,7 +95,7 @@ class CategoriesChart
     end
 
     def expenses_for_month(expenses, beginning_of_month)
-      expenses.select { |cat| cat.beginning_of_month == beginning_of_month }
+      expenses.select { |record| record.beginning_of_month == beginning_of_month }
     end
 
     def extract_amount(expenses, credit = true)
@@ -101,13 +109,11 @@ class CategoriesChart
     def grouped_expenses
       @grouped_expenses ||= begin
         sql = <<-SQL
-          SELECT CONCAT(YEAR(e.transaction_date), '-', MONTH(e.transaction_date), '-', 1) AS beginning_of_month,
-                 main_categories.name                                                     AS main_category,
-                 subcategories.name                                                       AS subcategory,
-                 SUM(IF(e.transaction_amount > 0, e.transaction_amount, 0))
-                 AS credit,
-                 SUM(IF(e.transaction_amount < 0, -e.transaction_amount, 0))
-                 AS debit
+          SELECT DATE_FORMAT(e.transaction_date, '%Y-%m-01')                  AS beginning_of_month,
+                 main_categories.name                                         AS main_category,
+                 subcategories.name                                           AS subcategory,
+                 SUM(IF(e.transaction_amount > 0, e.transaction_amount, 0))   AS credit,
+                 SUM(IF(e.transaction_amount < 0, -e.transaction_amount, 0))  AS debit
           FROM   expenses e
                  LEFT JOIN categories subcategories
                    ON e.category_id = subcategories.id
