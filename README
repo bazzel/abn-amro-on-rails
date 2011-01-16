@@ -15,6 +15,7 @@ In random order:
 * Remember page when in expense edit and adding object through sidebar first
 * Assign bankaccount to person
 * Filter categories (and it's expenses) by person
+* Assign preset to selected expenses manually
 * ignore multiple spaces in presets
 * use regex in presets?
 * Browse to next or previous expense

@@ -137,6 +137,7 @@ aside {
 }
 
 .table {
+  @include adjust-font-size-to(14px);
   border: none;
   .debit, .credit, .balance, .total {
     text-align: right;
