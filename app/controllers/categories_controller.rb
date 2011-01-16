@@ -29,7 +29,15 @@ class CategoriesController < ApplicationController
       # we redirect to the postback_url instead of the index view.
       redirect_to (params[:postback_url] || categories_path(options)), :notice => 'Category was successfully created'
     else
-      render :new
+      @preset = Preset.new
+
+      # Submitted from a form in the sidebar?
+      if @postback_url = params[:postback_url]
+        render :template => extract_template_from_url
+      else
+        @postback_url = new_category_path
+        render :new
+      end
     end
 
   end

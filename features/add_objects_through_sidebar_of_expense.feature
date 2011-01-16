@@ -35,22 +35,20 @@ Feature: Add category through sidebar
     When I go to the expenses page
     And I am on the expense edit page for "UW REKENING MET SALDO IS         ADMINISTRATIEF OVERGEHEVELD VAN  FORTIS BANK NEDERLAND NAAR       ABN AMRO BANK"
     And I press "Save" within "#new_preset"
-    Then I should be on the expense edit page for "UW REKENING MET SALDO IS         ADMINISTRATIEF OVERGEHEVELD VAN  FORTIS BANK NEDERLAND NAAR       ABN AMRO BANK"
-  And I should not see "There was a problem with your submission." within "#new_preset"
-  And I should see "This field is required. Please enter a value." within "#new_preset"
-  And I should not see "Cancel" within "#new_preset"
+    # Then I should be on the expense edit page for "UW REKENING MET SALDO IS         ADMINISTRATIEF OVERGEHEVELD VAN  FORTIS BANK NEDERLAND NAAR       ABN AMRO BANK" # No; edit is only rendered, not redirected to...
+    Then I should see "Edit Expense"
+    And I should not see "There was a problem with your submission." within "#new_preset"
+    And I should see "Expenses" highlighted in the menu
+    And I should see "This field is required. Please enter a value." within "#new_preset"
+    And I should not see "Cancel" within "#new_preset"
 
   Scenario: Render expense edit when submitting an invalid category
     And I've uploaded the file "TXT101121100433.TAB"
     When I go to the expenses page
     And I am on the expense edit page for "UW REKENING MET SALDO IS         ADMINISTRATIEF OVERGEHEVELD VAN  FORTIS BANK NEDERLAND NAAR       ABN AMRO BANK"
     And I press "Save" within "#new_category"
-    Then I should be on the expense edit page for "UW REKENING MET SALDO IS         ADMINISTRATIEF OVERGEHEVELD VAN  FORTIS BANK NEDERLAND NAAR       ABN AMRO BANK"
-  And I should not see "There was a problem with your submission." within "#new_category"
-  And I should see "This field is required. Please enter a value." within "#new_category"
-  And I should not see "Cancel" within "#new_preset"
-
-
-
-  # TODO:
-  # Write scenario and implement invalid category
+    Then I should see "Edit Expense"
+    And I should see "Expenses" highlighted in the menu
+    And I should not see "There was a problem with your submission." within "#new_category"
+    And I should see "This field is required. Please enter a value." within "#new_category"
+    And I should not see "Cancel" within "#new_preset"

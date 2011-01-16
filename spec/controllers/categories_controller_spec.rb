@@ -9,6 +9,7 @@ describe CategoriesController do
    Category.stub(:children).and_return(@categories)
    @categories.stub(:paginate).and_return(@categories)
    Category.stub(:find).and_return(@category)
+   @preset = mock_model(Preset)
   end
 
   describe "GET /categories/index" do
@@ -93,27 +94,100 @@ describe CategoriesController do
     end
 
     describe "success" do
-      it "should set the flash notice" do
-        do_post
-        flash[:notice].should eql('Category was successfully created')
+      describe "submitted from category view" do
+        it "should set the flash notice" do
+          do_post
+          flash[:notice].should eql('Category was successfully created')
+        end
+
+        it "should redirect to categories index" do
+          do_post
+          response.should redirect_to(categories_path(:roots => true))
+        end
       end
 
-      it "should redirect to categories index" do
-        do_post
-        response.should redirect_to(categories_path(:roots => true))
-      end
-
-      it "redirects to postback_url if given" do
-        do_post :postback_url => 'http://example.com'
-        response.should redirect_to('http://example.com')
+      describe "submitted from sidebar" do
+        it "redirects to postback_url if given" do
+          do_post :postback_url => 'http://example.com'
+          response.should redirect_to('http://example.com')
+        end
       end
     end
 
     describe "failure" do
-      it "should render new" do
+      before(:each) do
         @category.stub(:save).and_return(false)
-        do_post
-        response.should render_template('new')
+      end
+
+      describe "submitted from category view" do
+        it "should render new" do
+          do_post
+          response.should render_template('new')
+        end
+
+        it "assigns path to category new to postback_url" do
+          do_post
+          assigns[:postback_url].should eql(new_category_path)
+        end
+      end
+
+      describe "submitted from expense sidebar" do
+        before(:each) do
+          @bank_account = mock_model(BankAccount, :id => 1)
+          @expense = mock_model(Expense, :id => 100)
+          @postback_url = edit_bank_account_expense_path(@bank_account, @expense) #'/bank_accounts/1/expenses/664/edit'
+          Expense.stub(:find).and_return(@expense)
+          BankAccount.stub(:find).and_return(@bank_account)
+        end
+
+        it "finds expense with id extracted from referrer" do
+          Expense.should_receive(:find).with("100")
+          do_post :postback_url => @postback_url
+        end
+
+        it "finds bankaccount with id extracted from referrer" do
+          BankAccount.should_receive(:find).with("1")
+          do_post :postback_url => @postback_url
+        end
+
+        it "re-assigns postback_url" do
+          do_post :postback_url => @postback_url
+          assigns[:postback_url].should eql(@postback_url)
+        end
+
+        it "assigns new preset to the view" do
+          Preset.stub(:new).and_return(@preset)
+          do_post :postback_url => @postback_url
+          assigns[:preset].should eql(@preset)
+        end
+
+        it "renders template to a path extracted from postback_url" do
+          do_post :postback_url => @postback_url
+          response.should render_template('expenses/edit')
+        end
+      end
+
+      describe "submitted from preset sidebar" do
+        before(:each) do
+          @preset = mock_model(Preset, :id => 1)
+          @postback_url = edit_preset_path(@preset) #'/presets/1/edit'
+          Preset.stub(:find).and_return(@preset)
+        end
+
+        it "finds preset with id extracted from postback_url" do
+          Preset.should_receive(:find).with("1")
+          do_post :postback_url => @postback_url
+        end
+
+        it "re-assigns postback_url" do
+          do_post :postback_url => @postback_url
+          assigns[:postback_url].should eql(@postback_url)
+        end
+
+        it "renders template to a path extracted from postback_url" do
+          do_post :postback_url => @postback_url
+          response.should render_template('presets/edit')
+        end
       end
     end
   end

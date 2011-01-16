@@ -24,9 +24,15 @@ class PresetsController < ApplicationController
       # we redirect to the postback_url instead of the index view.
       redirect_to (params[:postback_url] || presets_path), :notice => 'Preset was successfully created'
     else
-      @postback_url = new_preset_path
       @category = Category.new
-      render :new
+
+      # Submitted from a form in the sidebar?
+      if @postback_url = params[:postback_url]
+        render :template => extract_template_from_url
+      else
+        @postback_url = new_preset_path
+        render :new
+      end
     end
   end
 
@@ -82,6 +88,4 @@ class PresetsController < ApplicationController
 
     redirect_to presets_path, response_status_and_flash
   end
-
-
 end

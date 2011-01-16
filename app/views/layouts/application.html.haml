@@ -9,12 +9,12 @@
         %h1{:role => 'banner'}= link_to "ABN AMRO on Rails", root_path
         %nav#main-navigation
           %ul
-            %li{:class => controller.controller_name == 'bank_accounts' && 'active' }= link_to "Bank Accounts", bank_accounts_path
-            %li{:class => controller.controller_name == 'expenses' && 'active' }= link_to "Expenses", expenses_path
-            %li{:class => controller.controller_name == 'categories' && 'active' }= link_to "Categories", categories_path(:roots => true)
-            %li{:class => controller.controller_name == 'creditors' && 'active' }= link_to "Creditors", creditors_path
-            %li{:class => controller.controller_name == 'presets' && 'active' }= link_to "Presets", presets_path
-            %li{:class => controller.controller_name == 'uploads' && 'active' }= link_to "Uploads", uploads_path
+            =li_active_unless(link_to("Bank Accounts", bank_accounts_path),           :controller => 'bank_accounts')
+            =li_active_unless(link_to("Expenses", expenses_path),                     :controller => 'expenses')
+            =li_active_unless(link_to("Categories", categories_path(:roots => true)), :controller => 'categories')
+            =li_active_unless(link_to("Creditors", creditors_path),                   :controller => 'creditors')
+            =li_active_unless(link_to("Presets", presets_path),                       :controller => 'presets')
+            =li_active_unless(link_to("Uploads", uploads_path),                       :controller => 'uploads')
 
       %section#content
         .block= yield

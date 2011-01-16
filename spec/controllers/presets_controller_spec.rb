@@ -97,19 +97,23 @@ describe PresetsController do
     end
 
     describe "success" do
-      it "should set the flash notice" do
-        do_post
-        flash[:notice].should eql('Preset was successfully created')
+      describe "submitted from preset view" do
+        it "should set the flash notice" do
+          do_post
+          flash[:notice].should eql('Preset was successfully created')
+        end
+
+        it "should redirect to presets index" do
+          do_post
+          response.should redirect_to(presets_path)
+        end
       end
 
-      it "should redirect to presets index" do
-        do_post
-        response.should redirect_to(presets_path)
-      end
-
-      it "redirects to postback_url if given" do
-        do_post :postback_url => 'http://example.com'
-        response.should redirect_to('http://example.com')
+      describe "submitted from sidebar" do
+        it "redirects to postback_url if given" do
+          do_post :postback_url => 'http://example.com'
+          response.should redirect_to('http://example.com')
+        end
       end
     end
 
@@ -118,22 +122,59 @@ describe PresetsController do
         @preset.stub(:save).and_return(false)
       end
 
-      it "should render new" do
-        do_post
-        response.should render_template('new')
+      describe "submitted from preset view" do
+        it "renders new" do
+          do_post
+          response.should render_template('new')
+        end
+
+        it "assigns path to preset new to postback_url" do
+          do_post
+          assigns[:postback_url].should eql(new_preset_path)
+        end
+
+        it "assigns new category to the view" do
+          Category.stub(:new).and_return(@category)
+          do_post
+          assigns[:category].should eql(@category)
+        end
       end
 
-      it "assigns path to preset new to postback_url" do
-        do_post
-        assigns[:postback_url].should eql(new_preset_path)
-      end
+      describe "submitted from expense sidebar" do
+        before(:each) do
+          @bank_account = mock_model(BankAccount, :id => 1)
+          @expense = mock_model(Expense, :id => 100)
+          @postback_url = edit_bank_account_expense_path(@bank_account, @expense) #'/bank_accounts/1/expenses/664/edit'
+          Expense.stub(:find).and_return(@expense)
+          BankAccount.stub(:find).and_return(@bank_account)
+        end
 
-      it "assigns new category to the view" do
-        Category.stub(:new).and_return(@category)
-        do_post
-        assigns[:category].should eql(@category)
-      end
+        it "finds expense with id extracted from postback_url" do
+          Expense.should_receive(:find).with("100")
+          do_post :postback_url => @postback_url
+        end
 
+        it "finds bankaccount with id extracted from postback_url" do
+          BankAccount.should_receive(:find).with("1")
+          do_post :postback_url => @postback_url
+        end
+
+        it "re-assigns postback_url" do
+          do_post :postback_url => @postback_url
+          assigns[:postback_url].should eql(@postback_url)
+        end
+
+        it "assigns new category to the view" do
+          Category.stub(:new).and_return(@category)
+          do_post :postback_url => @postback_url
+          assigns[:category].should eql(@category)
+        end
+
+        it "renders template to a path extracted from postback_url" do
+          do_post :postback_url => @postback_url
+          response.should render_template('expenses/edit')
+        end
+      end
     end
   end
 

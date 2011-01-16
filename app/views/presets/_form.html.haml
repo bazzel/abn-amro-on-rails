@@ -12,7 +12,7 @@
 = semantic_form_for(preset) do |f|
   = render "shared/error_messages", :target => preset
 
-  = postback_url_unless(:controller => 'presets')
+  = postback_url(:controller => 'presets')
 
   - pass_through.each do |k,v|
     = hidden_field_tag k, v
@@ -25,6 +25,6 @@
 
   = f.buttons do
     = f.commit_button
-    - if controller_name == 'presets'
+    - unless must_be_a_sidebar?(:controller => 'presets')
       -# No Cancel link if displayed in the sidebar.
       %li= link_to "Cancel", presets_path(pass_through)

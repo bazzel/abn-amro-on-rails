@@ -1,7 +1,7 @@
 = semantic_form_for(category) do |f|
   = render "shared/error_messages", :target => category
 
-  = postback_url_unless(:controller => 'categories')
+  = postback_url(:controller => 'categories')
 
   - pass_through.each do |k,v|
     = hidden_field_tag k, v
@@ -12,6 +12,6 @@
 
   = f.buttons do
     = f.commit_button
-    - if controller_name == 'categories'
+    - unless must_be_a_sidebar?(:controller => 'categories')
       -# No Cancel link if displayed in the sidebar.
       %li= link_to "Cancel", categories_path(pass_through)

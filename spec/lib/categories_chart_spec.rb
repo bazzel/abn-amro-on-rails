@@ -69,7 +69,7 @@ describe CategoriesChart do
         ]
 
       @categories_chart.stub(:grouped_expenses).and_return(grouped_expenses)
-      @categories_chart.y_axis_max.should eql(105.0)
+      @categories_chart.y_axis_max.should eql(120.0)
     end
 
     it "returns the highest value of credit multiplied by 1.05" do
@@ -81,7 +81,7 @@ describe CategoriesChart do
         ]
 
       @categories_chart.stub(:grouped_expenses).and_return(grouped_expenses)
-      @categories_chart.y_axis_max.should eql(105.0)
+      @categories_chart.y_axis_max.should eql(120.0)
     end
   end
 

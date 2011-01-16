@@ -25,6 +25,7 @@ Feature: Managing expenses
       | CZ   |
     When I go to the expenses page
     And I follow "Edit" for expense "UW REKENING MET SALDO IS         ADMINISTRATIEF OVERGEHEVELD VAN  FORTIS BANK NEDERLAND NAAR       ABN AMRO BANK"
+    And I should see "Expenses" highlighted in the menu
     And I select "CZ" from "Creditor"
     And I press "Save"
     Then I should be on the expenses page for "861887719"
