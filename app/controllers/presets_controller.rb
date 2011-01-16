@@ -1,4 +1,5 @@
 class PresetsController < ApplicationController
+  before_filter :find_preset, :only => [:edit, :update, :show, :destroy]
 
   # GET "presets/index"
   def index
@@ -38,15 +39,12 @@ class PresetsController < ApplicationController
 
   # GET "presets/1"
   def edit
-    @preset = Preset.find(params[:id])
     @postback_url = edit_preset_path(@preset)
     @category = Category.new
   end
 
   # PUT "presets/1"
   def update
-    @preset = Preset.find(params[:id])
-
     if @preset.update_attributes(params[:preset])
       redirect_to presets_path(@pass_through), :notice => 'Preset was successfully updated'
     else
@@ -60,8 +58,6 @@ class PresetsController < ApplicationController
   #
   # This will show a confirmation view for users who have javascript disabled.
   def show
-    @preset = Preset.find(params[:id])
-
     if params[:destroy]
       render :confirm_destroy and return
     end
@@ -69,7 +65,6 @@ class PresetsController < ApplicationController
 
   # DELETE "presets/1"
   def destroy
-    @preset = Preset.find(params[:id])
     @preset.destroy
     redirect_to presets_path(@pass_through), :notice => 'Preset was successfully destroyed'
   end
@@ -88,4 +83,9 @@ class PresetsController < ApplicationController
 
     redirect_to presets_path, response_status_and_flash
   end
+
+  private
+    def find_preset
+      @preset = Preset.find(params[:id])
+    end
 end
