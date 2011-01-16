@@ -31,15 +31,24 @@ module ApplicationHelper
     @postback_url && @postback_url !~ /#{options[:controller] || controller_name}/
   end
 
+  # Return content wrapped in a LI tag.
+  # If options contains a controller which
+  # matches the postback_url or the controller_name
+  # the class_name active is added to the LI.
   def li_active_unless(content, options = {})
-
+    # Extract last controller_name from route,
+    # >> bank_accounts/1/edit
+    # => bank_accounts
+    # >> bank_accounts/1/expenses/100/edit
+    # => expenses
     if params[:postback_url]
       path = URI::split(params[:postback_url])[5]
-      controller = path.split('/').delete_if{|e| e == "#{e.to_i}"}
-      controller = controller[-2]
+      controller = path.split('/').delete_if{|e| e == "#{e.to_i}"}[-2]
+    else
+      controller = controller_name
     end
 
-    if (controller && controller =~ /#{options[:controller]}/) || (!params[:postback_url] && controller_name =~ /#{options[:controller]}/)
+    if controller =~ /#{options[:controller]}/
       content_tag_options = {:class => 'active'}
     else
       content_tag_options = {}
