@@ -12,11 +12,11 @@
 Roadmap
 =======
 In random order:
+* Apply presets from presets index page only to 'empty' expenses
 * ignore multiple spaces in presets
 * use regex in presets?
 * Browse to next or previous expense
 * Apply preset during import
-* Apply presets from presets index page only to 'empty' expenses
 * Apply preset from edit preset page
 * Display at, pos, etc. icons for expense
 * Create filter for expenses:

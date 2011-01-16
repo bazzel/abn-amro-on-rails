@@ -31,6 +31,7 @@ describe Category do
 
   describe 'associations' do
     it { should have_many(:expenses, :dependent => :nullify) }
+    it { should have_many(:presets, :dependent => :destroy) }
   end
 
   describe "acts_as_tree" do

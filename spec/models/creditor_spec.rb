@@ -6,4 +6,8 @@ describe Creditor do
     it { Factory(:creditor); should validate_uniqueness_of(:name, :message => 'This name already exists. Please enter another one.')}
   end
 
+  describe 'associations' do
+    it { should have_many(:presets, :dependent => :destroy) }
+  end
+
 end

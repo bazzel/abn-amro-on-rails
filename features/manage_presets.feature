@@ -56,7 +56,7 @@ Feature: Manage presets
     Then I should be on the presets page
     And I should see "Preset was successfully created"
     And I should see the following creditors:
-      | keyphrase    | creditor | category |
+      | keyphrase   | creditor | category |
       | My Employer | Foo      | Salaris  |
 
   @javascript
@@ -70,7 +70,7 @@ Feature: Manage presets
     Then I should be on the presets page
     And I should see "Preset was successfully created"
     And I should see the following creditors:
-      | keyphrase    | creditor | category |
+      | keyphrase   | creditor | category |
       | My Employer | Baz      | Salaris  |
 
     Given I've uploaded the file "TXT101121100433.TAB"
@@ -168,3 +168,20 @@ Feature: Manage presets
     And I press "Save"
     And I should see a page link to "1"
     Then I should not see a page link to "2"
+
+  Scenario: Preset is destroyed when corresponding creditor is destroyed
+    When I go to the creditors page
+    And I follow "Destroy" for creditor "Foo"
+    And I go to the presets page
+    And I should not see the following presets:
+    | keyphrase    | creditor |
+    | ALBERT HEIJN | Foo      |
+
+  Scenario: Preset is destroyed when corresponding category is destroyed
+    When I go to the categories page
+    And I follow "Destroy" for category "Salaris"
+    And I go to the presets page
+    And I should not see the following presets:
+    | keyphrase               | creditor | category |
+    | ALBERT HEIJN            | Foo      | Salaris  |
+    | REAAL LEVENSVERZEKERING | Bar      | Salaris  |

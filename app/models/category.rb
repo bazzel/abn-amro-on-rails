@@ -7,6 +7,7 @@ class Category < ActiveRecord::Base
 
   # === Associations
   has_many :expenses, :dependent => :nullify
+  has_many :presets, :dependent => :destroy
 
   # === Scopes
   scope :children, where(['parent_id IS NOT ?', nil]).order(:name)
