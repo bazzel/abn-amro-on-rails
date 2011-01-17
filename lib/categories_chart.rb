@@ -41,9 +41,20 @@ class CategoriesChart
     account(true, roots)
   end
 
-  # returns the highest debit or credit value multiplied by 1.05
+  # returns the highest sum of debit or sum of credit value per beginning_of_month
   def y_axis_max
-    @y_axis_max ||= (grouped_expenses.map(&:credit) + grouped_expenses.map(&:debit)).max * 1.2
+    @y_axis_max ||= begin
+      # Use 0 as initial value for every new key.
+      credits = Hash.new{|h,k| h[k] = 0 }
+      debits = Hash.new{|h,k| h[k] = 0 }
+
+      grouped_expenses.each do |expense|
+        credits[expense.beginning_of_month] += expense.credit
+        debits[expense.beginning_of_month] += expense.debit
+      end
+
+      @y_axis_max = (credits.values + debits.values).max
+    end
   end
 
   private

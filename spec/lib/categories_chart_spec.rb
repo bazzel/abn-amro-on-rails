@@ -65,28 +65,28 @@ describe CategoriesChart do
   end
 
   describe ".y_axis_max" do
-    it "returns the highest value of debit multiplied by 1.05" do
+    it "returns the highest value of the sum of debit per beginning_of_month" do
       grouped_expenses = [
-        mock('a', :debit => 50, :credit => 100),
-        mock('b', :debit => 60, :credit => 90),
-        mock('c', :debit => 70, :credit => 80),
-        mock('d', :debit => 80, :credit => 70)
+        mock('a', :beginning_of_month => 'a', :debit => 50, :credit => 100),
+        mock('b', :beginning_of_month => 'b', :debit => 60, :credit => 90),
+        mock('c', :beginning_of_month => 'a', :debit => 70, :credit => 80),
+        mock('d', :beginning_of_month => 'd', :debit => 80, :credit => 70)
         ]
 
       @categories_chart.stub(:grouped_expenses).and_return(grouped_expenses)
-      @categories_chart.y_axis_max.should eql(120.0)
+      @categories_chart.y_axis_max.should eql(180)
     end
 
-    it "returns the highest value of credit multiplied by 1.05" do
+    it "returns the highest value of the sum of credit per beginning_of_month" do
       grouped_expenses = [
-        mock('a', :debit => 100, :credit => 50),
-        mock('b', :debit => 90, :credit => 60),
-        mock('c', :debit => 80, :credit => 70),
-        mock('d', :debit => 70, :credit => 80)
+        mock('a', :beginning_of_month => 'a', :debit => 100, :credit => 50),
+        mock('b', :beginning_of_month => 'b', :debit => 90, :credit => 60),
+        mock('c', :beginning_of_month => 'a', :debit => 80, :credit => 70),
+        mock('d', :beginning_of_month => 'd', :debit => 70, :credit => 80)
         ]
 
       @categories_chart.stub(:grouped_expenses).and_return(grouped_expenses)
-      @categories_chart.y_axis_max.should eql(120.0)
+      @categories_chart.y_axis_max.should eql(180)
     end
   end
 
