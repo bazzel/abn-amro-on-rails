@@ -1,6 +1,6 @@
 = tabs_for(:class => 'secondary-navigation') do |tab|
   - tab.create('table_container', 'Expenses') do
-    = render :partial => 'index', :locals => { :expenses => @expenses, :bank_account => @bank_account, :pass_through => @pass_through }, :layout => 'shared/block_content'
+    = render :partial => 'index', :locals => { :expenses => @expenses, :bank_account => @bank_account, :max_balance => @max_balance, :pass_through => @pass_through }, :layout => 'shared/block_content'
 
   = render :partial => 'expenses_tab', :locals => { :tab => tab, :bank_account => @bank_account }
   = render :partial => 'debits_and_credits_tabs', :locals => { :tab => tab, :categories_chart => @categories_chart }

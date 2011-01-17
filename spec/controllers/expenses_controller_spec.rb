@@ -9,6 +9,7 @@ describe ExpensesController do
     @expenses = [@expense]
     @expenses.stub(:includes).and_return(@expenses)
     @expenses.stub(:order).and_return(@expenses)
+    @expenses.stub(:max_balance).and_return(99)
     BankAccount.stub(:find).and_return(@bank_account)
     @bank_account.stub(:expenses).and_return(@expenses)
   end
@@ -84,9 +85,25 @@ describe ExpensesController do
       do_get :bank_account_id => 1
     end
 
+    it "includes category for performance improvement" do
+      @expenses.should_receive(:includes).with(:category).and_return(@expenses)
+      do_get :bank_account_id => 1
+    end
+
+    it "includes creditor for performance improvement" do
+      @expenses.should_receive(:includes).with(:creditor).and_return(@expenses)
+      do_get :bank_account_id => 1
+    end
+
     it "orders on created_at descending" do
       @expenses.should_receive(:order).with('expenses.transaction_date DESC').and_return(@expenses)
       do_get :bank_account_id => 1
+    end
+
+    it "assigns max_balance of all expenses of the current bank_account for the view" do
+      @expenses.should_receive(:max_balance).and_return(100)
+      do_get :bank_account_id => 1
+      assigns[:max_balance].should eql(100)
     end
 
     it "renders index" do

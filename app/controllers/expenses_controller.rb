@@ -4,7 +4,15 @@ class ExpensesController < ApplicationController
 
   # GET "/bank_accounts/1/expenses/index"s
   def index
-    @expenses = @bank_account.expenses.order('expenses.transaction_date DESC').includes(:bank_account)
+    @expenses = @bank_account.expenses
+      .order('expenses.transaction_date DESC')
+      .includes(:bank_account)    # performance improvement
+      .includes(:category)        # performance improvement
+      .includes(:creditor)        # performance improvement
+
+    # max_balance is used to determine the width of each green/red bar of the balance for every expense.
+    @max_balance = @expenses.max_balance
+
     @categories_chart = CategoriesChart.new(@bank_account)
 
     if params[:upload_id]

@@ -16,4 +16,4 @@
   %td.credit
     - if expense.transaction_amount.positive?
       = number_to_currency(expense.transaction_amount, :unit => '')
-  %td.balance= visual_amount(expense.balance, bank_account.expenses.max_balance)
+  %td.balance= visual_amount(expense.balance, max_balance)

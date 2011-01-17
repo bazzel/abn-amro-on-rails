@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110106192600) do
+ActiveRecord::Schema.define(:version => 20110117215607) do
 
   create_table "bank_accounts", :force => true do |t|
     t.string   "account_number"
@@ -61,6 +61,9 @@ ActiveRecord::Schema.define(:version => 20110106192600) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "presets", ["category_id"], :name => "index_presets_on_category_id"
+  add_index "presets", ["creditor_id"], :name => "index_presets_on_creditor_id"
 
   create_table "upload_details", :force => true do |t|
     t.string   "bankaccount"
