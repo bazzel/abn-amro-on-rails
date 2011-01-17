@@ -52,8 +52,7 @@ Feature: Managing expenses
     And the following creditors exist
       | name |
       | CZ   |
-    When I go to the expenses page
-    And I follow "Edit" for expense "UW REKENING MET SALDO IS         ADMINISTRATIEF OVERGEHEVELD VAN  FORTIS BANK NEDERLAND NAAR       ABN AMRO BANK"
+    And I am on the expense edit page for "UW REKENING MET SALDO IS         ADMINISTRATIEF OVERGEHEVELD VAN  FORTIS BANK NEDERLAND NAAR       ABN AMRO BANK"
     And I fill in "Creditor" with "C"
     And I select "CZ" from the autocomplete list
     And I press "Save"
@@ -66,8 +65,7 @@ Feature: Managing expenses
   @javascript
   Scenario: Add creditor to expense
     Given I've uploaded the file "TXT101121100433.TAB"
-    When I go to the expenses page
-    And I follow "Edit" for expense "UW REKENING MET SALDO IS         ADMINISTRATIEF OVERGEHEVELD VAN  FORTIS BANK NEDERLAND NAAR       ABN AMRO BANK"
+    And I am on the expense edit page for "UW REKENING MET SALDO IS         ADMINISTRATIEF OVERGEHEVELD VAN  FORTIS BANK NEDERLAND NAAR       ABN AMRO BANK"
     And I fill in "Creditor" with "CZ"
     And I press "Save"
     Then I should be on the expenses page for "861887719"
@@ -97,8 +95,7 @@ Feature: Managing expenses
     And the following categories
       | name    | parent  |
       | Salaris | Inkomen |
-    When I go to the expenses page
-    And I follow "Edit" for expense "UW REKENING MET SALDO IS         ADMINISTRATIEF OVERGEHEVELD VAN  FORTIS BANK NEDERLAND NAAR       ABN AMRO BANK"
+    And I am on the expense edit page for "UW REKENING MET SALDO IS         ADMINISTRATIEF OVERGEHEVELD VAN  FORTIS BANK NEDERLAND NAAR       ABN AMRO BANK"
     And I fill in "Category" with "S"
     And I select "Salaris" from the autocomplete list
     And I press "Save"

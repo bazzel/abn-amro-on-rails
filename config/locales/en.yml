@@ -10,6 +10,9 @@ en:
         separator: .
         precision: 2
         delimiter: ","
+  date:
+    formats:
+      middle_endian_forms: %m.%d.%y # See http://en.wikipedia.org/wiki/Calendar_date#Middle_endian_forms.2C_starting_with_the_month
   flash:
     uploads:
       created: "'%{file_name}' was successfully imported."

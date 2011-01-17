@@ -136,11 +136,23 @@ aside {
   }
 }
 
+.ui-tabs {
+  .content {
+    padding: 0 0 1em 0;
+  }
+}
+
 .table {
   @include adjust-font-size-to(14px);
   border: none;
   .debit, .credit, .balance, .total {
     text-align: right;
+  }
+  .row-actions {
+    //visibility: hidden;
+  }
+  tr:hover .row-actions {
+    //visibility: visible;
   }
   th {
     text-align: left;
@@ -157,9 +169,6 @@ aside {
     border-bottom: 1px solid;
     @include padding-leader(0.35);
     @include padding-trailer(0.2);
-    &:last-child {
-      text-align: right;
-    }
   }
 }
 
@@ -168,6 +177,11 @@ aside {
   margin-top: -1px;
   .actions {
     float: left;
+    input, a {
+      @include fancy-button-structure(12px);
+      @include fancy-button-colors(#E5E5E5, #DEDEDE);
+      @include serif-family;
+    }
   }
   .pagination {
     float: right;

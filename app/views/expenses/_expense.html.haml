@@ -1,11 +1,15 @@
 %tr[expense]{ :class => "#{cycle('odd', 'even')}"}
   %td= check_box_tag "expense_ids[]", expense.id, false, :id => "expense_ids_#{expense.id}"
-  %td= l(expense.transaction_date, :format => :default)
+  %td
+    = l(expense.transaction_date, :format => :middle_endian_forms)
+    .row-actions
+      = link_to('Edit', edit_bank_account_expense_path(bank_account, expense, pass_through))
   %td
     -# TODO: Create a helper for this:
     = expense.creditor.try(:name) || '-'
     %br/
     = expense.category.try(:name)
+  %td= expense.description
   %td.debit
     - if expense.transaction_amount.negative?
       = number_to_currency(expense.transaction_amount, :unit => '')
@@ -13,5 +17,3 @@
     - if expense.transaction_amount.positive?
       = number_to_currency(expense.transaction_amount, :unit => '')
   %td.balance= visual_amount(expense.balance, bank_account.expenses.max_balance)
-  %td
-    = link_to('Edit', edit_bank_account_expense_path(bank_account, expense, pass_through))

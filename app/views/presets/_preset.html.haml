@@ -1,10 +1,11 @@
 %tr[preset]{ :class => "#{cycle('odd', 'even')}"}
   %td= check_box_tag "preset_ids[]", preset.id, false, :id => "preset_ids_#{preset.id}"
-  %td= preset.keyphrase
+  %td
+    = preset.keyphrase
+    .row-actions
+      = link_to('Edit', edit_preset_path(preset, pass_through)) + " | "
+      = link_to 'Destroy', preset_path(preset, pass_through.merge(:destroy => true)), :confirm => 'Are you sure?', :method => :delete
   %td
     = preset.creditor.try(:name) || '-'
     %br/
     = preset.category.try(:name)
-  %td
-    = link_to('Edit', edit_preset_path(preset, pass_through)) + " | "
-    = link_to 'Destroy', preset_path(preset, pass_through.merge(:destroy => true)), :confirm => 'Are you sure?', :method => :delete

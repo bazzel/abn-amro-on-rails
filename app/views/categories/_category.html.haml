@@ -1,5 +1,9 @@
 %tr[category]{ :class => "#{cycle('odd', 'even')}"}
-  %td= category.name
+  %td
+    = category.name
+    .row-actions
+      = link_to('Edit', edit_category_path(category, pass_through)) + " | "
+      = link_to 'Destroy', category_path(category, pass_through.merge(:destroy => true)), :confirm => 'Are you sure?', :method => :delete
   - unless params[:roots]
     %td= category.parent.name
   %td.debit
@@ -11,7 +15,3 @@
   %td.total
     - unless category.total == 0
       = visual_amount(category.total, Category.max(params[:roots]))
-
-  %td
-    = link_to('Edit', edit_category_path(category, pass_through)) + " | "
-    = link_to 'Destroy', category_path(category, pass_through.merge(:destroy => true)), :confirm => 'Are you sure?', :method => :delete

@@ -1,5 +1,6 @@
 %tr[creditor]{ :class => "#{cycle('odd', 'even')}"}
-  %td= creditor.name
   %td
-    = link_to('Edit', edit_creditor_path(creditor, pass_through)) + " | "
-    = link_to 'Destroy', creditor_path(creditor, pass_through.merge(:destroy => true)), :confirm => 'Are you sure?', :method => :delete
+    = creditor.name
+    .row-actions
+      = link_to('Edit', edit_creditor_path(creditor, pass_through)) + " | "
+      = link_to 'Destroy', creditor_path(creditor, pass_through.merge(:destroy => true)), :confirm => 'Are you sure?', :method => :delete

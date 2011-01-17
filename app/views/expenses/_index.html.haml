@@ -6,11 +6,11 @@
     %table.table
       %tr
         %th= check_box_tag "toggle_all"
-        %th Transaction date
+        %th Date
         %th
           Creditor/Category
+        %th.description Description
         %th.debit Debit
         %th.credit Credit
         %th.balance Balance
-        %th
       = render expenses, :bank_account => bank_account, :pass_through => pass_through

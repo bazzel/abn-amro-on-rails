@@ -52,21 +52,21 @@ Feature: Manage uploads
     And I follow "Expenses" in the sidebar
     Then I should see the following expenses:
       | Transaction date | Debit   | Credit | Balance  |
-      | 2010-05-15       |         | 19.95  | 2,493.55 |
-      | 2010-05-16       | -115.00 |        | 2,378.55 |
-      | 2010-05-16       | -52.39  |        | 2,326.16 |
+      | 05.15.10         |         | 19.95  | 2,493.55 |
+      | 05.16.10         | -115.00 |        | 2,378.55 |
+      | 05.16.10         | -52.39  |        | 2,326.16 |
     And I should not see a link to "86.18.87.719" in the sidebar
     And I follow "80.82.57.226" in the sidebar
     Then I should see the following expenses:
       | Transaction date | Debit | Credit   | Balance   |
-      | 2010-05-26       |       | 5,000.00 | 73,007.45 |
-      | 2010-05-29       |       | 3,000.00 | 76,007.45 |
+      | 05.26.10         |       | 5,000.00 | 73,007.45 |
+      | 05.29.10         |       | 3,000.00 | 76,007.45 |
     And I should not see a link to "80.82.57.226" in the sidebar
     And I follow "84.55.93.013" in the sidebar
     Then I should see the following expenses:
       | Transaction date | Debit | Credit | Balance |
-      | 2010-06-09       |       | 65.00  | 351.21  |
-      | 2010-06-10       |       | 10.00  | 361.21  |
+      | 06.09.10         |       | 65.00  | 351.21  |
+      | 06.10.10         |       | 10.00  | 361.21  |
     And I should not see a link to "84.55.93.013" in the sidebar
 
   Scenario: Show only expenses for current upload
@@ -76,11 +76,11 @@ Feature: Manage uploads
     And I follow "Expenses" in the sidebar
     Then I should see the following expenses:
       | Transaction date | Debit   | Credit | Balance  |
-      | 2010-05-15       |         | 19.95  | 2,493.55 |
-      | 2010-05-16       | -115.00 |        | 2,378.55 |
-      | 2010-05-16       | -52.39  |        | 2,326.16 |
+      | 05.15.10         |         | 19.95  | 2,493.55 |
+      | 05.16.10         | -115.00 |        | 2,378.55 |
+      | 05.16.10         | -52.39  |        | 2,326.16 |
     And I should not see the following expenses:
       | Transaction date | Debit  |
-      | 2010-12-29       | -23.99 |
-      | 2010-12-30       | -27.55 |
-      | 2010-12-31       | -17.62 |
+      | 12.29.10         | -23.99 |
+      | 12.30.10         | -27.55 |
+      | 12.31.10         | -17.62 |

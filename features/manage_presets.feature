@@ -73,18 +73,6 @@ Feature: Manage presets
       | keyphrase   | creditor | category |
       | My Employer | Baz      | Salaris  |
 
-    Given I've uploaded the file "TXT101121100433.TAB"
-    When I go to the expenses page
-    And I follow "Edit" for expense "UW REKENING MET SALDO IS         ADMINISTRATIEF OVERGEHEVELD VAN  FORTIS BANK NEDERLAND NAAR       ABN AMRO BANK"
-    And I fill in "Creditor" with "CZ"
-    And I press "Save"
-    Then I should be on the expenses page for "861887719"
-    And I should see "Expense was successfully updated"
-    And I should see the following expenses:
-      | creditor |
-      | CZ       |
-
-
   Scenario: Cancelling creation of a preset
     When I go to the new preset page
     And I follow "Cancel"

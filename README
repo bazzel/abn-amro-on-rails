@@ -25,3 +25,7 @@ In random order:
 * Create filter for expenses:
   * 'empty' expenses
   * expenses from last week/month/...
+
+Bugs
+====
+Max y-value for categories chart doesn't seem to work for all scenario's
