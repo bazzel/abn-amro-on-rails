@@ -28,7 +28,7 @@ Then /^I should see "([^"]*)" highlighted in the menu$/ do |menu|
 end
 
 Then /^I should see "([^"]*)" highlighted in the submenu$/ do |menu|
-  within(:css, '.secondary-navigation li.active') do
+  within(:css, '.secondary-navigation li a.current') do
     page.should have_content(menu)
   end
 end

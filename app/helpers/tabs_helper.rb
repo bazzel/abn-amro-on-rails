@@ -29,13 +29,13 @@ module TabsHelper
     end
 
     def render
-      content_tag(:div, (render_tabs.html_safe + render_bodies.html_safe), { :id => :tabs }.merge(@options))
+      render_tabs.html_safe + render_bodies.html_safe
     end
 
     private #  ---------------------------------------------------------------------------
 
     def render_tabs
-      content_tag(:ul, render_headers.html_safe)
+      content_tag(:ul, render_headers.html_safe, @options)
     end
 
     def render_headers

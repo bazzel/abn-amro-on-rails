@@ -54,6 +54,9 @@ form.formtastic {
 aside {
   form.formtastic {
     @include adjust-font-size-to(12px);
+    input {
+      border-width: 1px;
+    }
     fieldset {
       > ol > li {
         margin-bottom: 0;

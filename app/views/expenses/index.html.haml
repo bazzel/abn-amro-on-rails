@@ -1,9 +1,12 @@
-= tabs_for(:class => 'secondary-navigation') do |tab|
-  - tab.create('table_container', 'Expenses') do
-    = render :partial => 'index', :locals => { :expenses => @expenses, :bank_account => @bank_account, :max_balance => @max_balance, :pass_through => @pass_through }, :layout => 'shared/block_content'
-
-  = render :partial => 'expenses_tab', :locals => { :tab => tab, :bank_account => @bank_account }
-  = render :partial => 'debits_and_credits_tabs', :locals => { :tab => tab, :categories_chart => @categories_chart }
+%ul.secondary-navigation.tabs
+  %li= link_to("Expenses", "#", :class => 'tab current')
+  %li= link_to("Chart", "#", :class => 'tab')
+  %li= link_to("Credit", "#", :class => 'tab')
+  %li= link_to("Debit", "http://www.nu.nl", :class => 'tab')
+.panes
+  = render :partial => 'index', :locals => { :expenses => @expenses, :bank_account => @bank_account, :max_balance => @max_balance, :pass_through => @pass_through }, :layout => 'shared/block_content'
+  = render :partial => 'expenses_tab', :locals => { :bank_account => @bank_account }
+  = render :partial => 'debits_and_credits_tabs', :locals => { :categories_chart => @categories_chart }
 
 - content_for :sidebar do
   .block
@@ -16,10 +19,3 @@
               = "#{bank_account}"
             - else
               = link_to("#{bank_account}", bank_account_expenses_path(bank_account, :upload_id => @upload))
-
-- content_for(:javascripts) do
-  :javascript
-    $(function () {
-      $("#tabs").tabs();
-      $("#tabs").removeClass('secondary-navigation');
-    });

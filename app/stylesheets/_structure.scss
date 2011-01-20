@@ -9,7 +9,7 @@ body {
     h1[role='banner'] {
       // span the full context:
       @include full; } }
-  #content {
+  #main {
     @include columns(9);
     @include alpha; }
   aside {
@@ -38,39 +38,37 @@ body {
   }
 }
 
-#content {
-  .secondary-navigation {
-    ul {
-      background: #F4F4F4;
-      @include border-top-left-radius(4px);
-      @include border-top-right-radius(4px);
-      @include horizontal-list;
-      li {
-        a {
-          text-decoration: none;
-          display: block;
-          @include leader(0.35);
-          @include trailer(0.2);
-          color: #111;
-          padding: {
-            left: 1em;
-            right: 1em;
-          }
+#main {
+  ul.secondary-navigation {
+    background: #F4F4F4;
+    @include border-top-left-radius(4px);
+    @include border-top-right-radius(4px);
+    @include horizontal-list;
+    li {
+      a {
+        text-decoration: none;
+        display: block;
+        @include padding-leader(0.35);
+        @include padding-trailer(0.2);
+        color: #111;
+        padding: {
+          left: 1em;
+          right: 1em;
         }
-        &:first-child {
-          // Ensure we still have a rounded left-corner when hovering:
-          @include border-top-left-radius(4px);
-        }
-        &.active, &.active:hover {
-          background: white;
-        }
-        &:hover {
-          background: #F4F4F4;
-        }
+      &.current, &.current:hover {
+        background: white;
       }
-      border: {
-        bottom: solid 12px;
+      &:hover {
+        background: #F4F4F4;
       }
+      }
+      &:first-child {
+        // Ensure we still have a rounded left-corner when hovering:
+        @include border-top-left-radius(4px);
+      }
+    }
+    border: {
+      bottom: solid 12px;
     }
   }
 }
@@ -128,8 +126,10 @@ aside {
 }
 
 .block {
+  @include trailer(1); 
   .content {
     padding: 1em;
+    background: white;
     h2 {
       @include adjust-font-size-to(22px);
       @include trailer(0.5, 22px);
@@ -174,10 +174,11 @@ aside {
 }
 
 .action-bars {
+  @include container;
   border-top: 1px solid white;
   margin-top: -1px;
   .actions {
-    float: left;
+    @include float-left;
     input, a {
       @include fancy-button-structure(12px);
       @include fancy-button-colors(#E5E5E5, #DEDEDE);
@@ -185,6 +186,6 @@ aside {
     }
   }
   .pagination {
-    float: right;
+    @include float-right;
   }
 }

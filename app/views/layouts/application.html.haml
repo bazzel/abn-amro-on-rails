@@ -15,7 +15,7 @@
             =li_active_unless(link_to("Presets", presets_path),                       :controller => 'presets')
             =li_active_unless(link_to("Uploads", uploads_path),                       :controller => 'uploads')
 
-      %section#content
+      %section#main
         .block= yield
 
       %aside= yield(:sidebar)

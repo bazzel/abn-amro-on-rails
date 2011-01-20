@@ -1,6 +1,6 @@
-= tabs_for(:class => 'secondary-navigation') do |tab|
-  - tab.create(bank_account_expenses_path(@bank_account, @pass_through), '« Back') do
-    = render :partial => 'expenses/edit', :locals => { :expense => @expense, :bank_account => @bank_account, :pass_through => @pass_through }, :layout => 'shared/block_content'
+%ul.secondary-navigation
+  %li= link_to("« Back", bank_account_expenses_path(@bank_account, @pass_through))
+= render :partial => 'expenses/edit', :locals => { :expense => @expense, :bank_account => @bank_account, :pass_through => @pass_through }, :layout => 'shared/block_content'
 
 - content_for :sidebar do
   .block

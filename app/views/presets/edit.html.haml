@@ -1,7 +1,7 @@
-= tabs_for(:class => 'secondary-navigation') do |tab|
-  - tab.create(presets_path(@pass_through), '« Back')
-  - tab.create(new_preset_path, 'New Preset') do
-    = render :partial => 'presets/edit', :locals => { :preset => @preset, :pass_through => @pass_through }, :layout => 'shared/block_content'
+%ul.secondary-navigation
+  %li= link_to("« Back", presets_path(@pass_through))
+  %li= link_to("New Preset", new_preset_path)
+= render :partial => 'presets/edit', :locals => { :preset => @preset, :pass_through => @pass_through }, :layout => 'shared/block_content'
 
 - content_for :sidebar do
   .block

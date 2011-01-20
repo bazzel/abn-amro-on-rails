@@ -18,7 +18,14 @@ function hoverRowActions() {
   });
 };
 
+function tabs() {
+  $('.tabs').tabs('.panes > div', {
+    tabs: 'a.tab'
+  });
+}
+
 jQuery(function($) {
   toggleAll();
   hoverRowActions();
+  tabs();
 });

@@ -1,5 +1,5 @@
-= tabs_for(:class => 'secondary-navigation') do |tab|
-  - tab.create(new_category_path(@pass_through), 'New Category')
-  - tab.create(categories_path(:roots => true), 'Main Categories', :item_html => { :class => params[:roots] && 'active'})
-  - tab.create(categories_path, 'Subcategories', :item_html => { :class => !params[:roots] && 'active'}) do
-    = render :partial => 'index', :locals => { :categories => @categories, :pass_through => @pass_through }, :layout => 'shared/block_content'
+%ul.secondary-navigation
+  %li= link_to("New Category", new_category_path(@pass_through))
+  %li= link_to("Main Categories", categories_path(:roots => true), :class => params[:roots] && 'current')
+  %li= link_to("Subcategories", categories_path, :class => !params[:roots] && 'current')
+= render :partial => 'index', :locals => { :categories => @categories, :pass_through => @pass_through }, :layout => 'shared/block_content'

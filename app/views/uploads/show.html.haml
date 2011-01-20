@@ -1,18 +1,6 @@
-= tabs_for(:class => 'secondary-navigation') do |tab|
-  - tab.create(new_upload_path, 'New Upload') do
-    .content
-      %h2 Add a new Upload
-      = render :partial => 'layouts/flashes'
-      %p
-        %b File name:
-        = @upload.tab.original_filename
-      %p
-        %b Downloaded at:
-        = l(@upload.downloaded_at, :format => :long)
-
-      %p
-        %b Upload details count:
-        = @upload.upload_details.count
+%ul.secondary-navigation
+  %li= link_to("New Upload", new_upload_path)
+= render :partial => 'show', :locals => { :upload => @upload }, :layout => 'shared/block_content'
 
 - content_for :sidebar do
   .block

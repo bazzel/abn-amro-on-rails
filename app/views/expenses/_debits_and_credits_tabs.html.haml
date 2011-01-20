@@ -1,22 +1,20 @@
-- tab.create('credits_chart_container', 'Credit') do
-  .content
-    %h2 Chart
-    .switch_categories
-      = link_to "x"
-    .categories_container{:'data-label' => 'Main Categories'}
-      #main_categories_credits_chart
-    .categories_container{:'data-label' => 'Subcategories'}
-      #subcategories_credits_chart
+.content
+  %h2 Chart
+  .switch_categories
+    = link_to "x"
+  .categories_container{:'data-label' => 'Main Categories'}
+    #main_categories_credits_chart
+  .categories_container{:'data-label' => 'Subcategories'}
+    #subcategories_credits_chart
 
-- tab.create('debits_chart_container', 'Debit') do
-  .content
-    %h2 Chart
-    .switch_categories
-      = link_to "x"
-    .categories_container{:'data-label' => 'Main Categories'}
-      #main_categories_debits_chart
-    .categories_container{:'data-label' => 'Subcategories'}
-      #subcategories_debits_chart
+.content
+  %h2 Chart
+  .switch_categories
+    = link_to "x"
+  .categories_container{:'data-label' => 'Main Categories'}
+    #main_categories_debits_chart
+  .categories_container{:'data-label' => 'Subcategories'}
+    #subcategories_debits_chart
 
 - content_for(:javascripts) do
   :javascript
