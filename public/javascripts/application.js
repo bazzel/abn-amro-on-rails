@@ -5,19 +5,8 @@ function toggleAll() {
   });
 };
 
-// Displays action links in table tows when hovering over them.
-function hoverRowActions() {
-  // var rowActions = $('.row-actions').hide();
-  var rowActions = $('.row-actions').css({visibility: "hidden"});
-  
-  rowActions.closest('tr').hover(function() {
-    $(this).find('.row-actions').css({visibility: "visible"});
-  },
-  function() {
-    $(this).find('.row-actions').css({visibility: "hidden"})
-  });
-};
-
+// Apply jQuery Tools tabs.
+// http://flowplayer.org/tools.
 function tabs() {
   $('.tabs').tabs('.panes > div', {
     tabs: 'a.tab'
@@ -26,6 +15,5 @@ function tabs() {
 
 jQuery(function($) {
   toggleAll();
-  hoverRowActions();
   tabs();
 });
