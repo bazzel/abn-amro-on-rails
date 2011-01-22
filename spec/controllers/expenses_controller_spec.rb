@@ -9,6 +9,7 @@ describe ExpensesController do
     @expenses = [@expense]
     @expenses.stub(:includes).and_return(@expenses)
     @expenses.stub(:order).and_return(@expenses)
+    @expenses.stub(:search).and_return(@expenses)
     @expenses.stub(:max_balance).and_return(99)
     BankAccount.stub(:find).and_return(@bank_account)
     @bank_account.stub(:expenses).and_return(@expenses)
@@ -120,6 +121,11 @@ describe ExpensesController do
       CategoriesChart.should_receive(:new).and_return(@categories_chart)
       do_get :bank_account_id => 1
       assigns[:categories_chart].should eql(@categories_chart)
+    end
+
+    it "search the expenses" do
+      @expenses.should_receive(:search).with(hash_including(:description_like => "bar"))
+      do_get :bank_account_id => 1, :search => {:description_like => "bar"}
     end
 
   end

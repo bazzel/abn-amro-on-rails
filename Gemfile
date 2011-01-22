@@ -10,6 +10,7 @@ gem 'fancy-buttons',        '~>1.0.4' # Easily style buttons with beautiful CSS3
 gem 'formtastic',           '~>1.2.3'
 gem 'haml',                 '~>3.0.24'
 gem 'jquery-rails',         '~>0.2.6'
+gem 'meta_search',          '~>1.0.1'
 gem 'mysql2',               '~>0.2.6'
 gem 'paperclip',            '~>2.3.5' # Easy upload management for ActiveRecord
 gem 'rails',                '~>3.0.3'

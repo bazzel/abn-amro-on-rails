@@ -4,11 +4,14 @@ class ExpensesController < ApplicationController
 
   # GET "/bank_accounts/1/expenses/index"s
   def index
+    params[:search] ||= {}
     @expenses = @bank_account.expenses
+    @search = @expenses
       .order('expenses.transaction_date DESC')
       .includes(:bank_account)    # performance improvement
       .includes(:category)        # performance improvement
       .includes(:creditor)        # performance improvement
+      .search(params[:search])
 
     # max_balance is used to determine the width of each green/red bar of the balance for every expense.
     @max_balance = @expenses.max_balance
@@ -17,12 +20,14 @@ class ExpensesController < ApplicationController
 
     if params[:upload_id]
       @bank_accounts = @upload.bank_accounts
-      @expenses = @expenses.joins(:upload_detail).where('upload_id = ?', params[:upload_id])
+      @expenses = @search.joins(:upload_detail)
+        .where('upload_id = ?', params[:upload_id])
+        .paginate(:page => params[:page], :per_page => 25)
     else
       @bank_accounts = BankAccount.all
+      @expenses = @search.paginate :page => params[:page], :per_page => 25
     end
 
-    @expenses = @expenses.paginate :page => params[:page], :per_page => 25
   end
 
   # GET "/bank_accounts/1/expenses/100/edit"

@@ -127,12 +127,36 @@ aside {
 
 .block {
   @include trailer(1); 
+  position: relative;
   .content {
     padding: 1em;
     background: white;
     h2 {
       @include adjust-font-size-to(22px);
       @include trailer(0.5, 22px);
+    }
+  }
+}
+
+.search {
+  position: absolute;
+  @include adjust-font-size-to(11px);
+  padding-top: 6px;
+  padding-right: 6px;
+  top: 0px;
+  right: 0px;
+  p {
+    input[type="search"] {
+      width: 180px;
+      border: 1px solid;
+      padding-left: 16px;
+      background: {
+        image: url('/images/icons/magnifier-medium-left.png');
+        position: 1px center;
+        repeat: no-repeat;
+        color: white;
+      }
+
     }
   }
 }
