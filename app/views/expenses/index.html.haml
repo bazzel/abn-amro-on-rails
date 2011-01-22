@@ -7,7 +7,7 @@
   = render :partial => 'index', :locals => { :expenses => @expenses, :bank_account => @bank_account, :max_balance => @max_balance, :pass_through => @pass_through }, :layout => 'shared/block_content'
   = render :partial => 'expenses_tab', :locals => { :bank_account => @bank_account }
   = render :partial => 'debits_and_credits_tabs', :locals => { :categories_chart => @categories_chart }
-= form_for @search, :url => bank_account_expenses_path(@bank_account), :html => {:class => "search"} do |f|
+= form_for @search, :url => bank_account_expenses_path(@bank_account, :upload_id => @upload), :html => {:class => "search"} do |f|
   %p
     = f.search_field :description_like, :placeholder => "Search..."
     = f.submit "Search"
