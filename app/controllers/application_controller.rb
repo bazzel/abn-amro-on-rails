@@ -5,7 +5,8 @@ class ApplicationController < ActionController::Base
 
   private
     def pass_through_params
-      @pass_through = params.slice(:page, :roots)
+      # Include only the given keys.
+      @pass_through = params.slice(:page, :roots, :search)
     end
 
     # Strips ids from postback_url,

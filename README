@@ -12,11 +12,9 @@
 Roadmap
 =======
 In random order:
-* Filter expenses on category- and creditorname
 * Apply filter to chart
-* Higlight search results
+* Highlight search results
 * Use GMail like pagination
-* Remember page when in expense edit and adding object through sidebar first
 * Assign bankaccount to person
 * Filter categories (and it's expenses) by person, bank_account, period
 * Assign preset to selected expenses manually
@@ -32,3 +30,5 @@ In random order:
 
 Bugs
 ====
+* Remember page when in expense edit and adding object through sidebar first
+* Remember Search string (and page) after applying presets on expenses page
