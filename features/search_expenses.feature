@@ -21,7 +21,6 @@ Scenario: Remember search criteria after returning from edit page
   And I search for "Kabisa"
   And I follow "Edit" for expense "12.27.28.793 KABISA B.V.        DECLARATIE EXTRA REISKOSTEN      SEPTEMBER 2010"
   And I follow "Cancel"
-  Then show me the page
   And I should see the following expenses:
     | description |
     | KABISA      |
