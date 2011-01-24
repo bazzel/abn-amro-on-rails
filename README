@@ -32,3 +32,4 @@ Bugs
 ====
 * Remember page when in expense edit and adding object through sidebar first
 * Remember Search string (and page) after applying presets on expenses page
+* Search on expenses, edit then save seems to break the commit

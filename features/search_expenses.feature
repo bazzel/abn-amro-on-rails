@@ -15,7 +15,7 @@ Feature: Search expenses
       | description |
       | Nettorama   |
 
-Scenario: Remember search criteria after returning from edit page
+Scenario: Remember search criteria after cancelling edit page
   Given I've uploaded the file "TXT101121100433.TAB"
   When I go to the expenses page for "861887719"
   And I search for "Kabisa"
@@ -27,6 +27,19 @@ Scenario: Remember search criteria after returning from edit page
   But I should not see the following expenses:
     | description |
     | Nettorama   |
+
+  Scenario: Remember search criteria after submitting edit page
+    Given I've uploaded the file "TXT101121100433.TAB"
+    When I go to the expenses page for "861887719"
+    And I search for "Kabisa"
+    And I follow "Edit" for expense "12.27.28.793 KABISA B.V.        DECLARATIE EXTRA REISKOSTEN      SEPTEMBER 2010"
+    And I press "Save"
+    And I should see the following expenses:
+      | description |
+      | KABISA      |
+    But I should not see the following expenses:
+      | description |
+      | Nettorama   |
 
   Scenario: Pagination after search
     Given I've uploaded the file "TXT101121100433.TAB"

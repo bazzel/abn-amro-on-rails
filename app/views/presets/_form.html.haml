@@ -13,9 +13,7 @@
   = render "shared/error_messages", :target => preset
 
   = postback_url(:controller => 'presets')
-
-  - pass_through.each do |k,v|
-    = hidden_field_tag k, v
+  = hash_as_hidden_fields(pass_through)
 
   = f.inputs do
     = f.input :keyphrase

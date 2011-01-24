@@ -2,9 +2,7 @@
   = render "shared/error_messages", :target => category
 
   = postback_url(:controller => 'categories')
-
-  - pass_through.each do |k,v|
-    = hidden_field_tag k, v
+  = hash_as_hidden_fields(pass_through)
 
   = f.inputs do
     = f.input :name
