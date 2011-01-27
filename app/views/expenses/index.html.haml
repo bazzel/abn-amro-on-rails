@@ -23,3 +23,31 @@
               = "#{bank_account}"
             - else
               = link_to("#{bank_account}", bank_account_expenses_path(bank_account, :upload_id => @upload))
+
+  .block
+    %h3 Filter
+    .content
+      = semantic_form_for @search, :url => bank_account_expenses_path(@bank_account, :upload_id => @upload) do |f|
+        = f.inputs do
+          %li.check_boxes
+            %fieldset
+              %legend.label
+                %label Creditor
+              %ol
+                - f.collection_checks :creditor_id_in, Creditor.checked_first(@search.creditor_id_in), :id, :name do |check|
+                  %li
+                    = check.box
+                    = check.label
+          %li.check_boxes
+            %fieldset
+              %legend.label
+                %label Category 
+              %ol
+                - f.collection_checks :category_parent_id_in, Category.roots, :id, :name do |check|
+                  %li
+                    = check.box
+                    = check.label
+          -#= f.input :creditor_id_in, :collection => Creditor.checked_first(@search.creditor_id_in), :as => :check_boxes, :required => false
+          -#= f.input :category_parent_id_in, :collection => Category.roots, :as => :check_boxes
+        = f.buttons do
+          = f.commit_button "Search"

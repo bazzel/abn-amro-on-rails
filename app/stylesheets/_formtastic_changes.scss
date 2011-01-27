@@ -53,10 +53,10 @@ form.formtastic {
 
 aside {
   form.formtastic {
+    position: static;
     @include adjust-font-size-to(12px);
     input {
-      border-width: 1px;
-    }
+      border-width: 1px; }
     fieldset {
       > ol > li {
         margin-bottom: 0;
@@ -68,17 +68,23 @@ aside {
           width: 100%; }
         p {
           &.inline-errors {
-            margin: 0;
-          }
-        }
-      }
+            margin: 0; } }
+        fieldset {
+          legend {
+            position: static;
+            &.label {
+              label {
+                position: static; } } }
+          ol {
+            overflow: auto;
+            height: 120px;
+            width: 100%;
+            padding-left: 0; 
+            li {
+              label {
+                display: inline; } } } } }
       &.buttons {
         padding-left: 0;
         input, a {
           @include fancy-button-structure(12px);
-          @include fancy-button-colors(#E5E5E5, #DEDEDE);
-        }
-      }
-    }
-  }
-}
+          @include fancy-button-colors(#E5E5E5, #DEDEDE); } } } } }

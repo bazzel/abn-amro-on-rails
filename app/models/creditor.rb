@@ -8,4 +8,10 @@ class Creditor < ActiveRecord::Base
   # === Associations
   has_many :presets, :dependent => :destroy
 
+  def self.checked_first(checked)
+    return all unless checked
+    checked_creditors = all.select {|c| checked.include?(c.id)}
+
+    (checked_creditors + all).uniq
+  end
 end
