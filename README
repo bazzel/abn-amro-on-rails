@@ -32,4 +32,10 @@ Bugs
 ====
 * Remember page when in expense edit and adding object through sidebar first
 * Remember Search string (and page) after applying presets on expenses page
-* Search on expenses, edit then save seems to break the commit
+
+Deployment
+==========
+Stuff to sort out:
+* How to use/combine rvm, bundler, capistrano, nginx, Amazon S3, passenger
+* Backup db to Amazon S3
+* Save attachments to S3
