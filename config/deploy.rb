@@ -18,12 +18,12 @@ default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
 set :deploy_to, "/var/www/abn-amro-on-rails"
 set :deploy_via, :remote_cache
-set :user, "passenger"
+set :user, "root"
 set :use_sudo, false
 
 # repo details
 set :scm, :git
-set :scm_username, "passenger"
+set :scm_username, "root"
 set :repository, "git@github.com:bazzel/abn-amro-on-rails.git"
 set :branch, "master"
 set :git_enable_submodules, 1
