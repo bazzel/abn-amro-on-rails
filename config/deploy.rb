@@ -9,9 +9,9 @@ require 'bundler/capistrano'
 
 # main details
 set :application, "abn-amro-on-rails"
-role :web, "abn-amro-on-rails"
-role :app, "abn-amro-on-rails"
-role :db,  "abn-amro-on-rails", :primary => true
+role :web, "patrick.kabisa.nl"
+role :app, "patrick.kabisa.nl"
+role :db,  "patrick.kabisa.nl", :primary => true
 
 # server details
 default_run_options[:pty] = true
