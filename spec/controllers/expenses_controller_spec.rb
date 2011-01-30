@@ -25,109 +25,129 @@ describe ExpensesController do
       get :index, params
     end
 
-    describe "no bank_account_id" do
-      it "find first bank account and assigns it for the view" do
-        BankAccount.should_receive(:first).and_return(@bank_account)
-        do_get
-      end
-    end
-
-    describe "upload_id" do
+    describe "no bank accounts" do
       before(:each) do
-        Upload.stub(:find).with(1).and_return(@upload)
-        @upload.stub(:bank_accounts).and_return(@bank_accounts)
-        @expenses.stub(:joins).and_return(@expenses)
-        @expenses.stub(:where).and_return(@expenses)
+        @bank_account = nil
+        BankAccount.stub(:find).and_return(@bank_account)
       end
 
-      it "finds first bank_account object for given upload_id and assigns it for the view" do
-        Upload.should_receive(:find).with(1).and_return(@upload)
-        @upload.should_receive(:bank_accounts).at_least(:once).and_return(@bank_accounts)
-        @bank_accounts.should_receive(:first).and_return(@bank_account)
-
-        do_get :upload_id => 1
+      it "does not assign a bank account" do
+        do_get
+        assigns[:bank_account].should be_nil
       end
 
-      it "gets the bank_accounts of the uploaded file and assigns them for the view" do
-        @upload.should_receive(:bank_accounts).at_least(:once).and_return(@bank_accounts)
-        do_get :upload_id => 1
-        assigns[:bank_accounts].should eql(@bank_accounts)
+      it "does not get expenses for bank account" do
+        do_get
+        assigns[:expenses].should be_nil
       end
-
-      it "filters the expenses on upload_id so only expenses for the uploaded file are returned" do
-        @expenses.should_receive(:joins).with(:upload_detail).and_return(@expenses)
-        @expenses.should_receive(:where).with('upload_id = ?', 1).and_return(@expenses)
-        do_get :upload_id => 1
-      end
+        
     end
 
-    describe "no upload_id" do
-      it "gets all the bank_accounts and assigns them for the view" do
-        BankAccount.should_receive(:all).and_return(@bank_accounts)
+    describe "one or more bank accounts" do
+
+      describe "no bank_account_id" do
+        it "find first bank account and assigns it for the view" do
+          BankAccount.should_receive(:first).and_return(@bank_account)
+          do_get
+        end
+      end
+
+      describe "upload_id" do
+        before(:each) do
+          Upload.stub(:find).with(1).and_return(@upload)
+          @upload.stub(:bank_accounts).and_return(@bank_accounts)
+          @expenses.stub(:joins).and_return(@expenses)
+          @expenses.stub(:where).and_return(@expenses)
+        end
+
+        it "finds first bank_account object for given upload_id and assigns it for the view" do
+          Upload.should_receive(:find).with(1).and_return(@upload)
+          @upload.should_receive(:bank_accounts).at_least(:once).and_return(@bank_accounts)
+          @bank_accounts.should_receive(:first).and_return(@bank_account)
+
+          do_get :upload_id => 1
+        end
+
+        it "gets the bank_accounts of the uploaded file and assigns them for the view" do
+          @upload.should_receive(:bank_accounts).at_least(:once).and_return(@bank_accounts)
+          do_get :upload_id => 1
+          assigns[:bank_accounts].should eql(@bank_accounts)
+        end
+
+        it "filters the expenses on upload_id so only expenses for the uploaded file are returned" do
+          @expenses.should_receive(:joins).with(:upload_detail).and_return(@expenses)
+          @expenses.should_receive(:where).with('upload_id = ?', 1).and_return(@expenses)
+          do_get :upload_id => 1
+        end
+      end
+
+      describe "no upload_id" do
+        it "gets all the bank_accounts and assigns them for the view" do
+          BankAccount.should_receive(:all).and_return(@bank_accounts)
+          do_get :bank_account_id => 1
+          assigns[:bank_accounts].should eql(@bank_accounts)
+        end
+
+        it "assigns the expenses for the view" do
+          @bank_account.should_receive(:expenses).and_return(@expenses)
+          do_get :bank_account_id => 1
+          assigns[:expenses].should eql(@expenses)
+        end
+      end
+
+      it "finds the bank_account object for the given bank_account_id and assigns it for the view" do
+        BankAccount.should_receive(:find).with(1).and_return(@bank_account)
         do_get :bank_account_id => 1
-        assigns[:bank_accounts].should eql(@bank_accounts)
+        assigns[:bank_account].should eql(@bank_account)
       end
 
-      it "assigns the expenses for the view" do
-        @bank_account.should_receive(:expenses).and_return(@expenses)
+      it "includes bank_account for performance improvement" do
+        @expenses.should_receive(:includes).with(:bank_account).and_return(@expenses)
         do_get :bank_account_id => 1
-        assigns[:expenses].should eql(@expenses)
+      end
+
+      it "includes category for performance improvement" do
+        @expenses.should_receive(:includes).with(:category).and_return(@expenses)
+        do_get :bank_account_id => 1
+      end
+
+      it "includes creditor for performance improvement" do
+        @expenses.should_receive(:includes).with(:creditor).and_return(@expenses)
+        do_get :bank_account_id => 1
+      end
+
+      it "orders on created_at descending" do
+        @expenses.should_receive(:order).with('expenses.transaction_date DESC').and_return(@expenses)
+        do_get :bank_account_id => 1
+      end
+
+      it "assigns max_balance of all expenses of the current bank_account for the view" do
+        @expenses.should_receive(:max_balance).and_return(100)
+        do_get :bank_account_id => 1
+        assigns[:max_balance].should eql(100)
+      end
+
+      it "renders index" do
+        do_get :bank_account_id => 1
+        response.should render_template('index')
+      end
+
+      it "paginates the expenses" do
+        @expenses.should_receive(:paginate).with(hash_including(:page, :per_page))
+        do_get :bank_account_id => 1
+      end
+
+      it "instantiates a new CategoriesChart object and assigns it to the view" do
+        CategoriesChart.should_receive(:new).and_return(@categories_chart)
+        do_get :bank_account_id => 1
+        assigns[:categories_chart].should eql(@categories_chart)
+      end
+
+      it "search the expenses" do
+        @expenses.should_receive(:search).with(hash_including(:description_like => "bar"))
+        do_get :bank_account_id => 1, :search => {:description_like => "bar"}
       end
     end
-
-    it "finds the bank_account object for the given bank_account_id and assigns it for the view" do
-      BankAccount.should_receive(:find).with(1).and_return(@bank_account)
-      do_get :bank_account_id => 1
-      assigns[:bank_account].should eql(@bank_account)
-    end
-
-    it "includes bank_account for performance improvement" do
-      @expenses.should_receive(:includes).with(:bank_account).and_return(@expenses)
-      do_get :bank_account_id => 1
-    end
-
-    it "includes category for performance improvement" do
-      @expenses.should_receive(:includes).with(:category).and_return(@expenses)
-      do_get :bank_account_id => 1
-    end
-
-    it "includes creditor for performance improvement" do
-      @expenses.should_receive(:includes).with(:creditor).and_return(@expenses)
-      do_get :bank_account_id => 1
-    end
-
-    it "orders on created_at descending" do
-      @expenses.should_receive(:order).with('expenses.transaction_date DESC').and_return(@expenses)
-      do_get :bank_account_id => 1
-    end
-
-    it "assigns max_balance of all expenses of the current bank_account for the view" do
-      @expenses.should_receive(:max_balance).and_return(100)
-      do_get :bank_account_id => 1
-      assigns[:max_balance].should eql(100)
-    end
-
-    it "renders index" do
-      do_get :bank_account_id => 1
-      response.should render_template('index')
-    end
-
-    it "paginates the expenses" do
-      @expenses.should_receive(:paginate).with(hash_including(:page, :per_page))
-      do_get :bank_account_id => 1
-    end
-
-    it "instantiates a new CategoriesChart object and assigns it to the view" do
-      CategoriesChart.should_receive(:new).and_return(@categories_chart)
-      do_get :bank_account_id => 1
-      assigns[:categories_chart].should eql(@categories_chart)
-    end
-
-    it "search the expenses" do
-      @expenses.should_receive(:search).with(hash_including(:description_like => "bar"))
-      do_get :bank_account_id => 1, :search => {:description_like => "bar"}
-    end
-
   end
 
   describe "GET /bank_accounts/1/expenses/100/edit" do
