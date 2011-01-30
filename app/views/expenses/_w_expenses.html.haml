@@ -1,4 +1,4 @@
-= render :partial => 'expenses/search', :locals => { :search => search, :bank_account => bank_account, :upload_id => upload }
+= render :partial => 'expenses/search', :locals => { :search => search, :bank_account => bank_account, :upload => upload }
 
 %ul.secondary-navigation.tabs
   %li= link_to("Expenses", "#", :class => 'tab current')
@@ -15,12 +15,9 @@
     %h3 Accounts
     .content
       %ul
-        - bank_accounts.each do |bank_account|
-          %li{:title => bank_account.description}
-            - if bank_account == bank_account
-              = "#{bank_account}"
-            - else
-              = link_to("#{bank_account}", bank_account_expenses_path(bank_account, :upload_id => upload))
+        - bank_accounts.each do |_bank_account|
+          %li{:title => _bank_account.description}
+            = link_to_unless(_bank_account == bank_account, "#{_bank_account}", bank_account_expenses_path(_bank_account, :upload_id => upload))
 
   .block
     %h3 Filter

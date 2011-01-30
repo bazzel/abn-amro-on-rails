@@ -76,7 +76,7 @@ Scenario: Remember search criteria after cancelling edit page
       |  65.00 | W en C Lammers-van Vroon  |
       | -52.39 | VAN OERS                  |
       | -27.55 | ALBERT HEIJN 1521>TILBURG |
-  
+
   Scenario: Search expenses on creditor
     Given the following creditors exist
       | name |
@@ -87,12 +87,11 @@ Scenario: Remember search criteria after cancelling edit page
     And I select "CZ" from "Creditor"
     And I press "Save"
     And I search for "CZ"
-    And show me the page
     Then I should see the following expenses:
-      | description             | 
+      | description             |
       | HTC Foodcourt>EINDHOVEN |
       | CZ ACTIEF IN GEZONDHEID |
-  
+
   Scenario: Search expenses on category
     Given the following categories
       | name    | parent  |
@@ -104,6 +103,6 @@ Scenario: Remember search criteria after cancelling edit page
     And I press "Save"
     And I search for "Salaris"
     Then I should see the following expenses:
-      | description             | 
+      | description             |
       | HTC Foodcourt>EINDHOVEN |
       | KABISA B.V.             |

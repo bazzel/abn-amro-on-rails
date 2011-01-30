@@ -1,4 +1,4 @@
 - if @bank_account
-  = render :partial => 'expenses/w_expenses', :locals => { :search => @search, :bank_account => @bank_account, :upload_id => @upload, :expenses => @expenses, :max_balance => @max_balance, :categories_chart => @categories_chart, :pass_through => @pass_through }
+  = render :partial => 'expenses/w_expenses', :locals => { :search => @search, :bank_account => @bank_account, :upload => @upload, :expenses => @expenses, :bank_accounts => @bank_accounts, :max_balance => @max_balance, :categories_chart => @categories_chart, :pass_through => @pass_through }
 - else
   = render :partial => 'expenses/wo_expenses', :layout => 'shared/block_content'
