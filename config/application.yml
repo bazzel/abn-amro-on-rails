@@ -35,4 +35,4 @@ production:
         storage: s3
         bucket: 'abn-amro-on-rails'
         path: "public/system/:attachment/:id/:style/:filename"
-        <<: *s3_credentials
+        s3_credentials: *s3_credentials
