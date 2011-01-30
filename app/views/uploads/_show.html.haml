@@ -1,10 +1,10 @@
 - title "Add a new Upload"
 %p
   %b File name:
-  = @upload.tab.original_filename
+  = upload.tab.original_filename
 %p
   %b Downloaded at:
-  = l(@upload.downloaded_at, :format => :long)
+  = l(upload.downloaded_at, :format => :long)
 %p
   %b Upload details count:
-  = @upload.upload_details.count
+  = upload.upload_details.count
