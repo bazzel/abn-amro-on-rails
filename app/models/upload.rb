@@ -15,7 +15,7 @@ class Upload < ActiveRecord::Base
   has_many :expenses, :through => :upload_details
 
   # Paperclip
-  has_attached_file :tab, APP_CONFIG['upload']['tab']['has_attached_file_options'].with_indifferent_access
+  has_attached_file :tab, APP_CONFIG['upload']['tab']['has_attached_file_options'].symbolize_keys
 
   # === Callbacks
   # Paperclip saves the file in the after_save callback,
