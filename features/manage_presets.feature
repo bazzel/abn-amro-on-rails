@@ -4,17 +4,18 @@ Feature: Manage presets
   I want to manage presets for this
 
   Background:
-  Given the following creditors exist
-    | name |
-    | Foo  |
-    | Bar  |
-  And the following categories
-    | name    | parent  |
-    | Salaris | Inkomen |
-  And the following presets
-    | keyphrase               | creditor | category |
-    | ALBERT HEIJN            | Foo      | Salaris  |
-    | REAAL LEVENSVERZEKERING | Bar      | Salaris  |
+    Given I am logged in as a user with email "john@example.com" and password "secret"
+    And the following creditors exist
+      | name |
+      | Foo  |
+      | Bar  |
+    And the following categories
+      | name    | parent  |
+      | Salaris | Inkomen |
+    And the following presets
+      | keyphrase               | creditor | category |
+      | ALBERT HEIJN            | Foo      | Salaris  |
+      | REAAL LEVENSVERZEKERING | Bar      | Salaris  |
 
   Scenario: Listing presets
     When I go to the home page

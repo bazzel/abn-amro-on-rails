@@ -4,20 +4,21 @@ Feature: Apply presets
   I want to apply presets by checking one or more expenses
 
   Background:
-  Given the following creditors exist
-    | name |
-    | Foo  |
-    | Bar  |
-  And the following categories
-    | name    | parent  |
-    | Salaris | Inkomen |
-  And the following presets
-    | keyphrase             | creditor | category     |
-    | FORTIS BANK NEDERLAND | Foo      | Salaris      |
-    | Nettorama             | Bar      | Boodschappen |
-    | ALBERT HEIJN          | Bar      | Boodschappen |
-  Given I've uploaded the file "TXT101121100433.TAB"
-  When I go to the expenses page
+    Given I am logged in as a user with email "john@example.com" and password "secret"
+    And the following creditors exist
+      | name |
+      | Foo  |
+      | Bar  |
+    And the following categories
+      | name    | parent  |
+      | Salaris | Inkomen |
+    And the following presets
+      | keyphrase             | creditor | category     |
+      | FORTIS BANK NEDERLAND | Foo      | Salaris      |
+      | Nettorama             | Bar      | Boodschappen |
+      | ALBERT HEIJN          | Bar      | Boodschappen |
+    Given I've uploaded the file "TXT101121100433.TAB"
+    When I go to the expenses page
 
   Scenario: title
     Given I check expense "UW REKENING MET SALDO IS         ADMINISTRATIEF OVERGEHEVELD VAN  FORTIS BANK NEDERLAND NAAR       ABN AMRO BANK"

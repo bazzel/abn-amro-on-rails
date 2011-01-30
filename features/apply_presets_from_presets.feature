@@ -4,20 +4,21 @@ Feature: Apply presets
   I want to apply presets by checking one or more presets
 
   Background:
-  Given the following creditors exist
-    | name |
-    | Foo  |
-    | Bar  |
-  And the following categories
-    | name    | parent  |
-    | Salaris | Inkomen |
-  And the following presets
-    | keyphrase             | creditor | category     |
-    | FORTIS BANK NEDERLAND | Foo      | Salaris      |
-    | Nettorama             | Bar      | Boodschappen |
-    | ALBERT HEIJN          | Bar      | Boodschappen |
-  Given I've uploaded the file "TXT101121100433.TAB"
-  When I go to the presets page
+    Given I am logged in as a user with email "john@example.com" and password "secret"
+    And the following creditors exist
+      | name |
+      | Foo  |
+      | Bar  |
+    And the following categories
+      | name    | parent  |
+      | Salaris | Inkomen |
+    And the following presets
+      | keyphrase             | creditor | category     |
+      | FORTIS BANK NEDERLAND | Foo      | Salaris      |
+      | Nettorama             | Bar      | Boodschappen |
+      | ALBERT HEIJN          | Bar      | Boodschappen |
+    Given I've uploaded the file "TXT101121100433.TAB"
+    When I go to the presets page
 
   Scenario: Apply a single preset
     Given I check preset "ALBERT HEIJN"

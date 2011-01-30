@@ -3,6 +3,9 @@ Feature: Managing expenses
   As a role
   I want some pages to view them
 
+  Background:
+    Given I am logged in as a user with email "john@example.com" and password "secret"
+
   Scenario: Viewing the expenses pagw without any uploads
     When I go to the expenses page
     Then I should see "No expenses To view expenses you have to upload a file first."

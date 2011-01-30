@@ -11,6 +11,9 @@ module NavigationHelpers
     when /the home\s?page/
       '/'
 
+    when /^the login page$/
+      new_user_session_path
+
     # Then I should be on the upload page for "TXT101231141500.TAB"
     # When I go to the upload page for "TXT101231141500.TAB"
     when /^the upload page for "([^"]*)"$/

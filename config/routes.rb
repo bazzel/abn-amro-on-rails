@@ -1,4 +1,6 @@
 AbnAmroOnRails::Application.routes.draw do
+  devise_for :users
+
   resources :expenses
   resources :creditors
   resources :categories

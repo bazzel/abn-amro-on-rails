@@ -3,6 +3,9 @@ Feature: Add category through sidebar of preset
   As a use
   I want to add missing category without leaving the preset page
 
+  Background:
+    Given I am logged in as a user with email "john@example.com" and password "secret"
+
   Scenario: Viewing the category form
     Given I go to the new preset page
     Then I should see a form to add a category in the sidebar

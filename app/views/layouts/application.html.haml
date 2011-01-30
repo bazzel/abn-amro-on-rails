@@ -6,6 +6,9 @@
     #container
       %header
         %h1{:role => 'banner'}= link_to "ABN AMRO on Rails", root_path
+        %nav#user-navigation
+          %ul
+            %li= link_to "Sign out", destroy_user_session_path, :class => 'logout'
         %nav#main-navigation
           %ul
             =li_active_unless(link_to("Bank Accounts", bank_accounts_path),           :controller => 'bank_accounts')

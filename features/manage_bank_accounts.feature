@@ -3,6 +3,9 @@ Feature: Manage bank accounts
   As a user
   I want some views for this
 
+  Background:
+    Given I am logged in as a user with email "john@example.com" and password "secret"
+
   Scenario: Listing bank accounts
     Given the following bank_accounts exist
       | account_number | description  |

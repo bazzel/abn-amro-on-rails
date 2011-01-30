@@ -3,6 +3,9 @@ Feature: Manage creditors
   As a user
   I want some views for this
 
+  Background:
+    Given I am logged in as a user with email "john@example.com" and password "secret"
+
   Scenario: Listing creditors
     Given the following creditors exist
       | name |

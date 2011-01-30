@@ -3,6 +3,9 @@ Feature: Search expenses
   As a user
   I want find expenses quickly
 
+  Background:
+    Given I am logged in as a user with email "john@example.com" and password "secret"
+
   Scenario: Search expenses on description
     Given I've uploaded the file "TXT101121100433.TAB"
     When I go to the expenses page for "861887719"

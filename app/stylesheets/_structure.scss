@@ -73,6 +73,23 @@ body {
   }
 }
 
+#user-navigation {
+  @include adjust-font-size-to(14px);
+  position: absolute;
+  right: 2em;
+  bottom: 0em;
+  @include trailer(0.45, 14px);
+  ul {
+    @include horizontal-list;
+    li {
+      a {
+        text-decoration: none;
+        color: white;
+        &.logout {
+          background: #C00;
+          @include border-radius(4px);
+          padding: 2px 6px; } } } } }
+
 #main-navigation {
   @include full;
   @include border-top-left-radius(4px);
@@ -91,16 +108,10 @@ body {
         @include trailer(0.45);
         padding: {
           left: 1em;
-          right: 1em;
-        }
-        color: #111;
-      }
+          right: 1em; }
+        color: #111; }
       &.active {
-        background: #E5E5E5;
-      }
-    }
-  }
-}
+        background: #E5E5E5; } } } }
 
 aside {
   h3 {
@@ -111,32 +122,24 @@ aside {
     @include trailer(0);
     background: #F4F4F4;
     border: {
-      bottom: solid 12px;
-    }
+      bottom: solid 12px; }
     font-weight: normal;
     padding: {
       left: 1em;
-      right: 1em;
-    }
-  }
+      right: 1em; } }
   ul {
     @include no-bullets;
-    margin-left: 0;
-  }
-}
+    margin-left: 0; } }
 
 .block {
-  @include trailer(1); 
+  @include trailer(1);
   position: relative;
   .content {
     padding: 1em;
     background: white;
     h2 {
       @include adjust-font-size-to(22px);
-      @include trailer(0.5, 22px);
-    }
-  }
-}
+      @include trailer(0.5, 22px); } } }
 
 .search {
   position: absolute;
@@ -154,48 +157,33 @@ aside {
         image: url('/images/icons/magnifier-medium-left.png');
         position: 1px center;
         repeat: no-repeat;
-        color: white;
-      }
-
-    }
-  }
-}
+        color: white; } } } }
 
 .ui-tabs {
   .content {
-    padding: 0 0 1em 0;
-  }
-}
+    padding: 0 0 1em 0; } }
 
 .table {
   @include adjust-font-size-to(14px);
   border: none;
   .debit, .credit, .balance, .total {
-    text-align: right;
-  }
+    text-align: right; }
   .row-actions {
-    visibility: hidden;
-  }
+    visibility: hidden; }
   tr:hover .row-actions {
-    visibility: visible;
-  }
+    visibility: visible; }
   th {
     text-align: left;
     @include padding-leader(0.35);
     @include padding-trailer(0.2);
     &:first-child {
-      @include border-top-left-radius(4px);
-    }
+      @include border-top-left-radius(4px); }
     &:last-child {
-      @include border-top-right-radius(4px);
-    }
-  }
+      @include border-top-right-radius(4px); } }
   td {
     border-bottom: 1px solid;
     @include padding-leader(0.35);
-    @include padding-trailer(0.2);
-  }
-}
+    @include padding-trailer(0.2); } }
 
 .action-bars {
   @include container;
@@ -206,10 +194,35 @@ aside {
     input, a {
       @include fancy-button-structure(12px);
       @include fancy-button-colors(#E5E5E5, #DEDEDE);
-      @include serif-family;
-    }
-  }
+      @include serif-family; } }
   .pagination {
-    @include float-right;
+    @include float-right; } }
+
+/* Devise -------------------------------------------------------------- */
+#box {
+  @include prefix(3);
+  @include columns(6);
+  @include alpha;
+  h1 {
+    @include adjust-font-size-to(32px);
+    @include leader(4,32px);
+    @include trailer(1,32px);
+    color: #002134;
+  }
+  .block {
+    @include border-radius(4px);
+    background: white;
+    h2 {
+      @include border-top-left-radius(4px);
+      @include border-top-right-radius(4px);
+      background: #002134;
+      color: white;
+      @include adjust-font-size-to(26px);
+      @include trailer(0,26px);
+      padding: {
+        left: 0.5em;
+        right: 0.5em;
+      }
+    }
   }
 }

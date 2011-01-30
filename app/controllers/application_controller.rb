@@ -1,7 +1,10 @@
 class ApplicationController < ActionController::Base
   before_filter :pass_through_params#, :only => [:index, :edit, :update, :new]
+  before_filter :authenticate_user!
 
   protect_from_forgery
+
+  layout :layout_by_resource
 
   private
     def pass_through_params
@@ -34,6 +37,16 @@ class ApplicationController < ActionController::Base
 
       template = routing[-2,2].join('/')
       template
+    end
+
+
+    private
+    def layout_by_resource
+      if devise_controller?# && !(controller_name == "registrations" && action_name == "edit")
+        "devise"
+      else
+        "application"
+      end
     end
 
 end

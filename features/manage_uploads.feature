@@ -3,6 +3,9 @@ Feature: Manage uploads
   As an authorized user
   I want to view of list of my uploads
 
+  Background:
+    Given I am logged in as a user with email "john@example.com" and password "secret"
+
   Scenario: Listing my uploads
     Given I go to the uploads page
     Then I should see "Listing Uploads"
