@@ -1,6 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'acts_as_tree_rails3',  '~>0.1.0'
+gem 'aws-s3',               '~>0.6.2' # Client library for Amazon's Simple Storage Service's REST API
 gem 'capistrano',           '2.5.19'
 gem 'compass',              '~>0.10.6'
 gem 'compass-susy-plugin',  '~>0.8.1' # Responsive web design with grids the quick and reliable way

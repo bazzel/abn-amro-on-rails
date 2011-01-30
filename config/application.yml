@@ -1,12 +1,25 @@
+# This file is loaded by config/initializers/load_application_configuration.rb
+# and the content is stored in a hash named APP_CONFIG.
 defaults: &defaults
   upload:
     tab:
       has_attached_file_options:
         path: ":rails_root/public/system/:attachment/:id/:style/:filename"
+  # Amazon S3 data is stored in environment vars.
+  #
+  # 1. You can set these values in the ~/.bashrc for the user:
+  #   export S3_KEY=mykey
+  #   export S3_SECRET=mysecret
+  #
+  # 2. Or, specify them when running the local server (or any other command, like a rake task) by prepending the shell command:
+  #   $ S3_KEY=mykey S3_SECRET=mysecret script/server
+  s3_credentials: &s3_credentials
+    access_key_id: <%= ENV['S3_KEY'] %>
+    secret_access_key: <%= ENV['S3_SECRET'] %>
 
 development:
   <<: *defaults
-        
+
 test:
   <<: *defaults
   upload:
@@ -16,3 +29,10 @@ test:
 
 production:
   <<: *defaults
+  upload:
+    tab:
+      has_attached_file_options:
+        storage: ":s3"
+        bucket: 'abn-amro-on-rails'
+        path: "public/system/:attachment/:id/:style/:filename"
+        s3_credentials: *s3_credentials
