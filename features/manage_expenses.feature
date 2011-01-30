@@ -3,7 +3,11 @@ Feature: Managing expenses
   As a role
   I want some pages to view them
 
-  Scenario: title
+  Scenario: Viewing the expenses pagw without any uploads
+    When I go to the expenses page
+    Then I should see "No expenses To view expenses you have to upload a file first."
+
+  Scenario: Viewing the expenses page
     Given I've uploaded the file "TXT101204150043.TAB"
     When I follow "Expenses" in the menu
     Then I should be on the expenses page

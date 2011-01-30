@@ -2,8 +2,10 @@ class ExpensesController < ApplicationController
   before_filter :find_upload, :find_bank_account
   before_filter :find_expense, :only => [:edit, :update]
 
-  # GET "/bank_accounts/1/expenses/index"s
+  # GET "/bank_accounts/1/expenses/index"
   def index
+    return unless @bank_account
+
     params[:search] ||= {}
     @expenses = @bank_account.expenses
     @search = @expenses

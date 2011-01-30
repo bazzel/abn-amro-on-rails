@@ -1,0 +1,4 @@
+= form_for search, :url => bank_account_expenses_path(bank_account, :upload_id => upload), :html => {:class => "search"} do |f|
+  %p
+    = f.search_field :description_or_creditor_name_or_category_name_like, :placeholder => "Search..."
+    = f.submit "Search"
