@@ -45,6 +45,11 @@ Feature: Manage bank accounts
       | 80.82.57.226   | 76,007.45 |
       | 84.55.93.013   | 76,007.45 |
 
+  Scenario: Viewing the expenses page by clicking on a bank account on the bank accounts page
+    Given I've uploaded the file "TXT101204150043.TAB"
+    And I am on the bank_accounts page
+    And I follow "86.18.87.719" for bank account "861887719"
+    Then I should be on the expenses page for "861887719"
 
   # Scenario: Updating an existing bank account with an empty account number
   #   Given a bank_account exists with account_number: "861887719"
