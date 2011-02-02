@@ -8,10 +8,19 @@ class Creditor < ActiveRecord::Base
   # === Associations
   has_many :presets, :dependent => :destroy
 
-  def self.checked_first(checked)
-    return all unless checked
-    checked_creditors = all.select {|c| checked.include?(c.id)}
+  # Returns <tt>array</tt> in which the elements
+  # with its id's included in <tt>first_ids</tt>
+  # are listed first.
+  # >> Creditor.checked_first(Creditor.all, [3, 6, 12])
+  # => [#<Creditor id: 3, name: "Albert Heijn", ...>,
+  #     #<Creditor id: 12, name: "Kabisa", ...>,
+  #     #<Creditor id: 6, name: "Nettorama", ...>,
+  #     #<Creditor id: 1, name: "Philips", ...>,
+  #     ...]
+  def self.checked_first(array, first_ids)
+    return array unless first_ids
+    creditors = array.select {|c| first_ids.include?(c.id)}
 
-    (checked_creditors + all).uniq
+    (creditors + array).uniq
   end
 end
