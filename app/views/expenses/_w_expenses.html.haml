@@ -29,16 +29,25 @@
               %legend.label
                 %label Creditor
               %ol
-                - f.collection_checks :creditor_id_in, Creditor.checked_first(search.creditor_id_in), :id, :name do |check|
+                - f.collection_checks :creditor_id_in, Creditor.checked_first(Creditor.all, search.creditor_id_in), :id, :name do |check|
                   %li
                     = check.box
                     = check.label
           %li.check_boxes
             %fieldset
               %legend.label
-                %label Category
+                %label Main category
               %ol
                 - f.collection_checks :category_parent_id_in, Category.roots, :id, :name do |check|
+                  %li
+                    = check.box
+                    = check.label
+          %li.check_boxes
+            %fieldset
+              %legend.label
+                %label Subcategory
+              %ol
+                - f.collection_checks :category_id_in, Category.children, :id, :name do |check|
                   %li
                     = check.box
                     = check.label
