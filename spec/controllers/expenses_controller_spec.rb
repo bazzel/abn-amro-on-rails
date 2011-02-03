@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe ExpensesController do
+  login_admin
+
   before(:each) do
     @upload = mock_model(Upload)
     @bank_account = mock_model(BankAccount, :id => 1)
@@ -40,7 +42,7 @@ describe ExpensesController do
         do_get
         assigns[:expenses].should be_nil
       end
-        
+
     end
 
     describe "one or more bank accounts" do

@@ -29,7 +29,7 @@
               %legend.label
                 %label Creditor
               %ol
-                - f.collection_checks :creditor_id_in, Creditor.checked_first(Creditor.all, search.creditor_id_in), :id, :name do |check|
+                - f.collection_checks :creditor_id_in, Creditor.prioritized(Creditor.all, search.creditor_id_in), :id, :name do |check|
                   %li
                     = check.box
                     = check.label
@@ -38,7 +38,7 @@
               %legend.label
                 %label Main category
               %ol
-                - f.collection_checks :category_parent_id_in, Category.roots, :id, :name do |check|
+                - f.collection_checks :category_parent_id_in, Category.prioritized(Category.roots, search.category_parent_id_in), :id, :name do |check|
                   %li
                     = check.box
                     = check.label
@@ -47,11 +47,9 @@
               %legend.label
                 %label Subcategory
               %ol
-                - f.collection_checks :category_id_in, Category.children, :id, :name do |check|
+                - f.collection_checks :category_id_in, Category.prioritized(Category.children, search.category_id_in), :id, :name do |check|
                   %li
                     = check.box
                     = check.label
-          -#= f.input :creditor_id_in, :collection => Creditor.checked_first(search.creditor_id_in), :as => :check_boxes, :required => false
-          -#= f.input :category_parent_id_in, :collection => Category.roots, :as => :check_boxes
         = f.buttons do
           = f.commit_button "Search"

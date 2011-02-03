@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe CategoriesController do
+  login_admin
 
   before(:each) do
    @category = mock_model(Category)

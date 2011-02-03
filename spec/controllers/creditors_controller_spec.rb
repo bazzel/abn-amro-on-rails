@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe CreditorsController do
+  login_admin
+
   before(:each) do
    @creditor = mock_model(Creditor)
    @creditors = [@creditor]

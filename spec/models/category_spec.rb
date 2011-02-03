@@ -89,4 +89,26 @@ describe Category do
     # Fails, but looks correct...
     # it { should have_scope(:children).where('parent_id IS NOT NULL').order('name') }
   end
+
+  describe "#prioritized" do
+    before(:each) do
+      @categories = Array.new(10) do |i|
+        Factory(:category, :id => i+1)
+      end
+    end
+
+    it "returns the given categories ordered by the ids in the checked array" do
+
+      priorities = Category.prioritized(@categories, [10,3,1])
+
+      priorities[0].id.should eql(1)
+      priorities[1].id.should eql(3)
+      priorities[2].id.should eql(10)
+    end
+
+    it "returns the given categories as is when no checked array is provided" do
+      Category.prioritized(@categories, nil).should eql(@categories)
+    end
+  end
+
 end

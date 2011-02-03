@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe UploadsController do
+  login_admin
 
   def mock_upload(stubs={})
     (@mock_upload ||= mock_model(Upload).as_null_object).tap do |upload|

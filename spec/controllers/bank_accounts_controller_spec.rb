@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe BankAccountsController do
+  login_admin
 
   before(:each) do
     @bank_account = mock_model(BankAccount)
@@ -11,7 +12,7 @@ describe BankAccountsController do
     before(:each) do
       BankAccount.stub(:all).and_return(@bank_accounts)
     end
-    
+
     def do_get
       get :index
     end
@@ -25,18 +26,18 @@ describe BankAccountsController do
       do_get
       assigns[:bank_accounts].should eql(@bank_accounts)
     end
-    
+
     it "renders the index view" do
       do_get
       response.should render_template("index")
     end
   end
-  
+
   describe "GET /bank_accounts/1/edit" do
     before(:each) do
       BankAccount.stub(:find).and_return(@bank_account)
     end
-    
+
     def do_get
       get :edit, :id => 1
     end
@@ -56,7 +57,7 @@ describe BankAccountsController do
       response.should render_template('edit')
     end
   end
-  
+
   describe "PUT bank_accounts/1" do
 
     before(:each) do

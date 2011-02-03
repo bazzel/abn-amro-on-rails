@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe PresetsController do
+  login_admin
+
   before(:each) do
    @preset = mock_model(Preset)
    @presets = [@preset]

@@ -27,9 +27,12 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = true
 
-  # Provides rspec-compatible matchers for testing Paperclip attachments  
+  # Provides rspec-compatible matchers for testing Paperclip attachments
   config.include Paperclip::Shoulda::Matchers
-  
+  # ...and Devise.
+  config.include Devise::TestHelpers, :type => :controller
+  config.extend ControllerMacros, :type => :controller
+
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation)
@@ -42,11 +45,11 @@ RSpec.configure do |config|
   config.after(:each) do
     DatabaseCleaner.clean
   end
-    
+
   config.after(:all) do
     # Cleanup tmp dir.
     FileUtils.rm_rf "#{Rails.root}/tmp/system"
     FileUtils.rm Dir.glob("#{Rails.root}/tmp/*.*")
   end
-  
+
 end
