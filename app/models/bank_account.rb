@@ -4,6 +4,7 @@ class BankAccount < ActiveRecord::Base
 
   # === Associations
   has_many :expenses
+  has_many :creditors, :through => :expenses, :uniq => true
 
   # === Validations
   validates_presence_of :account_number, :message => 'This field is required. Please enter a value.'

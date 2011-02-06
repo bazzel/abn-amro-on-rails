@@ -17,6 +17,9 @@ In random order:
 * Use GMail like pagination
 * Assign bankaccount to person
 * Filter categories (and it's expenses) by person, bank_account, period
+* Filter creditors
+* Order creditors index on name by default
+* Use bullet/footnote gem?
 * Assign preset to selected expenses manually
 * ignore multiple spaces in presets
 * use regex in presets?
@@ -27,6 +30,7 @@ In random order:
 * Create filter for expenses:
   * 'empty' expenses
   * expenses from last week/month/...
+* Display summary info on expenses index (total debit, credit, etc.)
 
 Bugs
 ====
@@ -36,6 +40,5 @@ Bugs
 Deployment
 ==========
 Stuff to sort out:
-* How to use/combine rvm, bundler, capistrano, nginx, Amazon S3, passenger
 * Backup db to Amazon S3
 * Save attachments to S3

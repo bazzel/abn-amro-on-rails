@@ -41,27 +41,10 @@ Feature: Filter expenses
       | HTC Foodcourt>EINDHOVEN |
       | Saturn Tilburg B.V.     |
 
-  Scenario: Filter expenses by one main category
-    And I filter expenses by main category "Inkomen"
-    Then I should see the following expenses:
-      | description             |
-      | HTC Foodcourt>EINDHOVEN |
-      | Saturn Tilburg B.V.     |
-    But I should not see the following expenses:
-      | description                   |
-      | SPEELGOEDH. DE LIN>OISTERWIJK |
-
-  Scenario: Filter expenses by multiple main categories
-    And I filter expenses by main category "Inkomen"
-    And I filter expenses by main category "Vrije tijd"
-    Then I should see the following expenses:
-      | description                   |
-      | HTC Foodcourt>EINDHOVEN       |
-      | Saturn Tilburg B.V.           |
-      | SPEELGOEDH. DE LIN>OISTERWIJK |
-
-  Scenario: Filter expenses by one subcategory
-    And I filter expenses by subcategory "Salaris"
+  Scenario: Remove filter on creditor
+    When I filter expenses by creditor "CZ"
+    And I filter expenses by creditor "Saturn"
+    And I unfilter expenses by creditor "Saturn"
     Then I should see the following expenses:
       | description             |
       | HTC Foodcourt>EINDHOVEN |
@@ -70,14 +53,43 @@ Feature: Filter expenses
       | Saturn Tilburg B.V.           |
       | SPEELGOEDH. DE LIN>OISTERWIJK |
 
-  Scenario: Filter expenses by multiple subcategories
-    And I filter expenses by subcategory "Salaris"
-    And I filter expenses by subcategory "Uit eten"
-    Then I should see the following expenses:
-      | description                   |
-      | HTC Foodcourt>EINDHOVEN       |
-      | SPEELGOEDH. DE LIN>OISTERWIJK |
-      But I should not see the following expenses:
-        | description         |
-        | Saturn Tilburg B.V. |
-
+  # Scenario: Filter expenses by one main category
+  #   And I filter expenses by main category "Inkomen"
+  #   Then I should see the following expenses:
+  #     | description             |
+  #     | HTC Foodcourt>EINDHOVEN |
+  #     | Saturn Tilburg B.V.     |
+  #   But I should not see the following expenses:
+  #     | description                   |
+  #     | SPEELGOEDH. DE LIN>OISTERWIJK |
+  #
+  # Scenario: Filter expenses by multiple main categories
+  #   And I filter expenses by main category "Inkomen"
+  #   And I filter expenses by main category "Vrije tijd"
+  #   Then I should see the following expenses:
+  #     | description                   |
+  #     | HTC Foodcourt>EINDHOVEN       |
+  #     | Saturn Tilburg B.V.           |
+  #     | SPEELGOEDH. DE LIN>OISTERWIJK |
+  #
+  # Scenario: Filter expenses by one subcategory
+  #   And I filter expenses by subcategory "Salaris"
+  #   Then I should see the following expenses:
+  #     | description             |
+  #     | HTC Foodcourt>EINDHOVEN |
+  #   But I should not see the following expenses:
+  #     | description                   |
+  #     | Saturn Tilburg B.V.           |
+  #     | SPEELGOEDH. DE LIN>OISTERWIJK |
+  #
+  # Scenario: Filter expenses by multiple subcategories
+  #   And I filter expenses by subcategory "Salaris"
+  #   And I filter expenses by subcategory "Uit eten"
+  #   Then I should see the following expenses:
+  #     | description                   |
+  #     | HTC Foodcourt>EINDHOVEN       |
+  #     | SPEELGOEDH. DE LIN>OISTERWIJK |
+  #     But I should not see the following expenses:
+  #       | description         |
+  #       | Saturn Tilburg B.V. |
+  #

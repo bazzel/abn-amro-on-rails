@@ -1,0 +1,34 @@
+.block
+  %h3 Filter
+  .content
+    = semantic_form_for search, :url => bank_account_expenses_path(bank_account, :upload_id => upload) do |f|
+      = f.inputs do
+        %li.check_boxes
+          %fieldset
+            %legend.label
+              %label Creditor
+            %ol
+              - f.collection_checks :creditor_id_in, Creditor.prioritized(Creditor.all, search.creditor_id_in), :id, :name do |check|
+                %li
+                  = check.box
+                  = check.label
+        %li.check_boxes
+          %fieldset
+            %legend.label
+              %label Main category
+            %ol
+              - f.collection_checks :category_parent_id_in, Category.prioritized(Category.roots, search.category_parent_id_in), :id, :name do |check|
+                %li
+                  = check.box
+                  = check.label
+        %li.check_boxes
+          %fieldset
+            %legend.label
+              %label Subcategory
+            %ol
+              - f.collection_checks :category_id_in, Category.prioritized(Category.children, search.category_id_in), :id, :name do |check|
+                %li
+                  = check.box
+                  = check.label
+      = f.buttons do
+        = f.commit_button "Search"

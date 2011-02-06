@@ -14,4 +14,5 @@ module ExpensesHelper
     content = content_tag(:div, submit_tag("Apply Presets"), :class => 'actions') + will_paginate(*args)
     content_tag(:div, content, :class => 'action-bars')
   end
+
 end

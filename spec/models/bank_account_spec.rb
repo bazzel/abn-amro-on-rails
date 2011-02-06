@@ -3,6 +3,7 @@ require 'spec_helper'
 describe BankAccount do
   describe 'associations' do
     it { should have_many(:expenses) }
+    it { should have_many(:creditors, :through => :expenses, :uniq => true) }
   end
 
   describe "validation" do

@@ -198,6 +198,21 @@ aside {
   .pagination {
     @include float-right; } }
 
+/* Filter in sidebar --------------------------------------------------- */
+ul.filter_creditors {
+  height: 170px;
+  overflow: auto;
+  .filter_creditor {
+    a.in_filter {
+      background-color: #005498;
+      color: white;
+      padding: 3px;
+      text-decoration: none;
+    }
+  }
+}
+
+
 /* Devise -------------------------------------------------------------- */
 #box {
   @include prefix(3);
